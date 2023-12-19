@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="flex w-full h-full bg-[#090909]">
-          <div className="w-[500px] h-full bg-red-500">
+          <div className="w-[242px] h-full bg-red-500">
             <h1>Sidebar component here, pas aussi large, mettre du w-fit</h1>
           </div>
           {children}

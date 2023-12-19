@@ -4,9 +4,10 @@ import Avatar from '@/components/atoms/Avatar'
 type CardProps = {
   companyName: string
   jobName: string
+  date: string
 }
 
-export default function Card({ companyName, jobName }: CardProps) {
+export default function Card({ companyName, jobName, date }: CardProps) {
   return (
     <div className="p-5 bg-[#141414] rounded-2xl min-w-[308px]">
       <div className="flex items-center">
@@ -26,7 +27,7 @@ export default function Card({ companyName, jobName }: CardProps) {
             <path d="M9 7V3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M15 7V3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <p className="text-[14px] text-[#5A595C] ml-[8px]">Aujourd'hui</p>
+          <p className="text-[14px] text-[#5A595C] ml-[8px]">{date}</p>
         </div>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
