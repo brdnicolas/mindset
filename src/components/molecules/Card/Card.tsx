@@ -1,5 +1,5 @@
 import Avatar from '@/components/atoms/Avatar'
-import placeholder from '@/assets/placeholder.svg'
+// import placeholder from '@/assets/placeholder.svg'
 
 type CardProps = {
   companyName: string
@@ -10,7 +10,7 @@ export default function Card({ companyName, jobName }: CardProps) {
   return (
     <div className="p-5 bg-[#141414] rounded-2xl min-w-[308px]">
       <div className="flex items-center">
-        <Avatar src={placeholder} alt="placeholder" width={32} height={32} />
+        <Avatar width={32} height={32} />
         <p className="ml-3 text-[#9E9DA0] text-sm">{companyName}</p>
       </div>
       <p className="mt-5 text-[#D6D6D6] text-base font-bold">{jobName}</p>
