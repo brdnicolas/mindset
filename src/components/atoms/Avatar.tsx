@@ -2,15 +2,15 @@ import Image from 'next/image'
 
 type AvatarProps = {
   src: string
-  imgName: string
+  alt: string
   width: number
   height: number
 }
 
-export default function Avatar({ src, imgName, width, height }: AvatarProps) {
+export default function Avatar({ src, alt, width, height }: AvatarProps) {
   return (
-    <div className="w-fit">
-      <Image width={width} height={height} src={src} alt={imgName} className="rounded-full" />
+    <div>
+      <Image width={width} height={height} src={src} alt={alt} className="rounded-full" />
     </div>
   )
 }
