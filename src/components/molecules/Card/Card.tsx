@@ -8,13 +8,13 @@ type CardProps = {
 
 export default function Card({ companyName, jobName }: CardProps) {
   return (
-    <div className="p-[21px] bg-[#141414] rounded-[14px] min-w-[308px]">
+    <div className="p-5 bg-[#141414] rounded-2xl min-w-[308px]">
       <div className="flex items-center">
         <Avatar src={placeholder} alt="placeholder" width={32} height={32} />
-        <p className="ml-[12px] text-[#9E9DA0] text-[14px]">{companyName}</p>
+        <p className="ml-3 text-[#9E9DA0] text-sm">{companyName}</p>
       </div>
-      <p className="mt-[21px] text-[#D6D6D6] text-[16px] font-bold">{jobName}</p>
-      <div className="flex items-center justify-between mt-[21px]">
+      <p className="mt-5 text-[#D6D6D6] text-base font-bold">{jobName}</p>
+      <div className="flex items-center justify-between mt-5">
         <div className="flex items-center ">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 11H16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
