@@ -13,8 +13,8 @@ type NavbarLabelProps = {
 export const NavbarLabel = ({ iconName, children, onClick, isActive, className }: NavbarLabelProps) => {
   return (
     <div className={clsx('flex items-center cursor-pointer', className)} onClick={onClick}>
-      <Icon className={isActive ? 'text-[#B6B6B8]' : 'text-[#5A595C]'} name={iconName} />
-      <p className={clsx('ml-2 text-base font-medium', isActive ? ' text-[#B6B6B8]' : 'text-[#5A595C]')}>{children}</p>
+      <Icon className={isActive ? 'text-gray-200' : 'text-gray-500'} name={iconName} />
+      <p className={clsx('ml-2 text-base font-medium', isActive ? ' text-gray-200' : 'text-gray-500')}>{children}</p>
     </div>
   )
 }
