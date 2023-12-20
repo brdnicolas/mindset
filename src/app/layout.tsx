@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Navbar from '@/components/organisms/Navbar/Navbar'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -11,9 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="flex w-full h-full bg-[#090909]">
-          <div className="w-[242px] h-full bg-red-500">
-            <h1>Sidebar component here, pas aussi large, mettre du w-fit</h1>
-          </div>
+          <Navbar studentName="Nicolas B." applicationNumber={2} />
           {children}
         </div>
       </body>
