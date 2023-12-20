@@ -39,15 +39,23 @@ export const Navbar = ({ studentName, applicationsNumber }: AvatarProps) => {
             </NavbarLabel>
 
             <NavbarLabel iconName="bar-chart-2" onClick={() => goTo('/stats')} isActive={isPath('stats')}>
-              Mes candidatures
+              Statistiques
             </NavbarLabel>
           </div>
         </div>
         <div className="w-full">
           <hr className="h-[1px] w-full border-gray-500" />
           <div className="mt-5">
-            <NavbarLabel iconName="bar-chart-2" onClick={() => goTo('/stats')} isActive={isPath('stats')}>
-              Mes candidatures
+            <NavbarLabel iconName="credit-card" onClick={() => goTo('/plans')} isActive={isPath('plans')}>
+              Plans
+            </NavbarLabel>
+            <NavbarLabel
+              className="mt-5"
+              iconName="gear"
+              onClick={() => goTo('/settings')}
+              isActive={isPath('settings')}
+            >
+              Réglages
             </NavbarLabel>
           </div>
         </div>
