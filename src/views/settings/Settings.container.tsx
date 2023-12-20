@@ -12,7 +12,7 @@ export const SettingsContainer = () => {
         handleOnChange={(e) => setState(e.target.value)}
         iconName="activity"
         type="text"
-        placeholder="MY PLACEHOLDER"
+        placeholder="Email"
       />
       <Button iconName="activity" iconPosition="right" onClick={() => console.log('cc')}>
         My text

@@ -12,13 +12,15 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 export const Input = ({ value, iconName, className, handleOnChange, ...rest }: InputProps) => {
   return (
     <div className="relative flex items-center">
-      {iconName && <Icon className={clsx('absolute left-3 ', { 'text-gray-100': value })} name={iconName} />}
+      {iconName && (
+        <Icon className={clsx('absolute left-3 text-gray-550', { 'text-gray-100': value })} name={iconName} />
+      )}
       <input
         value={value}
         className={clsx(
           className,
-          'transition-all w-full bg-gray-800 rounded-2 p-3 pl-11 text-3',
-          'text-gray-100 placeholder:text-gray-400',
+          'transition-all w-full bg-gray-800 rounded-2 p-3 pl-11 text-sm',
+          'text-gray-100 placeholder:text-gray-550',
           'border-[1px] border-gray-600 focus:border-gray-300',
           'focus:ring-2 ring-gray-500 focus:outline-none'
         )}

@@ -37,7 +37,6 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     borderRadius: { ...sizes },
-    fontSize: { ...sizes },
     extend: {
       colors: {
         gray: {
@@ -47,6 +46,7 @@ module.exports = {
           300: '#9E9DA0',
           400: '#8F8F8F',
           500: '#5A595C',
+          550: '#333333',
           600: '#222222',
           700: '#141414',
           800: '#0E0E0E',
