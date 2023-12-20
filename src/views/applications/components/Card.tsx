@@ -1,4 +1,4 @@
-import Avatar from '@/components/atoms/Avatar'
+import { Avatar } from '@/components'
 
 type CardProps = {
   company: string
@@ -6,7 +6,7 @@ type CardProps = {
   date: string
 }
 
-export default function Card({ company, job, date }: CardProps) {
+export const Card = ({ company, job, date }: CardProps) => {
   return (
     <div className="p-5 bg-[#141414] rounded-2xl min-w-[308px]">
       <div className="flex items-center">
