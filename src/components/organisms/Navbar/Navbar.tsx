@@ -1,4 +1,4 @@
-import Avatar from '@/components/atoms/Avatar'
+import Avatar from '@/components/molecules/Avatar/Avatar'
 import student from '@/assets/student.svg'
 
 type AvatarProps = {

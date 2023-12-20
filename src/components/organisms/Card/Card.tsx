@@ -1,4 +1,4 @@
-import Avatar from '@/components/atoms/Avatar'
+import Avatar from '@/components/molecules/Avatar/Avatar'
 
 type CardProps = {
   company: string
