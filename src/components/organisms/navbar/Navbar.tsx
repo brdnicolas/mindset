@@ -16,9 +16,9 @@ export const Navbar = ({ studentName, applicationsNumber }: AvatarProps) => {
 
   return (
     <div className="p-5">
-      <div className="w-[242px] h-full bg-[#131313] rounded-2xl p-6 flex flex-col justify-between items-start">
+      <div className="w-[242px] h-full bg-gray-700 rounded-2xl p-6 flex flex-col justify-between items-start">
         <div>
-          <h1 className="text-[#B6B6B8] text-2xl font-extrabold uppercase mb-9">Mindset</h1>
+          <h1 className="text-gray-200 text-2xl font-extrabold uppercase mb-9">Mindset</h1>
           <div className="flex items-center">
             <Avatar
               width={52}
@@ -27,8 +27,8 @@ export const Navbar = ({ studentName, applicationsNumber }: AvatarProps) => {
               alt="student"
             />
             <div className="ml-5">
-              <p className="text-[#5A595C] text-xs font-medium">{studentName}</p>
-              <p className="text-[#5A595C] text-xs font-medium">
+              <p className="text-gray-500 text-xs font-medium">{studentName}</p>
+              <p className="text-gray-500 text-xs font-medium">
                 {applicationsNumber} {applicationsNumber <= 0 ? 'candidature' : 'candidatures'}
               </p>
             </div>

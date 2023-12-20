@@ -4,22 +4,33 @@ import { useApplicationsContext } from '@/contexts/applications/applications.pro
 import { setApplications } from '@/contexts/applications/applications.actions'
 import { Column } from '@/views/applications/components/Column'
 import { ApplicationStatus } from '@/contexts/applications/applications.types'
+import { Icon } from '@/components/atoms/icons/Icon'
+import { IconName } from '@/components/atoms/icons/types'
 
 export const ApplicationsContainer = () => {
   const { applied, relaunched, interviewObtained, dispatch } = useApplicationsContext()
   const columns = useMemo(
     () => ({
       applied: {
-        id: 'applied',
-        cards: applied
+        title: 'Postulée',
+        cards: applied,
+        icon: 'folder-add',
+        color: 'applied',
+        id: 'applied'
       },
       relaunched: {
-        id: 'relaunched',
-        cards: relaunched
+        title: 'Relancées',
+        cards: relaunched,
+        icon: 'mail',
+        color: 'relaunched',
+        id: 'relaunched'
       },
       interviewObtained: {
-        id: 'interviewObtained',
-        cards: interviewObtained
+        title: 'Entretien obtenu',
+        cards: interviewObtained,
+        icon: 'check',
+        color: 'interviewObtained',
+        id: 'interviewObtained'
       }
     }),
     [applied, relaunched, interviewObtained]
@@ -80,9 +91,20 @@ export const ApplicationsContainer = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
+      <div className="flex items-center mt-12 ml-12">
+        <Icon className="w-7 h-7 text-gray-200" name="document" />
+        <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
+      </div>
       <div className="flex h-full">
         {Object.values(columns).map((column) => (
-          <Column key={column.id} cards={column.cards} id={column.id} />
+          <Column
+            title={column.title}
+            icon={column.icon as IconName}
+            color={column.color}
+            key={column.id}
+            cards={column.cards}
+            id={column.id}
+          />
         ))}
       </div>
     </DragDropContext>
