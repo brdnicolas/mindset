@@ -1,3 +1,12 @@
+'use client'
+
+import { ApplicationsContainer } from '@/containers/applications/ApplicationsContainer'
+import { ApplicationsProvider } from '@/contexts/applications/applications.provider'
+
 export default function Home() {
-  return <h1>Ici on aura le kanban</h1>
+  return (
+    <ApplicationsProvider>
+      <ApplicationsContainer />
+    </ApplicationsProvider>
+  )
 }

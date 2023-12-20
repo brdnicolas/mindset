@@ -1,0 +1,14 @@
+export type Application = {
+  id: string
+  job: string
+  company: string
+  date: string
+}
+
+export type ApplicationsState = {
+  applied: Application[]
+  relaunched: Application[]
+  interviewObtained: Application[]
+}
+
+export type ApplicationStatus = 'applied' | 'relaunched' | 'interviewObtained'
