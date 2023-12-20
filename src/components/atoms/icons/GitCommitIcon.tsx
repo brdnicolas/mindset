@@ -1,0 +1,23 @@
+import * as React from 'react'
+import { IconProps } from '@/components/atoms/icons/types'
+
+export const GitCommitIcon = ({ className }: IconProps) => {
+  return (
+    <svg
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M12 14a2 2 0 100-4 2 2 0 000 4zM3 12h7M14 12h7"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
