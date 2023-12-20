@@ -1,3 +1,10 @@
+import Card from '@/components/molecules/Card/Card'
+
 export default function Home() {
-  return <h1>Ici on aura le kanban</h1>
+  return (
+    <div className="mt-11 ml-16">
+      <h1 className="text-2xl text-[#B6B6B8] font-extrabold mb-12">Mes candidatures</h1>
+      <Card company="Mentor Goal" job="Développeur Front-End" date="Aujourd'hui" />
+    </div>
+  )
 }
