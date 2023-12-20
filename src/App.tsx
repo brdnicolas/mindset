@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ApplicationsContainer } from '@/views/applications/Applications.container'
 import { GlobalLayout } from './layouts/GlobalLayout'
 import { ApplicationsProvider } from '@/contexts/applications/applications.provider'
+import { SettingsContainer } from '@/views/settings/Settings.container'
 
 function App() {
   return (
@@ -17,14 +18,7 @@ function App() {
                 </ApplicationsProvider>
               }
             />
-            <Route
-              path="/settings"
-              element={
-                <>
-                  <p>SETTINGS</p>
-                </>
-              }
-            />
+            <Route path="/settings" element={<SettingsContainer />} />
           </Routes>
         </BrowserRouter>
       </GlobalLayout>
