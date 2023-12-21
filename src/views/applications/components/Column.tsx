@@ -3,6 +3,7 @@ import { Application } from '@/contexts/applications/applications.types'
 import { Card } from './Card'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
+
 type ColumnProps = {
   cards: Application[]
   id: string
@@ -26,7 +27,8 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
               <div className={`h-4 w-1 rounded-full mr-2 ${variantsColor[color]}`} />
               <Icon className="w-7 h-7 text-gray-500" name={icon} />
               <h2 className="ml-2 text-gray-500 text-base">
-                {title} {cards.length}
+                {title}
+                {cards.length > 1 && 's'} {cards.length}
               </h2>
             </div>
             <Icon name="more-horizontal" className="cursor-pointer w-6 h-6 text-gray-500" />
