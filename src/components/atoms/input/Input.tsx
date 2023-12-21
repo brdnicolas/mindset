@@ -15,7 +15,6 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export const Input = ({ value, iconName, className, handleOnChange, placeholder, type, ...rest }: InputProps) => {
   const [inputType, setInputType] = useState(type)
-  console.log(inputType)
   const togglePassword = () => {
     if (inputType === 'password') {
       setInputType('text')

@@ -6,6 +6,7 @@ import { SettingsContainer } from '@/views/settings/Settings.container'
 import { StatisticsContainer } from './views/statistics/Statistics.container'
 import { PlansContainer } from './views/plans/Plans.container'
 import { RegisterContainer } from './views/register/Register.container'
+import { LoginContainer } from './views/login/Login.container'
 
 function App() {
   const withGlobalLayout = (component: () => JSX.Element) => <GlobalLayout>{component()}</GlobalLayout>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/stats" element={withGlobalLayout(StatisticsContainer)} />
           <Route path="/plans" element={withGlobalLayout(PlansContainer)} />
           <Route path="/register" element={<RegisterContainer />} />
+          <Route path="/login" element={<LoginContainer />} />
         </Routes>
       </BrowserRouter>
     </>

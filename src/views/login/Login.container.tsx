@@ -1,7 +1,7 @@
 import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
 import { useState } from 'react'
 
-export const RegisterContainer = () => {
+export const LoginContainer = () => {
   const [mail, setMail] = useState('')
   const [password, setPassword] = useState('')
   return (
@@ -9,12 +9,12 @@ export const RegisterContainer = () => {
       <div className="h-full">
         <header className="flex items-center justify-between">
           <img src="/assets/logo.svg" alt="Logo" />
-          <ButtonSecondary onClick={() => (window.location.href = '/login')}>Se connecter</ButtonSecondary>
+          <ButtonSecondary onClick={() => (window.location.href = '/register')}>S'inscrire</ButtonSecondary>
         </header>
         <div className="flex items-center justify-center h-full">
           <div className="flex flex-col items-center">
             <h1 className="text-white text-center text-10 font-bold w-[597px]">
-              Gérez vos candidatures avec précision, boosté par l'IA
+              Vos compétences en première ligne de l'innovation
             </h1>
             <div className="mt-30 w-[300px]">
               <Input
@@ -43,12 +43,12 @@ export const RegisterContainer = () => {
                   console.log('cc')
                 }}
               >
-                S'inscrire
+                Se connecter
               </ButtonPrimary>
               <p className="text-gray-300 text-3 flex justify-center mt-26">
-                Vous avez déjà un compte ?{' '}
-                <a className="text-white font-bold cursor-pointer no-underline ml-1" href="/login">
-                  Se connecter
+                Vous n'avez pas de compte ?
+                <a className="text-white font-bold cursor-pointer no-underline ml-1" href="/register">
+                  S'inscrire
                 </a>
               </p>
             </div>

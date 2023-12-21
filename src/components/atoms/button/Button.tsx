@@ -42,11 +42,13 @@ export const ButtonPrimary = ({
 type ButtonSecondaryProps = {
   children: React.ReactNode
   className?: string
+  onClick?: () => void
 }
 
-export const ButtonSecondary = ({ children, className }: ButtonSecondaryProps) => {
+export const ButtonSecondary = ({ children, className, onClick }: ButtonSecondaryProps) => {
   return (
     <button
+      onClick={onClick}
       className={clsx(
         className,
         'transition-all cursor-pointer py-3 px-6 flex items-center justify-center rounded-1.5 border-[1px] border-gray-600 bg-gray-800 text-gray-50  hover:bg-gray-700'
