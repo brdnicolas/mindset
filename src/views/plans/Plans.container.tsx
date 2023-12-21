@@ -1,4 +1,4 @@
-import { withGlobalLayout } from '@/utils/hoc/WithGlobalLayout'
+import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 
 export const PlansContainer = withGlobalLayout(() => {
   return (

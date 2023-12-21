@@ -6,7 +6,7 @@ import { Column } from '@/views/applications/components/Column'
 import { ApplicationStatus } from '@/contexts/applications/applications.types'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
-import { withGlobalLayout } from '@/utils/hoc/WithGlobalLayout'
+import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 
 export const ApplicationsContainer = withGlobalLayout(() => {
   const { applied, relaunched, interviewObtained, dispatch } = useApplicationsContext()

@@ -1,5 +1,5 @@
 import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
-import { withGlobalLayout } from '@/utils/hoc/WithGlobalLayout'
+import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 import { useState } from 'react'
 
 export const SettingsContainer = withGlobalLayout(() => {
