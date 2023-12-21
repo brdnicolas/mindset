@@ -3,6 +3,7 @@ import { ApplicationsContainer } from '@/views/applications/Applications.contain
 import { GlobalLayout } from './layouts/GlobalLayout'
 import { ApplicationsProvider } from '@/contexts/applications/applications.provider'
 import { SettingsContainer } from '@/views/settings/Settings.container'
+import { PlansContainer } from './views/plans/Plans.container'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               }
             />
             <Route path="/settings" element={<SettingsContainer />} />
+            <Route path="/plans" element={<PlansContainer />} />
           </Routes>
         </BrowserRouter>
       </GlobalLayout>
