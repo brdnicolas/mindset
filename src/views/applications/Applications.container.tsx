@@ -91,21 +91,23 @@ export const ApplicationsContainer = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="flex items-center mt-12 ml-12">
-        <Icon className="w-7 h-7 text-gray-200" name="document" />
-        <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
-      </div>
-      <div className="flex h-full">
-        {Object.values(columns).map((column) => (
-          <Column
-            title={column.title}
-            icon={column.icon as IconName}
-            color={column.color}
-            key={column.id}
-            cards={column.cards}
-            id={column.id}
-          />
-        ))}
+      <div className="pl-12 pt-12">
+        <div className="flex items-center">
+          <Icon className="w-7 h-7 text-gray-200" name="document" />
+          <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
+        </div>
+        <div className="flex gap-12 h-full">
+          {Object.values(columns).map((column) => (
+            <Column
+              title={column.title}
+              icon={column.icon as IconName}
+              color={column.color}
+              key={column.id}
+              cards={column.cards}
+              id={column.id}
+            />
+          ))}
+        </div>
       </div>
     </DragDropContext>
   )

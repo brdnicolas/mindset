@@ -15,7 +15,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
   return (
     <Droppable droppableId={id}>
       {(provided) => (
-        <div className="pr-12 first:pl-12 min-w-[308px] ">
+        <div className=" min-w-[308px] ">
           <div className="flex items-center justify-between mt-12">
             <div className="flex items-center">
               <div className={`h-4 w-1 bg-applicationStatus-${color}`} />
@@ -31,7 +31,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
               <Draggable key={card.id} draggableId={card.id} index={index}>
                 {(provided) => (
                   <div
-                    className="mt-5 outline-none rounded-2xl border-2 border-transparent focus:border-2 focus:border-gray-500 focus:box-border"
+                    className="mt-5 outline-none rounded-4 border-2 border-transparent focus:border-2 focus:border-gray-500 focus:box-border"
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}

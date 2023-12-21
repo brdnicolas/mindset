@@ -10,7 +10,7 @@ type CardProps = {
 
 export const Card = ({ company, job, date, avatar }: CardProps) => {
   return (
-    <div className="p-5 bg-gray-700 rounded-2xl min-w-[308px] border-2 border-transparent hover:border-2  hover:border-gray-500 hover:box-border">
+    <div className="p-5 bg-gray-700 rounded-4 min-w-[308px] border-2 border-transparent hover:border-2  hover:border-gray-500 hover:box-border">
       <div className="flex items-center">
         <Avatar src={avatar} width={32} height={32} />
         <p className="ml-3 text-gray-300 text-sm">{company}</p>
