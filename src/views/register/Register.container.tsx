@@ -4,6 +4,8 @@ import { useState } from 'react'
 export const RegisterContainer = () => {
   const [mail, setMail] = useState('')
   const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   return (
     <div className="bg-gray-900 w-full h-full px-17 py-14">
       <div className="h-full">
@@ -18,6 +20,26 @@ export const RegisterContainer = () => {
             </h1>
             <div className="mt-30 w-[300px]">
               <Input
+                type="text"
+                value={firstName}
+                placeholder="Prénom"
+                iconName="user"
+                handleOnChange={(e) => {
+                  setFirstName(e.target.value)
+                }}
+              />
+              <Input
+                className="mt-6"
+                type="text"
+                value={lastName}
+                placeholder="Nom"
+                iconName="user"
+                handleOnChange={(e) => {
+                  setLastName(e.target.value)
+                }}
+              />
+              <Input
+                className="mt-6"
                 type="text"
                 value={mail}
                 placeholder="email"
@@ -37,7 +59,7 @@ export const RegisterContainer = () => {
                 }}
               />
               <ButtonPrimary
-                isDisabled={!mail || !password}
+                isDisabled={!firstName || !lastName || !mail || !password}
                 className="w-full mt-9"
                 onClick={() => {
                   console.log('cc')
