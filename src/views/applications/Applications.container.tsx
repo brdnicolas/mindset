@@ -12,21 +12,21 @@ export const ApplicationsContainer = () => {
   const columns = useMemo(
     () => ({
       applied: {
-        title: 'Postulée',
+        title: 'Postuleée',
         cards: applied,
         icon: 'folder-add',
         color: 'applied',
         id: 'applied'
       },
       relaunched: {
-        title: 'Relancées',
+        title: 'Relancée',
         cards: relaunched,
         icon: 'mail',
         color: 'relaunched',
         id: 'relaunched'
       },
       interviewObtained: {
-        title: 'Entretien obtenu',
+        title: 'Entretien',
         cards: interviewObtained,
         icon: 'check',
         color: 'interviewObtained',
@@ -97,16 +97,30 @@ export const ApplicationsContainer = () => {
           <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
         </div>
         <div className="flex gap-12 h-full">
-          {Object.values(columns).map((column) => (
-            <Column
-              title={column.title}
-              icon={column.icon as IconName}
-              color={column.color}
-              key={column.id}
-              cards={column.cards}
-              id={column.id}
-            />
-          ))}
+          <Column
+            title={columns.applied.title}
+            icon={columns.applied.icon as IconName}
+            color={columns.applied.color}
+            key={columns.applied.id}
+            cards={columns.applied.cards}
+            id={columns.applied.id}
+          />
+          <Column
+            title={columns.relaunched.title}
+            icon={columns.relaunched.icon as IconName}
+            color={columns.relaunched.color}
+            key={columns.relaunched.id}
+            cards={columns.relaunched.cards}
+            id={columns.relaunched.id}
+          />
+          <Column
+            title={columns.interviewObtained.title}
+            icon={columns.interviewObtained.icon as IconName}
+            color={columns.interviewObtained.color}
+            key={columns.interviewObtained.id}
+            cards={columns.interviewObtained.cards}
+            id={columns.interviewObtained.id}
+          />
         </div>
       </div>
     </DragDropContext>
