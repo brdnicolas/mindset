@@ -12,13 +12,18 @@ type ColumnProps = {
 }
 
 export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
+  const variantsColor: any = {
+    applied: 'bg-applicationStatus-applied',
+    relaunched: 'bg-applicationStatus-relaunched',
+    interviewObtained: 'bg-applicationStatus-interviewObtained'
+  }
   return (
     <Droppable droppableId={id}>
       {(provided) => (
         <div className=" min-w-[308px] ">
           <div className="flex items-center justify-between mt-12">
             <div className="flex items-center">
-              <div className={`h-4 w-1 bg-applicationStatus-${color}`} />
+              <div className={`h-4 w-1 rounded-full mr-2 ${variantsColor[color]}`} />
               <Icon className="w-7 h-7 text-gray-500" name={icon} />
               <h2 className="ml-2 text-gray-500 text-base">
                 {title} {cards.length}

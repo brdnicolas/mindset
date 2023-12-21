@@ -60,5 +60,10 @@ module.exports = {
       }
     }
   },
+  safelist: [
+    {
+      pattern: /text-applicationsStatus-(applied|relaunched|interviewObtained)/
+    }
+  ],
   plugins: []
 }
