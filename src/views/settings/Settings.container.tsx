@@ -14,7 +14,7 @@ export const SettingsContainer = () => {
         type="text"
         placeholder="Email"
       />
-      <ButtonPrimary disabled={true} iconName="activity" iconPosition="right" onClick={() => console.log('cc')}>
+      <ButtonPrimary iconName="activity" iconPosition="right" onClick={() => console.log('cc')}>
         My text
       </ButtonPrimary>
       <ButtonSecondary>Se connecter</ButtonSecondary>

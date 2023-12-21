@@ -8,7 +8,7 @@ type ButtonPrimaryProps = {
   onClick: () => void
   className?: string
   iconPosition?: 'left' | 'right'
-  disabled?: boolean
+  isDisabled?: boolean
 }
 
 export const ButtonPrimary = ({
@@ -17,17 +17,18 @@ export const ButtonPrimary = ({
   className,
   onClick,
   iconPosition,
-  disabled
+  isDisabled
 }: ButtonPrimaryProps) => {
   return (
     <button
-      disabled={disabled}
+      disabled={isDisabled}
       onClick={onClick}
       className={clsx(
         className,
         'transition-all cursor-pointer flex items-center gap-3 bg-gray-50 rounded-1.5 py-2 px-10 text-gray-800',
         iconPosition ? 'flex-row-reverse' : 'flex-row',
-        'hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-2 ring-gray-500 border-[1px] border-gray-800 disabled:bg-gray-700 disabled:border-gray-550 disabled:text-gray-400 disabled:cursor-default'
+        'hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-2 ring-gray-500 border-[1px] border-gray-800 ',
+        'disabled:bg-gray-700 disabled:border-gray-550 disabled:text-gray-400 disabled:cursor-default'
       )}
     >
       <>
