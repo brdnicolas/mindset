@@ -1,7 +1,8 @@
 import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
+import { withGlobalLayout } from '@/utils/hoc/WithGlobalLayout'
 import { useState } from 'react'
 
-export const SettingsContainer = () => {
+export const SettingsContainer = withGlobalLayout(() => {
   const [state, setState] = useState('')
 
   return (
@@ -20,4 +21,4 @@ export const SettingsContainer = () => {
       <ButtonSecondary>Se connecter</ButtonSecondary>
     </>
   )
-}
+})
