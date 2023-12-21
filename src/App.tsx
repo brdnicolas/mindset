@@ -5,27 +5,24 @@ import { ApplicationsProvider } from '@/contexts/applications/applications.provi
 import { SettingsContainer } from '@/views/settings/Settings.container'
 import { StatisticsContainer } from './views/statistics/Statistics.container'
 import { PlansContainer } from './views/plans/Plans.container'
+import { RegisterContainer } from './views/register/Register.container'
 
 function App() {
+  const withGlobalLayout = (component: () => JSX.Element) => <GlobalLayout>{component()}</GlobalLayout>
   return (
     <>
-      <GlobalLayout>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ApplicationsProvider>
-                  <ApplicationsContainer />
-                </ApplicationsProvider>
-              }
-            />
-            <Route path="/settings" element={<SettingsContainer />} />
-            <Route path="/stats" element={<StatisticsContainer />} />
-            <Route path="/plans" element={<PlansContainer />} />
-          </Routes>
-        </BrowserRouter>
-      </GlobalLayout>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<ApplicationsProvider>{withGlobalLayout(ApplicationsContainer)}</ApplicationsProvider>}
+          />
+          <Route path="/settings" element={withGlobalLayout(SettingsContainer)} />
+          <Route path="/stats" element={withGlobalLayout(StatisticsContainer)} />
+          <Route path="/plans" element={withGlobalLayout(PlansContainer)} />
+          <Route path="/register" element={<RegisterContainer />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
