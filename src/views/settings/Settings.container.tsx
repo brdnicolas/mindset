@@ -1,4 +1,4 @@
-import { Button, Input } from '@/components'
+import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
 import { useState } from 'react'
 
 export const SettingsContainer = () => {
@@ -14,9 +14,10 @@ export const SettingsContainer = () => {
         type="text"
         placeholder="Email"
       />
-      <Button iconName="activity" iconPosition="right" onClick={() => console.log('cc')}>
+      <ButtonPrimary disabled={true} iconName="activity" iconPosition="right" onClick={() => console.log('cc')}>
         My text
-      </Button>
+      </ButtonPrimary>
+      <ButtonSecondary>Se connecter</ButtonSecondary>
     </>
   )
 }
