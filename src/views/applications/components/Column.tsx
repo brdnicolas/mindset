@@ -3,6 +3,7 @@ import { Application } from '@/contexts/applications/applications.types'
 import { Card } from './Card'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
+import clsx from 'clsx'
 
 type ColumnProps = {
   cards: Application[]
@@ -24,7 +25,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
         <div className=" min-w-[308px] ">
           <div className="flex items-center justify-between mt-12">
             <div className="flex items-center">
-              <div className={`h-4 w-1 rounded-full mr-2 ${variantsColor[color]}`} />
+              <div className={clsx('h-4 w-1 rounded-full mr-2', variantsColor[color])} />
               <Icon className="w-7 h-7 text-gray-500" name={icon} />
               <h2 className="ml-2 text-gray-500 text-base">
                 {title}
