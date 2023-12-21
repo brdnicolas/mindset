@@ -13,7 +13,7 @@ export const Input = ({ value, iconName, className, handleOnChange, ...rest }: I
   return (
     <div className="relative flex items-center">
       {iconName && (
-        <Icon className={clsx('absolute left-3 text-gray-550', { 'text-gray-100': value })} name={iconName} />
+        <Icon className={clsx('absolute left-3', value ? 'text-gray-100' : 'text-gray-550')} name={iconName} />
       )}
       <input
         value={value}
