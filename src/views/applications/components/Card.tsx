@@ -18,10 +18,10 @@ export const Card = ({ company, job, date, avatar }: CardProps) => {
       <p className="mt-5 text-gray-100 text-base font-bold">{job}</p>
       <div className="flex items-center justify-between mt-5">
         <div className="flex items-center ">
-          <Icon name="calendar" />
-          <p className="text-[14px] text-gray-500 ml-[8px]">{date}</p>
+          <Icon className="w-[18px] h-[18px]" name="calendar" />
+          <p className="text-3.5 text-gray-500 ml-[8px]">{date}</p>
         </div>
-        <Icon name="document-text" />
+        <Icon className="w-[18px] h-[18px]" name="document-text" />
       </div>
     </div>
   )
