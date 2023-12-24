@@ -44,7 +44,7 @@ module.exports = {
     fontSize: { ...sizes },
     extend: {
       gridTemplateColumns: {
-        navbar: '285px 1fr'
+        globalLayout: '285px 1fr'
       },
       colors: {
         gray: {
