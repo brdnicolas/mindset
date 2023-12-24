@@ -5,7 +5,7 @@ import clsx from 'clsx'
 type ButtonPrimaryProps = {
   children: React.ReactNode
   iconName?: IconName
-  onClick: () => void
+  onClick?: () => void
   className?: string
   iconPosition?: 'left' | 'right'
   isDisabled?: boolean

@@ -1,17 +1,21 @@
 import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export const RegisterContainer = () => {
   const [mail, setMail] = useState('')
   const [password, setPassword] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+
   return (
     <div className="bg-gray-900 w-full h-full px-17 py-14">
       <div className="h-full">
         <header className="flex items-center justify-between">
           <img src="/assets/logo.svg" alt="Logo" />
-          <ButtonSecondary onClick={() => (window.location.href = '/login')}>Se connecter</ButtonSecondary>
+          <ButtonSecondary>
+            <Link to="/login">Se connecter</Link>
+          </ButtonSecondary>
         </header>
         <div className="flex items-center justify-center h-full">
           <div className="flex flex-col items-center">
@@ -22,7 +26,7 @@ export const RegisterContainer = () => {
               <Input
                 type="text"
                 value={firstName}
-                placeholder="Prénom"
+                placeholder="Votre prénom"
                 iconName="user"
                 handleOnChange={(e) => {
                   setFirstName(e.target.value)
@@ -32,7 +36,7 @@ export const RegisterContainer = () => {
                 className="mt-6"
                 type="text"
                 value={lastName}
-                placeholder="Nom"
+                placeholder="Votre nom"
                 iconName="user"
                 handleOnChange={(e) => {
                   setLastName(e.target.value)
@@ -58,20 +62,14 @@ export const RegisterContainer = () => {
                   setPassword(e.target.value)
                 }}
               />
-              <ButtonPrimary
-                isDisabled={!firstName || !lastName || !mail || !password}
-                className="w-full mt-9"
-                onClick={() => {
-                  console.log('cc')
-                }}
-              >
+              <ButtonPrimary isDisabled={!firstName || !lastName || !mail || !password} className="w-full mt-9">
                 S'inscrire
               </ButtonPrimary>
               <p className="text-gray-300 text-3 flex justify-center mt-26">
                 Vous avez déjà un compte ?{' '}
-                <a className="text-white font-bold cursor-pointer no-underline ml-1" href="/login">
+                <Link className="text-white font-bold cursor-pointer no-underline ml-1" to="/login">
                   Se connecter
-                </a>
+                </Link>
               </p>
             </div>
           </div>

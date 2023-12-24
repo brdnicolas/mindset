@@ -15,7 +15,7 @@ export const SettingsContainer = withGlobalLayout(() => {
         type="text"
         placeholder="Email"
       />
-      <ButtonPrimary iconName="activity" iconPosition="right" onClick={() => console.log('cc')}>
+      <ButtonPrimary iconName="activity" iconPosition="right">
         My text
       </ButtonPrimary>
       <ButtonSecondary>Se connecter</ButtonSecondary>
