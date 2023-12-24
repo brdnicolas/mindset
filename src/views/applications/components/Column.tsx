@@ -23,8 +23,8 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
   return (
     <Droppable droppableId={id}>
       {(provided) => (
-        <div className="w-[285px]">
-          <div className="flex items-center justify-between mt-12">
+        <div className="min-w-[285px] max-w-[285px] h-full overflow-hidden flex flex-col">
+          <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className={clsx('h-4 w-1 rounded-full mr-2', variantsColor[color])} />
               <Icon className="w-7 h-7 text-gray-500" name={icon} />
@@ -35,14 +35,15 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
             </div>
             <Icon name="more-horizontal" className="cursor-pointer w-6 h-6 text-gray-500" />
           </div>
-          <div className="h-full" {...provided.droppableProps} ref={provided.innerRef}>
+          <div className="h-full overflow-y-auto" {...provided.droppableProps} ref={provided.innerRef}>
             {cards.map((card, index) => (
               <Draggable key={card.id} draggableId={card.id} index={index}>
                 {(provided) => (
                   <div
                     className={clsx(
-                      'mt-5 outline-none rounded-4 border-2 border-transparent focus:border-2 focus:border-gray-500 focus:box-border',
-                      id === 'archived' && 'opacity-20'
+                      'overflow-hidden mt-5 outline-none rounded-4 border-2 border-transparent focus:border-2 focus:border-gray-500 focus:box-border',
+                      id === 'archived' && 'opacity-20',
+                      'border-2 border-transparent hover:border-2 hover:border-gray-500 hover:box-border'
                     )}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
