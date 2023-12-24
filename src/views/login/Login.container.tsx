@@ -10,7 +10,7 @@ export const LoginContainer = () => {
     <div className="bg-gray-900 w-full h-full px-17 py-14">
       <div className="h-full">
         <header className="flex items-center justify-between">
-          <img src="/assets/logo.svg" alt="Logo" />
+          <img src="/assets/tinyLogo.svg" alt="Logo" />
           <ButtonSecondary>
             <Link to="/register">S'inscrire</Link>
           </ButtonSecondary>
