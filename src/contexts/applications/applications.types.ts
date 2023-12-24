@@ -10,6 +10,7 @@ export type ApplicationsState = {
   applied: Application[]
   relaunched: Application[]
   interviewObtained: Application[]
+  archived: Application[]
 }
 
 export type ApplicationStatus = 'applied' | 'relaunched' | 'interviewObtained'
