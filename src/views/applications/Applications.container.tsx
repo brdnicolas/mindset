@@ -9,11 +9,11 @@ import { IconName } from '@/components/atoms/icons/types'
 import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 
 export const ApplicationsContainer = withGlobalLayout(() => {
-  const { applied, relaunched, interviewObtained, dispatch } = useApplicationsContext()
+  const { applied, relaunched, interviewObtained, archived, dispatch } = useApplicationsContext()
   const columns = useMemo(
     () => ({
       applied: {
-        title: 'Postuleée',
+        title: 'Postulée',
         cards: applied,
         icon: 'folder-add',
         color: 'applied',
@@ -32,9 +32,16 @@ export const ApplicationsContainer = withGlobalLayout(() => {
         icon: 'check',
         color: 'interviewObtained',
         id: 'interviewObtained'
+      },
+      archived: {
+        title: 'Archivée',
+        cards: archived,
+        icon: 'archive',
+        color: 'archived',
+        id: 'archived'
       }
     }),
-    [applied, relaunched, interviewObtained]
+    [applied, relaunched, interviewObtained, archived]
   )
 
   const onDragEnd = ({ source, destination }: DropResult) => {
@@ -92,7 +99,7 @@ export const ApplicationsContainer = withGlobalLayout(() => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="pl-12 pt-12">
+      <div className="pl-9 pt-12 pr-14">
         <div className="flex items-center">
           <Icon className="w-7 h-7 text-gray-200" name="document" />
           <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
@@ -121,6 +128,14 @@ export const ApplicationsContainer = withGlobalLayout(() => {
             key={columns.interviewObtained.id}
             cards={columns.interviewObtained.cards}
             id={columns.interviewObtained.id}
+          />
+          <Column
+            title={columns.archived.title}
+            icon={columns.archived.icon as IconName}
+            color={columns.archived.color}
+            key={columns.archived.id}
+            cards={columns.archived.cards}
+            id={columns.archived.id}
           />
         </div>
       </div>

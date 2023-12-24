@@ -26,10 +26,19 @@ const card3 = {
   date: '2021-09-01'
 }
 
+const card4 = {
+  id: 'card-4',
+  job: 'Software Engineer',
+  imageUrl: 'https://picsum.photos/200/300',
+  company: 'Amazon',
+  date: '2021-09-01'
+}
+
 export const initialState: ApplicationsState = {
-  applied: [card1, card2, card3],
+  applied: [card1, card2, card3, card4],
   relaunched: [],
-  interviewObtained: []
+  interviewObtained: [],
+  archived: []
 }
 
 export const applicationsReducer: Reducer<ApplicationsState, ApplicationsActions> = (state = initialState, action) => {
