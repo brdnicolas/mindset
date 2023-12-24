@@ -1,6 +1,12 @@
 export type Application = {
   id: string
   job: string
+  jobOfferUrl: string
+  applicationDate: string
+  cv: string
+  coverLetter: string
+  userId: string
+  applicationState: { name: string }
   imageUrl: string
   company: string
   date: string
@@ -13,4 +19,4 @@ export type ApplicationsState = {
   archived: Application[]
 }
 
-export type ApplicationStatus = 'applied' | 'relaunched' | 'interviewObtained'
+export type ApplicationStates = 'applied' | 'relaunched' | 'interviewObtained' | 'archived'

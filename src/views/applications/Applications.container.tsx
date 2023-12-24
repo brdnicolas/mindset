@@ -1,12 +1,13 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 import { useApplicationsContext } from '@/contexts/applications/applications.provider'
 import { setApplications } from '@/contexts/applications/applications.actions'
 import { Column } from '@/views/applications/components/Column'
-import { ApplicationStatus } from '@/contexts/applications/applications.types'
+import { ApplicationStates } from '@/contexts/applications/applications.types'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
 import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
+import { getAllUserApplications } from '@/services/applications/application'
 
 export const ApplicationsContainer = withGlobalLayout(() => {
   const { applied, relaunched, interviewObtained, archived, dispatch } = useApplicationsContext()
@@ -44,6 +45,21 @@ export const ApplicationsContainer = withGlobalLayout(() => {
     [applied, relaunched, interviewObtained, archived]
   )
 
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    getAllUserApplications({ token: token || '' }).then((data) => {
+      const applied = data.filter((x) => x.applicationState.name === 'applied')
+      const relaunched = data.filter((x) => x.applicationState.name === 'relaunched')
+      const interviewObtained = data.filter((x) => x.applicationState.name === 'interviewObtained')
+      const archived = data.filter((x) => x.applicationState.name === 'archived')
+
+      dispatch(setApplications({ target: 'applied', applications: applied }))
+      dispatch(setApplications({ target: 'relaunched', applications: relaunched }))
+      dispatch(setApplications({ target: 'interviewObtained', applications: interviewObtained }))
+      dispatch(setApplications({ target: 'archived', applications: archived }))
+    })
+  }, [])
+
   const onDragEnd = ({ source, destination }: DropResult) => {
     const destinationNotFound = destination === undefined || destination === null
 
@@ -58,8 +74,8 @@ export const ApplicationsContainer = withGlobalLayout(() => {
       return null
     }
 
-    const start = columns[source.droppableId as ApplicationStatus]
-    const end = columns[destination.droppableId as ApplicationStatus]
+    const start = columns[source.droppableId as ApplicationStates]
+    const end = columns[destination.droppableId as ApplicationStates]
     const isInTheSameColumn = start === end
 
     if (isInTheSameColumn) {
@@ -72,7 +88,7 @@ export const ApplicationsContainer = withGlobalLayout(() => {
         cards: newList
       }
 
-      dispatch(setApplications({ target: newCol.id as ApplicationStatus, applications: newCol.cards }))
+      dispatch(setApplications({ target: newCol.id as ApplicationStates, applications: newCol.cards }))
       return null
     } else {
       const newStartList = start.cards.filter((_: any, idx: number) => idx !== source.index)
@@ -91,8 +107,8 @@ export const ApplicationsContainer = withGlobalLayout(() => {
         cards: newEndList
       }
 
-      dispatch(setApplications({ target: newStartCol.id as ApplicationStatus, applications: newStartCol.cards }))
-      dispatch(setApplications({ target: newEndCol.id as ApplicationStatus, applications: newEndCol.cards }))
+      dispatch(setApplications({ target: newStartCol.id as ApplicationStates, applications: newStartCol.cards }))
+      dispatch(setApplications({ target: newEndCol.id as ApplicationStates, applications: newEndCol.cards }))
       return null
     }
   }
