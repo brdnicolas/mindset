@@ -34,8 +34,16 @@ const card4 = {
   date: '2021-09-01'
 }
 
+const card5 = {
+  id: 'card-5',
+  job: 'Software Engineer',
+  imageUrl: 'https://picsum.photos/200/300',
+  company: 'Amazon',
+  date: '2021-09-01'
+}
+
 export const initialState: ApplicationsState = {
-  applied: [card1, card2, card3, card4],
+  applied: [card1, card2, card3, card4, card5],
   relaunched: [],
   interviewObtained: [],
   archived: []

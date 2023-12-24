@@ -43,6 +43,9 @@ module.exports = {
     margin: { ...sizes },
     fontSize: { ...sizes },
     extend: {
+      gridTemplateColumns: {
+        globalLayout: '285px 1fr'
+      },
       colors: {
         gray: {
           50: '#EDEDED',
