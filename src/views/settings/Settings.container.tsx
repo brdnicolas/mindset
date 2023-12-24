@@ -1,7 +1,8 @@
 import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
+import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 import { useState } from 'react'
 
-export const SettingsContainer = () => {
+export const SettingsContainer = withGlobalLayout(() => {
   const [state, setState] = useState('')
 
   return (
@@ -14,10 +15,10 @@ export const SettingsContainer = () => {
         type="text"
         placeholder="Email"
       />
-      <ButtonPrimary iconName="activity" iconPosition="right" onClick={() => console.log('cc')}>
+      <ButtonPrimary iconName="activity" iconPosition="right">
         My text
       </ButtonPrimary>
       <ButtonSecondary>Se connecter</ButtonSecondary>
     </>
   )
-}
+})

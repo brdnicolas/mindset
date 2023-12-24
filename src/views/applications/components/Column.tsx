@@ -17,12 +17,13 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
   const variantsColor: any = {
     applied: 'bg-applicationStatus-applied',
     relaunched: 'bg-applicationStatus-relaunched',
-    interviewObtained: 'bg-applicationStatus-interviewObtained'
+    interviewObtained: 'bg-applicationStatus-interviewObtained',
+    archived: 'bg-gray-500'
   }
   return (
     <Droppable droppableId={id}>
       {(provided) => (
-        <div className=" min-w-[308px] ">
+        <div className="w-[285px]">
           <div className="flex items-center justify-between mt-12">
             <div className="flex items-center">
               <div className={clsx('h-4 w-1 rounded-full mr-2', variantsColor[color])} />
@@ -39,7 +40,10 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
               <Draggable key={card.id} draggableId={card.id} index={index}>
                 {(provided) => (
                   <div
-                    className="mt-5 outline-none rounded-4 border-2 border-transparent focus:border-2 focus:border-gray-500 focus:box-border"
+                    className={clsx(
+                      'mt-5 outline-none rounded-4 border-2 border-transparent focus:border-2 focus:border-gray-500 focus:box-border',
+                      id === 'archived' && 'opacity-20'
+                    )}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}

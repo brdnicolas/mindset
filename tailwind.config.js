@@ -39,6 +39,9 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     borderRadius: { ...sizes },
+    padding: { ...sizes },
+    margin: { ...sizes },
+    fontSize: { ...sizes },
     extend: {
       colors: {
         gray: {
@@ -62,10 +65,5 @@ module.exports = {
       }
     }
   },
-  safelist: [
-    {
-      pattern: /text-applicationsStatus-(applied|relaunched|interviewObtained)/
-    }
-  ],
   plugins: []
 }
