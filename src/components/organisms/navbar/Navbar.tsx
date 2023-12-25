@@ -29,8 +29,8 @@ export const Navbar = ({ studentName, applicationsNumber }: AvatarProps) => {
               alt="student"
             />
             <div className="ml-5">
-              <p className="text-gray-500 text-xs font-medium">{studentName}</p>
-              <p className="text-gray-500 text-xs font-medium">
+              <p className="text-gray-500 text-3 font-medium">{studentName}</p>
+              <p className="text-gray-500 text-3 font-medium">
                 {applicationsNumber} {applicationsNumber <= 0 ? 'candidature' : 'candidatures'}
               </p>
             </div>
