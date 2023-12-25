@@ -14,7 +14,7 @@ export const RegisterContainer = () => {
   const handleOnRegister = async () => {
     try {
       await register({ email, password, firstName, lastName })
-      navigate('/')
+      navigate('/login')
     } catch {
       alert('Error')
     }

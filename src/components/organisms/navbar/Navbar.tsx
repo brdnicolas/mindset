@@ -1,4 +1,5 @@
 import { Avatar, NavbarLabel } from '@/components'
+import { useNavigate } from 'react-router-dom'
 
 type AvatarProps = {
   studentName: string
@@ -6,12 +7,13 @@ type AvatarProps = {
 }
 
 export const Navbar = ({ studentName, applicationsNumber }: AvatarProps) => {
+  const navigate = useNavigate()
   const isPath = (path: string) => {
     return window.location.href.split('/')[3] === path
   }
 
   const goTo = (path: string) => {
-    window.location.href = path
+    navigate(path)
   }
 
   return (
