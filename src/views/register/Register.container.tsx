@@ -1,12 +1,24 @@
 import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
+import { register } from '@/services/auth/auth'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const RegisterContainer = () => {
-  const [mail, setMail] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+
+  const navigate = useNavigate()
+
+  const handleOnRegister = async () => {
+    try {
+      await register({ email, password, firstName, lastName })
+      navigate('/login')
+    } catch {
+      alert('Error')
+    }
+  }
 
   return (
     <div className="bg-gray-900 w-full h-full px-17 py-14">
@@ -45,11 +57,11 @@ export const RegisterContainer = () => {
               <Input
                 className="mt-6"
                 type="text"
-                value={mail}
+                value={email}
                 placeholder="email"
                 iconName="mail"
                 handleOnChange={(e) => {
-                  setMail(e.target.value)
+                  setEmail(e.target.value)
                 }}
               />
               <Input
@@ -62,7 +74,11 @@ export const RegisterContainer = () => {
                   setPassword(e.target.value)
                 }}
               />
-              <ButtonPrimary isDisabled={!firstName || !lastName || !mail || !password} className="w-full mt-9">
+              <ButtonPrimary
+                onClick={() => handleOnRegister()}
+                isDisabled={!firstName || !lastName || !email || !password}
+                className="w-full mt-9"
+              >
                 S'inscrire
               </ButtonPrimary>
               <p className="text-gray-300 text-3 flex justify-center mt-26">
