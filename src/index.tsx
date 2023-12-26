@@ -5,7 +5,11 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(<App />)
+root.render(
+  <div className="bg-gray-900 h-full w-full">
+    <App />
+  </div>
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

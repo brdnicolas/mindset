@@ -1,10 +1,9 @@
 import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
 import { login } from '@/services/auth/auth'
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export const LoginContainer = () => {
-  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -14,7 +13,7 @@ export const LoginContainer = () => {
       const token = data.token
 
       localStorage.setItem('token', token)
-      navigate('/')
+      window.location.href = '/'
     } catch {
       alert('Error')
     }

@@ -1,10 +1,17 @@
-import { Application } from '@/contexts/applications/applications.types'
+import { Application, EAApplicationStateId, EApplicationState } from '@/contexts/applications/applications.types'
 import { api } from '../api'
 
-type GetAllUserApplications = {
-  token: string
+export const getAllUserApplications = async (): Promise<Application[]> => {
+  return api.get('/applications').then((response) => response.data)
 }
 
-export const getAllUserApplications = async ({ token }: GetAllUserApplications): Promise<Application[]> => {
-  return api.get('/applications', { headers: { Authorization: 'Bearer ' + token } }).then((response) => response.data)
+export const updateApplicationStateById = async (
+  applicationId: number,
+  applicationState: EApplicationState
+): Promise<Application> => {
+  return api
+    .patch(`/applications/${applicationId}`, {
+      applicationStateId: EAApplicationStateId[applicationState]
+    })
+    .then((response) => response.data)
 }

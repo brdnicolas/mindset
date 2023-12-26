@@ -5,7 +5,7 @@ type GlobalLayoutProps = {
 }
 export const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   return (
-    <div className="h-full bg-gray-900 grid grid-cols-globalLayout">
+    <div className="h-full grid grid-cols-globalLayout">
       <Navbar studentName="Nicolas B." applicationsNumber={12} />
       <div className="w-full overflow-hidden p-5 pb-0">{children}</div>
     </div>

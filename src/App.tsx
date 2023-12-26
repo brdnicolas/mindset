@@ -10,23 +10,18 @@ import { LoginContainer } from './views/login/Login.container'
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ApplicationsProvider>
-                <ApplicationsContainer />
-              </ApplicationsProvider>
-            }
-          />
-          <Route path="/settings" element={<SettingsContainer />} />
-          <Route path="/stats" element={<StatisticsContainer />} />
-          <Route path="/plans" element={<PlansContainer />} />
-          <Route path="/register" element={<RegisterContainer />} />
-          <Route path="/login" element={<LoginContainer />} />
-        </Routes>
-      </BrowserRouter>
+      <ApplicationsProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<ApplicationsContainer />} />
+            <Route path="/settings" element={<SettingsContainer />} />
+            <Route path="/stats" element={<StatisticsContainer />} />
+            <Route path="/plans" element={<PlansContainer />} />
+            <Route path="/register" element={<RegisterContainer />} />
+            <Route path="/login" element={<LoginContainer />} />
+          </Routes>
+        </BrowserRouter>
+      </ApplicationsProvider>
     </>
   )
 }

@@ -37,7 +37,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
           </div>
           <div className="h-full overflow-y-auto" {...provided.droppableProps} ref={provided.innerRef}>
             {cards.map((card, index) => (
-              <Draggable key={card.id} draggableId={card.id} index={index}>
+              <Draggable key={card.id} draggableId={card.id + ''} index={index}>
                 {(provided) => (
                   <div
                     className={clsx(
