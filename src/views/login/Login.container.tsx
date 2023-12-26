@@ -58,7 +58,7 @@ export const LoginContainer = () => {
               </ButtonPrimary>
               <p className="text-gray-300 text-3 flex justify-center mt-26">
                 Vous n'avez pas de compte ?
-                <Link className="text-white font-bold cursor-pointer no-underline ml-1" to="/register">
+                <Link className="text-white font-bold cursor-pointer no-underline ml-1 hover:underline" to="/register">
                   S'inscrire
                 </Link>
               </p>

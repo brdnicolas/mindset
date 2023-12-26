@@ -49,7 +49,13 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <Card avatar={card.imageUrl} company={card.company} job={card.job} date={card.date} />
+                    <Card
+                      avatar={card.imageUrl}
+                      company={card.company}
+                      job={card.job}
+                      date={card.date}
+                      coverLetter={card.coverLetter}
+                    />
                   </div>
                 )}
               </Draggable>
