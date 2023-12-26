@@ -58,7 +58,7 @@ export const RegisterContainer = () => {
                 className="mt-6"
                 type="text"
                 value={email}
-                placeholder="email"
+                placeholder="Votre email"
                 iconName="mail"
                 handleOnChange={(e) => {
                   setEmail(e.target.value)
@@ -68,7 +68,7 @@ export const RegisterContainer = () => {
                 className="mt-6"
                 type="password"
                 value={password}
-                placeholder="password"
+                placeholder="Votre mot de passe"
                 iconName="lock"
                 handleOnChange={(e) => {
                   setPassword(e.target.value)
@@ -83,7 +83,7 @@ export const RegisterContainer = () => {
               </ButtonPrimary>
               <p className="text-gray-300 text-3 flex justify-center mt-26">
                 Vous avez déjà un compte ?{' '}
-                <Link className="text-white font-bold cursor-pointer no-underline ml-1" to="/login">
+                <Link className="text-white font-bold cursor-pointer no-underline ml-1 hover:underline" to="/login">
                   Se connecter
                 </Link>
               </p>

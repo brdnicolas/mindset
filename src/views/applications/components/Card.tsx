@@ -6,9 +6,10 @@ type CardProps = {
   job: string
   date: string
   avatar?: string
+  coverLetter: string
 }
 
-export const Card = ({ company, job, date, avatar }: CardProps) => {
+export const Card = ({ company, job, date, avatar, coverLetter }: CardProps) => {
   return (
     <div className="p-5 bg-gray-700 w-full">
       <div className="flex items-center">
@@ -21,7 +22,7 @@ export const Card = ({ company, job, date, avatar }: CardProps) => {
           <Icon className="w-[18px] h-[18px]" name="calendar" />
           <p className="text-3.5 text-gray-500 ml-[8px]">{date}</p>
         </div>
-        <Icon className="w-[18px] h-[18px]" name="document-text" />
+        {coverLetter && <Icon className="w-[18px] h-[18px]" name="document-text" />}
       </div>
     </div>
   )
