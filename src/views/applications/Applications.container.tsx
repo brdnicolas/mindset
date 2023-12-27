@@ -9,10 +9,13 @@ import { IconName } from '@/components/atoms/icons/types'
 import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 import { updateApplicationStateById } from '@/services/applications/application'
 import { withAuthenticatedUser } from '@/utils/hoc/withAuthenticatedUser'
+import { useBreakpointsContext } from '@/contexts/breakpoints/breakpoints.provider'
 
 export const ApplicationsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
     const { applied, relaunched, interviewObtained, archived, dispatch } = useApplicationsContext()
+    const { isMobile, isTablet } = useBreakpointsContext()
+    const isMobileOrTablet = isMobile || isTablet
     const columns = useMemo(
       () => ({
         applied: {
@@ -105,12 +108,14 @@ export const ApplicationsContainer = withAuthenticatedUser(
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="pt-6 flex flex-col h-full">
-          <div className="flex items-center">
-            <Icon className="w-7 h-7 text-gray-200" name="document" />
-            <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
-          </div>
-          <div className="flex gap-12 h-full w-full overflow-hidden overflow-x-auto pt-12 pr-9">
+        <div className="laptop:pt-6 flex flex-col h-full">
+          {!isMobileOrTablet && (
+            <div className="flex items-center">
+              <Icon className="w-7 h-7 text-gray-200" name="document" />
+              <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
+            </div>
+          )}
+          <div className="flex gap-12 h-full w-full overflow-hidden overflow-x-auto pt-5 pl-5 laptop:pl-0 laptop:pt-12 pr-9">
             <Column
               title={columns.applied.title}
               icon={columns.applied.icon as IconName}

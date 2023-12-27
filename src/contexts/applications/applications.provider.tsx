@@ -27,17 +27,22 @@ export const ApplicationsProvider = ({ children }: ApplicationsProviderPropsType
       return
     }
 
-    getAllUserApplications().then((data) => {
-      const applied = data.filter((x) => x.applicationState.name === EApplicationState.applied)
-      const relaunched = data.filter((x) => x.applicationState.name === EApplicationState.relaunched)
-      const interviewObtained = data.filter((x) => x.applicationState.name === EApplicationState.interviewObtained)
-      const archived = data.filter((x) => x.applicationState.name === EApplicationState.archived)
+    getAllUserApplications()
+      .then((data) => {
+        const applied = data.filter((x) => x.applicationState.name === EApplicationState.applied)
+        const relaunched = data.filter((x) => x.applicationState.name === EApplicationState.relaunched)
+        const interviewObtained = data.filter((x) => x.applicationState.name === EApplicationState.interviewObtained)
+        const archived = data.filter((x) => x.applicationState.name === EApplicationState.archived)
 
-      dispatch(setApplications({ target: EApplicationState.applied, applications: applied }))
-      dispatch(setApplications({ target: EApplicationState.relaunched, applications: relaunched }))
-      dispatch(setApplications({ target: EApplicationState.interviewObtained, applications: interviewObtained }))
-      dispatch(setApplications({ target: EApplicationState.archived, applications: archived }))
-    })
+        dispatch(setApplications({ target: EApplicationState.applied, applications: applied }))
+        dispatch(setApplications({ target: EApplicationState.relaunched, applications: relaunched }))
+        dispatch(setApplications({ target: EApplicationState.interviewObtained, applications: interviewObtained }))
+        dispatch(setApplications({ target: EApplicationState.archived, applications: archived }))
+      })
+      .catch(() => {
+        localStorage.removeItem('token')
+        window.location.reload()
+      })
   }, [])
 
   const value: ApplicationsContext = useMemo(() => ({ ...state, dispatch }), [state])

@@ -1,27 +1,21 @@
-import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
+import { ButtonSecondary } from '@/components'
 import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
-import { useState } from 'react'
 import { withAuthenticatedUser } from '@/utils/hoc/withAuthenticatedUser'
 
 export const SettingsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
-    const [state, setState] = useState('')
+    const logOut = () => {
+      localStorage.removeItem('token')
+      window.location.reload()
+    }
 
     return (
-      <>
-        <p>SETTINGS</p>
-        <Input
-          value={state}
-          handleOnChange={(e) => setState(e.target.value)}
-          iconName="activity"
-          type="text"
-          placeholder="Email"
-        />
-        <ButtonPrimary iconName="activity" iconPosition="right">
-          My text
-        </ButtonPrimary>
-        <ButtonSecondary>Se connecter</ButtonSecondary>
-      </>
+      <div className="px-5">
+        <p className="text-gray-100">Se déconnecter</p>
+        <ButtonSecondary onClick={logOut} className="mt-5 bg-red-500">
+          Se déconnecter
+        </ButtonSecondary>
+      </div>
     )
   })
 )
