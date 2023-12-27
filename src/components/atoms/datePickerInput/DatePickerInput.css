@@ -1,0 +1,10 @@
+.date-picker-input {
+  input {
+    padding: 13px 40px;
+    background-color: #0e0e0e;
+    border: 1px solid #222222;
+    border-radius: 8px;
+    color: #d6d6d6;
+    font-size: 14px;
+  }
+}

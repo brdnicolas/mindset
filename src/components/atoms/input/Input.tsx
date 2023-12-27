@@ -22,9 +22,9 @@ export const Input = ({ value, iconName, className, handleOnChange, type, label,
   }
 
   return (
-    <div>
+    <div className={clsx(className)}>
       <p className="text-gray-500 text-3.5 mb-3">{label}</p>
-      <div className={clsx('relative flex items-center', className)}>
+      <div className="relative flex items-center">
         {iconName && (
           <Icon className={clsx('absolute left-3', value ? 'text-gray-100' : 'text-gray-550')} name={iconName} />
         )}
