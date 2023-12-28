@@ -1,18 +1,15 @@
+import clsx from 'clsx'
+
 type AvatarProps = {
   src?: string
   alt?: string
-  width: number
-  height: number
+  className?: string
 }
 
-export const Avatar = ({ src, alt, width, height }: AvatarProps) => {
+export const Avatar = ({ src, alt, className = '' }: AvatarProps) => {
   return (
-    <div>
-      {src ? (
-        <img width={width} height={height} src={src} alt={alt} className="rounded-full aspect-square" />
-      ) : (
-        <div className="bg-slate-600 rounded-full w-8 h-8"></div>
-      )}
+    <div className={clsx('rounded-full aspect-square overflow-hidden', className)}>
+      {src ? <img className="h-full w-full" src={src} alt={alt} /> : <div className="bg-slate-600 rounded-full"></div>}
     </div>
   )
 }

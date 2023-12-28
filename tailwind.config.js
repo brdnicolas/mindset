@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const sizes = {
+  0: '0px',
   1: '4px',
   1.5: '6px',
   2: '8px',
@@ -42,7 +43,17 @@ module.exports = {
     padding: { ...sizes },
     margin: { ...sizes },
     fontSize: { ...sizes },
+    spacing: { ...sizes },
+    screens: {
+      mobile: '320px',
+      tablet: '768px',
+      laptop: '1024px',
+      desktop: '1280px'
+    },
     extend: {
+      zIndex: {
+        first: 99999
+      },
       gridTemplateColumns: {
         globalLayout: '285px 1fr'
       },
