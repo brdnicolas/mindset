@@ -117,7 +117,7 @@ export const ApplicationsContainer = withAuthenticatedUser(
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="laptop:pt-6 flex flex-col h-full pr-9">
+        <div className="laptop:pt-6 flex flex-col h-full">
           {!isMobileOrTablet && (
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -127,7 +127,12 @@ export const ApplicationsContainer = withAuthenticatedUser(
               <ButtonPrimary onClick={() => setShowNewApplication(true)}>Nouvelle candidature</ButtonPrimary>
             </div>
           )}
-          <div className="flex gap-12 h-full w-full overflow-hidden overflow-x-auto pt-5 pl-5 laptop:pl-0 laptop:pt-12">
+          {isMobileOrTablet && (
+            <div className=" w-full flex justify-center">
+              <ButtonPrimary onClick={() => setShowNewApplication(true)}>Nouvelle candidature</ButtonPrimary>
+            </div>
+          )}
+          <div className="flex gap-12 h-full w-full overflow-hidden overflow-x-auto pt-5 pl-5 laptop:pl-0 laptop:pt-12 pr-9">
             <Column
               title={columns.applied.title}
               icon={columns.applied.icon as IconName}
