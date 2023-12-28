@@ -51,10 +51,40 @@ export const ButtonSecondary = ({ children, className, onClick }: ButtonSecondar
       onClick={onClick}
       className={clsx(
         className,
-        'transition-all cursor-pointer py-3 px-6 flex items-center justify-center rounded-2 border-1 border-gray600 border-[1px] border-gray-600 bg-gray-800 text-gray-50  hover:bg-gray-700'
+        'transition-all cursor-pointer py-3 px-6 flex items-center justify-center rounded-2 border-1 border-[1px] border-gray-600 bg-gray-800 text-gray-50  hover:bg-gray-700'
       )}
     >
       {children}
+    </button>
+  )
+}
+type IconButtonProps = {
+  iconName: IconName
+  onClick?: () => void
+}
+
+export const IconButtonPrimary = ({ iconName, onClick }: IconButtonProps) => {
+  return (
+    <button
+      onClick={onClick}
+      className={clsx(
+        'transition-all cursor-pointer p-1 flex items-center justify-center rounded-2 w-5 h-5 border-[1px] border-gray-600 bg-gray-800 text-gray-50  hover:text-gray-500'
+      )}
+    >
+      <Icon name={iconName} />
+    </button>
+  )
+}
+
+export const IconButtonSecondary = ({ iconName, onClick }: IconButtonProps) => {
+  return (
+    <button
+      onClick={onClick}
+      className={clsx(
+        'transition-all cursor-pointer p-1 flex items-center justify-center rounded-2 w-5 h-5 bg-white text-gray-900  hover:text-gray-400'
+      )}
+    >
+      <Icon name={iconName} />
     </button>
   )
 }
