@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 import { useApplicationsContext } from '@/contexts/applications/applications.provider'
 import { setApplications } from '@/contexts/applications/applications.actions'
@@ -10,12 +10,21 @@ import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 import { updateApplicationStateById } from '@/services/applications/application'
 import { withAuthenticatedUser } from '@/utils/hoc/withAuthenticatedUser'
 import { useBreakpointsContext } from '@/contexts/breakpoints/breakpoints.provider'
+import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
+import { DatePickerInput } from '@/components/atoms/datePickerInput/DatePickerInput'
+import { Modal } from '@/components/organisms/modal/Modal'
 
 export const ApplicationsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
     const { applied, relaunched, interviewObtained, archived, dispatch } = useApplicationsContext()
     const { isMobile, isTablet } = useBreakpointsContext()
     const isMobileOrTablet = isMobile || isTablet
+
+    const [showNewApplication, setShowNewApplication] = useState(false)
+    const [offerLink, setOfferLink] = useState('')
+    const [job, setJob] = useState('')
+    const [company, setCompany] = useState('')
+
     const columns = useMemo(
       () => ({
         applied: {
@@ -108,14 +117,17 @@ export const ApplicationsContainer = withAuthenticatedUser(
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="laptop:pt-6 flex flex-col h-full">
+        <div className="laptop:pt-6 flex flex-col h-full pr-9">
           {!isMobileOrTablet && (
-            <div className="flex items-center">
-              <Icon className="w-7 h-7 text-gray-200" name="document" />
-              <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Icon className="w-7 h-7 text-gray-200" name="document" />
+                <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
+              </div>
+              <ButtonPrimary onClick={() => setShowNewApplication(true)}>Nouvelle candidature</ButtonPrimary>
             </div>
           )}
-          <div className="flex gap-12 h-full w-full overflow-hidden overflow-x-auto pt-5 pl-5 laptop:pl-0 laptop:pt-12 pr-9">
+          <div className="flex gap-12 h-full w-full overflow-hidden overflow-x-auto pt-5 pl-5 laptop:pl-0 laptop:pt-12">
             <Column
               title={columns.applied.title}
               icon={columns.applied.icon as IconName}
@@ -150,6 +162,46 @@ export const ApplicationsContainer = withAuthenticatedUser(
             />
           </div>
         </div>
+        <Modal show={showNewApplication} onClose={() => setShowNewApplication(!showNewApplication)}>
+          <div className="mt-6">
+            <Input
+              type="string"
+              name="offerLink"
+              label="Lien de l'offre"
+              iconName="link"
+              handleOnChange={(e) => setOfferLink(e.target.value)}
+              value={offerLink}
+            />
+            <hr className="h-[1px] border-gray-600 w-full mt-8" />
+            <div className="flex items-center justify-between mt-8">
+              <Input
+                className="w-full"
+                type="string"
+                iconName="briefcase"
+                name="job"
+                label="Poste"
+                value={job}
+                handleOnChange={(e) => setJob(e.target.value)}
+              />
+              <Input
+                className="w-full ml-4"
+                type="string"
+                iconName="briefcase"
+                name="company"
+                label="Entreprise"
+                value={company}
+                handleOnChange={(e) => setCompany(e.target.value)}
+              />
+            </div>
+            <DatePickerInput className="mt-3" label="Date de candidature" />
+          </div>
+          <footer className="flex items-center justify-center mt-6">
+            <ButtonSecondary onClick={() => setShowNewApplication(!showNewApplication)}>Annuler</ButtonSecondary>
+            <ButtonPrimary className="ml-4" onClick={() => setShowNewApplication(!showNewApplication)}>
+              Confirmer
+            </ButtonPrimary>
+          </footer>
+        </Modal>
       </DragDropContext>
     )
   })
