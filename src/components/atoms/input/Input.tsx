@@ -7,9 +7,10 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   className?: string
   iconName?: IconName
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  hasError?: boolean
 }
 
-export const Input = ({ value, iconName, className, handleOnChange, type, ...rest }: InputProps) => {
+export const Input = ({ value, iconName, className, handleOnChange, type, hasError, ...rest }: InputProps) => {
   const [inputType, setInputType] = useState(type)
 
   const togglePassword = () => {
@@ -34,13 +35,14 @@ export const Input = ({ value, iconName, className, handleOnChange, type, ...res
           'border-[1px] border-gray-600 focus:border-gray-300',
           'focus:ring-2 ring-gray-500 focus:outline-none',
           iconName && 'pl-11',
-          type === 'password' && 'pr-11'
+          type === 'password' && 'pr-11',
+          hasError ? 'ring-2 ring-red-500' : 'ring-0'
         )}
         {...rest}
         onChange={handleOnChange}
       />
       {type === 'password' && (
-        <button className="absolute right-3 cursor-pointer" onClick={togglePassword}>
+        <button type="button" className="absolute right-3 cursor-pointer" onClick={togglePassword}>
           <Icon
             className={clsx(value ? 'text-gray-100' : 'text-gray-550')}
             name={type === 'password' ? 'eye' : 'eye-blink'}
