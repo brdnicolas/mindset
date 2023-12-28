@@ -167,7 +167,11 @@ export const ApplicationsContainer = withAuthenticatedUser(
             />
           </div>
         </div>
-        <Modal show={showNewApplication} onClose={() => setShowNewApplication(!showNewApplication)}>
+        <Modal
+          title="Ajouter une candidature"
+          show={showNewApplication}
+          onClose={() => setShowNewApplication(!showNewApplication)}
+        >
           <div className="mt-6">
             <Input
               type="string"

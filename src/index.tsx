@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <div className="bg-gray-900 h-full w-full">
+    <div id="modal-root" />
     <App />
   </div>
 )
