@@ -119,7 +119,7 @@ export const ApplicationsContainer = withAuthenticatedUser(
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="laptop:pt-6 flex flex-col h-full">
           {!isMobileOrTablet && (
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pr-9">
               <div className="flex items-center">
                 <Icon className="w-7 h-7 text-gray-200" name="document" />
                 <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>

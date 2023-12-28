@@ -19,7 +19,7 @@ export const Modal = ({ show, onClose, children }: NewApplicationModalProps) => 
       <div
         className={clsx(
           'w-full p-6 bg-gray-700 rounded-6  max-h-[75vh] fixed bottom-0',
-          'laptop:w-[666px] laptop:h-full laptop:block'
+          'laptop:w-[666px] laptop:h-full laptop:block laptop:bottom-auto laptop:h-fit'
         )}
       >
         <header className="flex justify-between">
