@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 type NavbarLabelProps = {
   iconName: IconName
-  children: React.ReactNode
+  children?: React.ReactNode
   onClick: () => void
   isActive: boolean
   className?: string
@@ -20,7 +20,7 @@ export const NavbarLabel = ({ iconName, children, onClick, isActive, className }
       )}
       onClick={onClick}
     >
-      <Icon name={iconName} />
+      <Icon className="w-8 h-8 laptop:w-6 laptop:h-6" name={iconName} />
       <p className="ml-2 text-base font-medium">{children}</p>
     </div>
   )

@@ -25,7 +25,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
       {(provided) => (
         <div className="min-w-[285px] max-w-[285px] h-full overflow-hidden flex flex-col">
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
+            <div className="flex items-center pb-4">
               <div className={clsx('h-4 w-1 rounded-full mr-2', variantsColor[color])} />
               <Icon className="w-7 h-7 text-gray-500" name={icon} />
               <h2 className="ml-2 text-gray-500 text-base">
@@ -35,7 +35,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
             </div>
             <Icon name="more-horizontal" className="cursor-pointer w-6 h-6 text-gray-500" />
           </div>
-          <div className="h-full overflow-y-auto" {...provided.droppableProps} ref={provided.innerRef}>
+          <div className="h-full overflow-y-auto pb-5" {...provided.droppableProps} ref={provided.innerRef}>
             {cards.map((card, index) => (
               <Draggable key={card.id} draggableId={card.id + ''} index={index}>
                 {(provided) => (
