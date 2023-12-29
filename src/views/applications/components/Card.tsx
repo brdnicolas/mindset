@@ -13,7 +13,7 @@ export const Card = ({ company, job, date, avatar, coverLetter }: CardProps) => 
   return (
     <div className="p-5 bg-gray-700 w-full">
       <div className="flex items-center">
-        <Avatar src={avatar} className="h-8  w-8" />
+        <Avatar src={avatar} className="h-8 w-8" />
         <p className="ml-3 text-gray-300 text-sm">{company}</p>
       </div>
       <p className="mt-5 text-gray-100 text-base font-bold">{job}</p>
