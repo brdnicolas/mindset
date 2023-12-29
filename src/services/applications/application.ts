@@ -15,3 +15,7 @@ export const updateApplicationStateById = async (
     })
     .then((response) => response.data)
 }
+
+export const deleteApplicationById = async (applicationId: number): Promise<Application> => {
+  return api.delete(`/applications/${applicationId}`).then((response) => response.data)
+}

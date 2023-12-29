@@ -1,9 +1,12 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { Application } from '@/contexts/applications/applications.types'
-import { Card } from './Card'
+import { Card } from './card/Card'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
 import clsx from 'clsx'
+import { deleteApplicationById } from '@/services/applications/application'
+import { useApplicationsContext } from '@/contexts/applications/applications.provider'
+import { deleteApplication } from '@/contexts/applications/applications.actions'
 
 type ColumnProps = {
   cards: Application[]
@@ -14,12 +17,19 @@ type ColumnProps = {
 }
 
 export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
+  const { dispatch } = useApplicationsContext()
   const variantsColor: any = {
     applied: 'bg-applicationStatus-applied',
     relaunched: 'bg-applicationStatus-relaunched',
     interviewObtained: 'bg-applicationStatus-interviewObtained',
     archived: 'bg-gray-500'
   }
+
+  const handleOnDelete = (cardId: number) => {
+    deleteApplicationById(Number(cardId))
+    dispatch(deleteApplication({ id: cardId }))
+  }
+
   return (
     <Droppable droppableId={id}>
       {(provided) => (
@@ -50,6 +60,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
                     {...provided.dragHandleProps}
                   >
                     <Card
+                      onDelete={() => handleOnDelete(Number(card.id))}
                       avatar={card.imageUrl}
                       company={card.company}
                       job={card.job}

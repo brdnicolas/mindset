@@ -13,7 +13,7 @@ export enum EAApplicationStateId {
 }
 
 export type Application = {
-  id: string
+  id: number
   job: string
   jobOfferUrl: string
   applicationDate: string
