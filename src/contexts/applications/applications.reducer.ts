@@ -40,6 +40,13 @@ export const applicationsReducer: Reducer<ApplicationsState, ApplicationsActions
           }
         ]
       }
+    case EApplicationsActions.DELETE_APPLICATION:
+      return {
+        applied: state.applied.filter((x) => x.id !== action.payload.id),
+        relaunched: state.relaunched.filter((x) => x.id !== action.payload.id),
+        interviewObtained: state.interviewObtained.filter((x) => x.id !== action.payload.id),
+        archived: state.archived.filter((x) => x.id !== action.payload.id)
+      }
     default:
       return { ...state }
   }

@@ -2,7 +2,8 @@ import { Application, ApplicationStates } from '@/contexts/applications/applicat
 
 export enum EApplicationsActions {
   SET_APPLICATIONS = 'SET_APPLICATIONS',
-  ADD_APPLICATION = 'ADD_APPLICATION'
+  ADD_APPLICATION = 'ADD_APPLICATION',
+  DELETE_APPLICATION = 'DELETE_APPLICATION'
 }
 
 type SetApplications = {
@@ -35,4 +36,16 @@ export const addApplication = (args: {
   payload: args
 })
 
-export type ApplicationsActions = SetApplications | AddApplication
+type DeleteApplication = {
+  type: EApplicationsActions.DELETE_APPLICATION
+  payload: {
+    id: number
+  }
+}
+
+export const deleteApplication = (args: { id: number }): DeleteApplication => ({
+  type: EApplicationsActions.DELETE_APPLICATION,
+  payload: args
+})
+
+export type ApplicationsActions = SetApplications | DeleteApplication | AddApplication

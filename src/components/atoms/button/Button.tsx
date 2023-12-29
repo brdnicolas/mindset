@@ -9,6 +9,7 @@ type ButtonPrimaryProps = {
   className?: string
   iconPosition?: 'left' | 'right'
   isDisabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
 }
 
 export const ButtonPrimary = ({
@@ -17,10 +18,12 @@ export const ButtonPrimary = ({
   className,
   onClick,
   iconPosition,
-  isDisabled
+  isDisabled,
+  type = 'button'
 }: ButtonPrimaryProps) => {
   return (
     <button
+      type={type}
       disabled={isDisabled}
       onClick={onClick}
       className={clsx(
@@ -43,18 +46,50 @@ type ButtonSecondaryProps = {
   children: React.ReactNode
   className?: string
   onClick?: () => void
+  type?: 'button' | 'submit' | 'reset'
 }
 
-export const ButtonSecondary = ({ children, className, onClick }: ButtonSecondaryProps) => {
+export const ButtonSecondary = ({ children, className, onClick, type = 'button' }: ButtonSecondaryProps) => {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={clsx(
+        className,
+        'transition-all cursor-pointer py-3 px-6 flex items-center justify-center rounded-2 border-1 border-[1px] border-gray-600 bg-gray-800 text-gray-50  hover:bg-gray-700'
+      )}
+    >
+      {children}
+    </button>
+  )
+}
+type IconButtonProps = {
+  iconName: IconName
+  onClick?: () => void
+}
+
+export const IconButtonPrimary = ({ iconName, onClick }: IconButtonProps) => {
   return (
     <button
       onClick={onClick}
       className={clsx(
-        className,
-        'transition-all cursor-pointer py-3 px-6 flex items-center justify-center rounded-2 border-1 border-gray600 border-[1px] border-gray-600 bg-gray-800 text-gray-50  hover:bg-gray-700'
+        'transition-all cursor-pointer p-1 flex items-center justify-center rounded-2 w-5 h-5 border-[1px] border-gray-600 bg-gray-800 text-gray-50  hover:text-gray-500'
       )}
     >
-      {children}
+      <Icon name={iconName} />
+    </button>
+  )
+}
+
+export const IconButtonSecondary = ({ iconName, onClick }: IconButtonProps) => {
+  return (
+    <button
+      onClick={onClick}
+      className={clsx(
+        'transition-all cursor-pointer p-1 flex items-center justify-center rounded-2 w-5 h-5 bg-white text-gray-900  hover:text-gray-400'
+      )}
+    >
+      <Icon name={iconName} />
     </button>
   )
 }
