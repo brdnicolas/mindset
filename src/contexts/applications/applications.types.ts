@@ -21,7 +21,7 @@ export type Application = {
   coverLetter: string
   userId: number
   applicationState: { name: EApplicationState }
-  imageUrl: string
+  companyImageUrl: string
   company: string
   date: string
 }

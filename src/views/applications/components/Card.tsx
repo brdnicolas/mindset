@@ -1,6 +1,7 @@
 import { Avatar } from '@/components'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { useState } from 'react'
+import dayjs from 'dayjs'
 
 type CardProps = {
   company: string
@@ -13,6 +14,7 @@ type CardProps = {
 
 export const Card = ({ company, job, date, avatar, coverLetter, onDelete }: CardProps) => {
   const [showIcon, setShowIcon] = useState(false)
+
   return (
     <div
       onMouseEnter={() => setShowIcon(true)}
@@ -34,7 +36,7 @@ export const Card = ({ company, job, date, avatar, coverLetter, onDelete }: Card
       <div className="flex items-center justify-between mt-5">
         <div className="flex items-center ">
           <Icon className="w-[18px] h-[18px]" name="calendar" />
-          <p className="text-3.5 text-gray-500 ml-[8px]">{date}</p>
+          <p className="text-3.5 text-gray-500 ml-[8px]">{dayjs(date).fromNow()}</p>
         </div>
         {coverLetter && <Icon className="w-[18px] h-[18px]" name="document-text" />}
       </div>

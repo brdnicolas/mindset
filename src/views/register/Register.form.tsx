@@ -63,7 +63,7 @@ export const RegisterForm = () => {
         type="text"
         placeholder="Votre prénom"
         iconName="user"
-        hasError={!!formik.errors.firstName}
+        errorMessage={formik.errors.firstName}
         value={formik.values.firstName}
         handleOnChange={formik.handleChange}
         name="firstName"
@@ -73,7 +73,7 @@ export const RegisterForm = () => {
         type="text"
         placeholder="Votre nom"
         iconName="user"
-        hasError={!!formik.errors.lastName}
+        errorMessage={formik.errors.lastName}
         value={formik.values.lastName}
         handleOnChange={formik.handleChange}
         name="lastName"
@@ -83,7 +83,7 @@ export const RegisterForm = () => {
         type="text"
         placeholder="Votre email"
         iconName="mail"
-        hasError={!!formik.errors.email}
+        errorMessage={formik.errors.email}
         value={formik.values.email}
         handleOnChange={formik.handleChange}
         name="email"
@@ -93,7 +93,7 @@ export const RegisterForm = () => {
         type="password"
         placeholder="Votre mot de passe"
         iconName="lock"
-        hasError={!!formik.errors.password}
+        errorMessage={formik.errors.password}
         value={formik.values.password}
         handleOnChange={formik.handleChange}
         name="password"

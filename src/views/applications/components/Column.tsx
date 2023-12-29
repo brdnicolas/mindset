@@ -1,6 +1,6 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { Application } from '@/contexts/applications/applications.types'
-import { Card } from './card/Card'
+import { Card } from './Card'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
 import clsx from 'clsx'
@@ -29,6 +29,8 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
     deleteApplicationById(Number(cardId))
     dispatch(deleteApplication({ id: cardId }))
   }
+
+  console.log(cards, 'cards')
 
   return (
     <Droppable droppableId={id}>
@@ -61,10 +63,10 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
                   >
                     <Card
                       onDelete={() => handleOnDelete(Number(card.id))}
-                      avatar={card.imageUrl}
+                      avatar={card.companyImageUrl}
                       company={card.company}
                       job={card.job}
-                      date={card.date}
+                      date={card.applicationDate}
                       coverLetter={card.coverLetter}
                     />
                   </div>

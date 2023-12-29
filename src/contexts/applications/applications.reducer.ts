@@ -36,7 +36,8 @@ export const applicationsReducer: Reducer<ApplicationsState, ApplicationsActions
             userId: 1,
             applicationState: { name: EApplicationState.applied },
             date: '',
-            imageUrl: ''
+            companyImageUrl: '',
+            jobOfferUrl: ''
           }
         ]
       }
