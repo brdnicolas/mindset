@@ -1,24 +1,8 @@
-import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
-import { login } from '@/services/auth/auth'
-import { useState } from 'react'
+import { ButtonSecondary } from '@/components'
 import { Link } from 'react-router-dom'
+import { LoginForm } from '@/views/login/Login.form'
 
 export const LoginContainer = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleOnLogin = async () => {
-    try {
-      const data = await login({ email, password })
-      const token = data.token
-
-      localStorage.setItem('token', token)
-      window.location.href = '/'
-    } catch {
-      alert('Error')
-    }
-  }
-
   return (
     <div className="bg-gray-900 w-full laptop:p-14 p-5">
       <header className="flex items-center justify-between">
@@ -33,28 +17,8 @@ export const LoginContainer = () => {
             Vos compétences en première ligne de l'innovation
           </h1>
           <div className="mt-[10vh] w-[300px]">
-            <Input
-              type="text"
-              value={email}
-              placeholder="Votre email"
-              iconName="mail"
-              handleOnChange={(e) => {
-                setEmail(e.target.value)
-              }}
-            />
-            <Input
-              className="mt-6"
-              type="password"
-              value={password}
-              placeholder="Votre mot de passe"
-              iconName="lock"
-              handleOnChange={(e) => {
-                setPassword(e.target.value)
-              }}
-            />
-            <ButtonPrimary onClick={() => handleOnLogin()} isDisabled={!email || !password} className="w-full mt-9">
-              Se connecter
-            </ButtonPrimary>
+            <LoginForm />
+
             <p className="text-gray-300 text-3 flex justify-center mt-[3vh] tablet:mt-[7vh]">
               Vous n'avez pas de compte ?
               <Link className="text-white font-bold cursor-pointer no-underline ml-1 hover:underline" to="/register">
