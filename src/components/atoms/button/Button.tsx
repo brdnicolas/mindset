@@ -9,6 +9,7 @@ type ButtonPrimaryProps = {
   className?: string
   iconPosition?: 'left' | 'right'
   isDisabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
 }
 
 export const ButtonPrimary = ({
@@ -17,10 +18,12 @@ export const ButtonPrimary = ({
   className,
   onClick,
   iconPosition,
-  isDisabled
+  isDisabled,
+  type = 'button'
 }: ButtonPrimaryProps) => {
   return (
     <button
+      type={type}
       disabled={isDisabled}
       onClick={onClick}
       className={clsx(
@@ -43,11 +46,13 @@ type ButtonSecondaryProps = {
   children: React.ReactNode
   className?: string
   onClick?: () => void
+  type?: 'button' | 'submit' | 'reset'
 }
 
-export const ButtonSecondary = ({ children, className, onClick }: ButtonSecondaryProps) => {
+export const ButtonSecondary = ({ children, className, onClick, type = 'button' }: ButtonSecondaryProps) => {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={clsx(
         className,
