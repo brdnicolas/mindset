@@ -1,4 +1,4 @@
-import { Application, ApplicationStates } from '@/contexts/applications/applications.types'
+import { ApplicationStates, MinimalApplication } from '@/contexts/applications/applications.types'
 
 export enum EApplicationsActions {
   SET_APPLICATIONS = 'SET_APPLICATIONS',
@@ -10,13 +10,13 @@ type SetApplications = {
   type: EApplicationsActions.SET_APPLICATIONS
   payload: {
     target?: ApplicationStates
-    applications: Application[]
+    applications: MinimalApplication[]
   }
 }
 
 export const setApplications = (args: {
   target?: ApplicationStates
-  applications: Application[]
+  applications: MinimalApplication[]
 }): SetApplications => ({
   type: EApplicationsActions.SET_APPLICATIONS,
   payload: args

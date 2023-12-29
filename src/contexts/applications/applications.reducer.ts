@@ -1,6 +1,6 @@
 import { Reducer } from 'react'
 import { ApplicationsActions, EApplicationsActions } from '@/contexts/applications/applications.actions'
-import { ApplicationsState, EApplicationState } from '@/contexts/applications/applications.types'
+import { ApplicationsState } from '@/contexts/applications/applications.types'
 
 export const initialState: ApplicationsState = {
   applied: [],
@@ -10,6 +10,11 @@ export const initialState: ApplicationsState = {
 }
 
 export const applicationsReducer: Reducer<ApplicationsState, ApplicationsActions> = (state = initialState, action) => {
+  const higherId = [...state.applied, ...state.relaunched, ...state.interviewObtained, ...state.archived].reduce(
+    (acc, x) => (x.id > acc ? x.id : acc),
+    0
+  )
+
   switch (action.type) {
     case EApplicationsActions.SET_APPLICATIONS:
       if (action.payload.target) {
@@ -30,14 +35,8 @@ export const applicationsReducer: Reducer<ApplicationsState, ApplicationsActions
           ...state.applied,
           {
             ...action.payload.application,
-            cv: '',
-            coverLetter: '',
-            id: 3,
-            userId: 1,
-            applicationState: { name: EApplicationState.applied },
-            date: '',
-            companyImageUrl: '',
-            jobOfferUrl: ''
+            id: higherId,
+            userId: -1
           }
         ]
       }

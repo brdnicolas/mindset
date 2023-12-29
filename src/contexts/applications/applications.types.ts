@@ -12,6 +12,16 @@ export enum EApplicationStateId {
   archived = 4
 }
 
+export type MinimalApplication = {
+  id: number
+  job: string
+  jobOfferUrl?: string
+  applicationDate: string
+  company: string
+  companyImageUrl?: string
+  coverLetter?: string
+}
+
 export type Application = {
   id: number
   job: string
@@ -27,10 +37,10 @@ export type Application = {
 }
 
 export type ApplicationsState = {
-  applied: Application[]
-  relaunched: Application[]
-  interviewObtained: Application[]
-  archived: Application[]
+  applied: MinimalApplication[]
+  relaunched: MinimalApplication[]
+  interviewObtained: MinimalApplication[]
+  archived: MinimalApplication[]
 }
 
 export type ApplicationStates =

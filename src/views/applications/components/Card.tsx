@@ -8,7 +8,7 @@ type CardProps = {
   job: string
   date: string
   avatar?: string
-  coverLetter: string
+  coverLetter?: string
   onDelete?: any
 }
 

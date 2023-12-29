@@ -1,5 +1,5 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { Application } from '@/contexts/applications/applications.types'
+import { MinimalApplication } from '@/contexts/applications/applications.types'
 import { Card } from './Card'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
@@ -9,7 +9,7 @@ import { useApplicationsContext } from '@/contexts/applications/applications.pro
 import { deleteApplication } from '@/contexts/applications/applications.actions'
 
 type ColumnProps = {
-  cards: Application[]
+  cards: MinimalApplication[]
   id: string
   color: string
   icon: IconName
@@ -29,8 +29,6 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
     deleteApplicationById(Number(cardId))
     dispatch(deleteApplication({ id: cardId }))
   }
-
-  console.log(cards, 'cards')
 
   return (
     <Droppable droppableId={id}>
