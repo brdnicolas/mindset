@@ -1,6 +1,6 @@
 import { Reducer } from 'react'
 import { ApplicationsActions, EApplicationsActions } from '@/contexts/applications/applications.actions'
-import { ApplicationsState } from '@/contexts/applications/applications.types'
+import { ApplicationsState, EApplicationState } from '@/contexts/applications/applications.types'
 
 export const initialState: ApplicationsState = {
   applied: [],
@@ -22,6 +22,23 @@ export const applicationsReducer: Reducer<ApplicationsState, ApplicationsActions
           ...state,
           ...action.payload
         }
+      }
+    case EApplicationsActions.ADD_APPLICATION:
+      return {
+        ...state,
+        applied: [
+          ...state.applied,
+          {
+            ...action.payload.application,
+            cv: '',
+            coverLetter: '',
+            id: 3,
+            userId: 1,
+            applicationState: { name: EApplicationState.applied },
+            date: '',
+            imageUrl: ''
+          }
+        ]
       }
     default:
       return { ...state }

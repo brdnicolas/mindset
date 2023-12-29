@@ -1,4 +1,4 @@
-import { Application, EAApplicationStateId, EApplicationState } from '@/contexts/applications/applications.types'
+import { Application, EApplicationStateId, EApplicationState } from '@/contexts/applications/applications.types'
 import { api } from '../api'
 
 export const getAllUserApplications = async (): Promise<Application[]> => {
@@ -11,7 +11,23 @@ export const updateApplicationStateById = async (
 ): Promise<Application> => {
   return api
     .patch(`/applications/${applicationId}`, {
-      applicationStateId: EAApplicationStateId[applicationState]
+      applicationStateId: EApplicationStateId[applicationState]
+    })
+    .then((response) => response.data)
+}
+
+export type CreateApplication = {
+  job: string
+  jobOfferUrl: string
+  company: string
+  applicationDate: string
+}
+
+export const createApplication = async (application: CreateApplication): Promise<Application> => {
+  return api
+    .post('/applications', {
+      ...application,
+      applicationStateId: EApplicationStateId.applied
     })
     .then((response) => response.data)
 }
