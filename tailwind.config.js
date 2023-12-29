@@ -37,7 +37,7 @@ const sizes = {
 }
 
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: ['./src/**/*.{js,jsx,ts,tsx}', 'node_modules/flowbite-react/lib/esm/**/*.js'],
   theme: {
     borderRadius: { ...sizes },
     padding: { ...sizes },
@@ -79,5 +79,5 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [require('flowbite/plugin')]
 }

@@ -5,7 +5,7 @@ export enum EApplicationState {
   archived = 'archived'
 }
 
-export enum EAApplicationStateId {
+export enum EApplicationStateId {
   applied = 1,
   relaunched = 2,
   interviewObtained = 3,
@@ -19,7 +19,7 @@ export type Application = {
   applicationDate: string
   cv: string
   coverLetter: string
-  userId: string
+  userId: number
   applicationState: { name: EApplicationState }
   imageUrl: string
   company: string
