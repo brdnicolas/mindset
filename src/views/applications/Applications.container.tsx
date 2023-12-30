@@ -22,6 +22,7 @@ export const ApplicationsContainer = withAuthenticatedUser(
     const isMobileOrTablet = isMobile || isTablet
 
     const [showNewApplication, setShowNewApplication] = useState(false)
+    const [showDatePicker, setShowDatePicker] = useState(false)
     const [jobOfferUrl, setJobOfferUrl] = useState('')
     const [job, setJob] = useState('')
     const [company, setCompany] = useState('')
@@ -213,7 +214,11 @@ export const ApplicationsContainer = withAuthenticatedUser(
               />
             </div>
             <DatePickerInput
+              onClick={() => setShowDatePicker(!showDatePicker)}
+              value={applicationDate}
+              show={showDatePicker}
               onChange={(e: any) => {
+                setShowDatePicker(!showDatePicker)
                 setApplicationDate(e)
               }}
               className="mt-3"
