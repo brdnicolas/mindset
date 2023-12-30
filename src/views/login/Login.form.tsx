@@ -1,6 +1,7 @@
 import { FormikErrors, useFormik } from 'formik'
 import { ButtonPrimary, Input } from '@/components'
 import { login } from '@/services/auth/auth'
+import { Toast } from '@/components/molecules/toast/Toast'
 
 type FormValues = {
   email: string
@@ -45,6 +46,9 @@ export const LoginForm = () => {
       window.location.href = '/'
     } catch {
       alert('Error')
+      setTimeout(() => {
+        return <Toast type="error" />
+      }, 3000)
     }
   }
 
