@@ -1,6 +1,6 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { Application } from '@/contexts/applications/applications.types'
-import { Card } from './card/Card'
+import { MinimalApplication } from '@/contexts/applications/applications.types'
+import { Card } from './Card'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
 import clsx from 'clsx'
@@ -9,7 +9,7 @@ import { useApplicationsContext } from '@/contexts/applications/applications.pro
 import { deleteApplication } from '@/contexts/applications/applications.actions'
 
 type ColumnProps = {
-  cards: Application[]
+  cards: MinimalApplication[]
   id: string
   color: string
   icon: IconName
@@ -61,10 +61,10 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
                   >
                     <Card
                       onDelete={() => handleOnDelete(Number(card.id))}
-                      avatar={card.imageUrl}
+                      avatar={card.companyImageUrl}
                       company={card.company}
                       job={card.job}
-                      date={card.date}
+                      date={card.applicationDate}
                       coverLetter={card.coverLetter}
                     />
                   </div>
