@@ -64,7 +64,6 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
     setShowDatePicker(!showDatePicker)
     formik.setFieldValue('applicationDate', date)
   }
-
   const handleOnAdd = (application: FormValues) => {
     if (!application.jobOfferUrl) {
       delete application.jobOfferUrl

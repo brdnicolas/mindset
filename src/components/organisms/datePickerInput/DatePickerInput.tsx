@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import './DatePickerInput.css'
 import { Datepicker } from 'flowbite-react'
-import dayjs from 'dayjs'
 import { CustomTheme } from './datepicker.custom'
 import { Input } from '@/components'
 
