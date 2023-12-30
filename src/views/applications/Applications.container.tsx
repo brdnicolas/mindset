@@ -26,7 +26,7 @@ export const ApplicationsContainer = withAuthenticatedUser(
     const [jobOfferUrl, setJobOfferUrl] = useState('')
     const [job, setJob] = useState('')
     const [company, setCompany] = useState('')
-    const [applicationDate, setApplicationDate] = useState('')
+    const [applicationDate, setApplicationDate] = useState(dayjs().format('DD MMM YYYY'))
 
     const columns = useMemo(
       () => ({
@@ -68,6 +68,11 @@ export const ApplicationsContainer = withAuthenticatedUser(
       createApplication(application)
       dispatch(addApplication({ application }))
       setShowNewApplication(!showNewApplication)
+    }
+
+    const handleOnChangeDate = (e: string) => {
+      setShowDatePicker(!showDatePicker)
+      setApplicationDate(e)
     }
 
     const onDragEnd = ({ source, destination }: DropResult) => {
@@ -217,10 +222,7 @@ export const ApplicationsContainer = withAuthenticatedUser(
               onClick={() => setShowDatePicker(!showDatePicker)}
               value={applicationDate}
               show={showDatePicker}
-              onChange={(e: any) => {
-                setShowDatePicker(!showDatePicker)
-                setApplicationDate(e)
-              }}
+              onChange={handleOnChangeDate}
               className="mt-3"
               label="Date de candidature"
             />
