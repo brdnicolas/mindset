@@ -11,7 +11,7 @@ import { createApplication, updateApplicationStateById } from '@/services/applic
 import { withAuthenticatedUser } from '@/utils/hoc/withAuthenticatedUser'
 import { useBreakpointsContext } from '@/contexts/breakpoints/breakpoints.provider'
 import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
-import { DatePickerInput } from '@/components/atoms/datePickerInput/DatePickerInput'
+import { DatePickerInput } from '@/components/organisms/datePickerInput/DatePickerInput'
 import { Modal } from '@/components/organisms/modal/Modal'
 import dayjs from 'dayjs'
 
