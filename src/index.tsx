@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom/client'
 import './styles/global.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import 'dayjs/locale/fr'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import dayjs from 'dayjs'
+
+dayjs.locale('fr')
+dayjs.extend(relativeTime)
+
+declare module 'dayjs' {
+  interface Dayjs {
+    fromNow(): string
+  }
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

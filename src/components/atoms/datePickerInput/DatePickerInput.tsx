@@ -5,7 +5,7 @@ import './DatePickerInput.css'
 type DatePickerInputProps = {
   label?: string
   className?: string
-  onChange?: any
+  onChange?: (date: Date) => void
 }
 
 export const DatePickerInput = ({ label, className, onChange }: DatePickerInputProps) => {
