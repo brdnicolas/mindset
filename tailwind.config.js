@@ -75,9 +75,12 @@ module.exports = {
           applied: '#DE9489',
           relaunched: '#D289DE',
           interviewObtained: '#88DEA0'
+        },
+        toast: {
+          error: '#EF707E',
+          success: '#119B92'
         }
       }
     }
-  },
-  plugins: [require('flowbite/plugin')]
+  }
 }
