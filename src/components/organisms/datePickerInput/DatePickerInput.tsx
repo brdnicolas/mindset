@@ -11,7 +11,7 @@ type DatePickerInputProps = {
   onChange?: any
   value: string
   show: boolean
-  onClick?: any
+  onClick?: () => void
 }
 
 export const DatePickerInput = ({ label, className, onChange, value, show, onClick }: DatePickerInputProps) => {

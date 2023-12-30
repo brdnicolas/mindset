@@ -1,12 +1,12 @@
 import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
-import { DatePickerInput } from '@/components/atoms/datePickerInput/DatePickerInput'
 import { Modal } from '@/components/organisms/modal/Modal'
 import dayjs from 'dayjs'
 import { createApplication, scrapApplication } from '@/services/applications/application'
 import { addApplication } from '@/contexts/applications/applications.actions'
 import { FormikErrors, useFormik } from 'formik'
 import { useApplicationsContext } from '@/contexts/applications/applications.provider'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import { DatePickerInput } from '@/components/organisms/datePickerInput/DatePickerInput'
 
 type FormValues = {
   jobOfferUrl?: string
@@ -39,6 +39,8 @@ type AddApplicationModalProps = {
 }
 
 export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps) => {
+  const [showDatePicker, setShowDatePicker] = useState(false)
+  const [applicationDate, setApplicationDate] = useState(dayjs().format('DD MMM YYYY'))
   const timerRef = useRef<NodeJS.Timeout>()
   const { dispatch } = useApplicationsContext()
   const formik = useFormik({
@@ -55,6 +57,11 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
       handleOnAdd(values)
     }
   })
+
+  const handleOnChangeDate = (e: string) => {
+    setShowDatePicker(!showDatePicker)
+    setApplicationDate(e)
+  }
 
   const handleOnAdd = (application: FormValues) => {
     if (!application.jobOfferUrl) {
@@ -131,9 +138,10 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
             />
           </div>
           <DatePickerInput
-            onChange={(date) => {
-              formik.setFieldValue('applicationDate', dayjs(date).format('YYYY-MM-DD'))
-            }}
+            onClick={() => setShowDatePicker(!showDatePicker)}
+            value={applicationDate}
+            show={showDatePicker}
+            onChange={handleOnChangeDate}
             className="mt-3"
             label="Date de candidature"
           />
