@@ -40,7 +40,6 @@ type AddApplicationModalProps = {
 
 export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps) => {
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [applicationDate, setApplicationDate] = useState(dayjs().format('DD MMM YYYY'))
   const timerRef = useRef<NodeJS.Timeout>()
   const { dispatch } = useApplicationsContext()
   const formik = useFormik({
@@ -54,13 +53,16 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
     validate,
     validateOnChange: false,
     onSubmit: (values) => {
+      console.log(values, 'values')
       handleOnAdd(values)
     }
   })
 
-  const handleOnChangeDate = (e: string) => {
+  console.log(formik.errors, 'errors')
+
+  const handleOnChangeDate = (date: Date) => {
     setShowDatePicker(!showDatePicker)
-    setApplicationDate(e)
+    formik.setFieldValue('applicationDate', date)
   }
 
   const handleOnAdd = (application: FormValues) => {
@@ -68,11 +70,9 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
       delete application.jobOfferUrl
     }
 
-    console.log(application, 'app')
-
-    const formatedDate = dayjs(application.applicationDate).format('YYYY-MM-DD')
-    createApplication({ ...application, applicationDate: formatedDate })
-    dispatch(addApplication({ application: { ...application, applicationDate: formatedDate } }))
+    const formattedDate = dayjs(application.applicationDate).format('YYYY-MM-DD')
+    createApplication({ ...application, applicationDate: formattedDate })
+    dispatch(addApplication({ application: { ...application, applicationDate: formattedDate } }))
     onClose()
   }
 
@@ -115,7 +115,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
             name="jobOfferUrl"
           />
           <hr className="h-[1px] border-gray-600 w-full mt-8" />
-          <div className="flex items-center justify-between mt-8">
+          <div className="flex items-start justify-between mt-8">
             <Input
               className="w-full"
               type="string"
@@ -139,7 +139,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
           </div>
           <DatePickerInput
             onClick={() => setShowDatePicker(!showDatePicker)}
-            value={applicationDate}
+            value={formik.values.applicationDate}
             show={showDatePicker}
             onChange={handleOnChangeDate}
             className="mt-3"
