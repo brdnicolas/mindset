@@ -57,19 +57,19 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
     }
   })
 
-  const handleOnChangeDate = (e: string) => {
-    formik.setFieldValue('applicationDate', e)
+  const handleOnChangeDate = (date: Date) => {
     setShowDatePicker(!showDatePicker)
+    formik.setFieldValue('applicationDate', date)
   }
 
   const handleOnAdd = (application: FormValues) => {
     if (!application.jobOfferUrl) {
       delete application.jobOfferUrl
     }
-    const formatedDate = dayjs(application.applicationDate).format('YYYY-MM-DD')
-    console.log(formatedDate)
-    createApplication({ ...application, applicationDate: formatedDate })
-    dispatch(addApplication({ application: { ...application, applicationDate: formatedDate } }))
+
+    const formattedDate = dayjs(application.applicationDate).format('YYYY-MM-DD')
+    createApplication({ ...application, applicationDate: formattedDate })
+    dispatch(addApplication({ application: { ...application, applicationDate: formattedDate } }))
     onClose()
   }
 
@@ -112,7 +112,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
             name="jobOfferUrl"
           />
           <hr className="h-[1px] border-gray-600 w-full mt-8" />
-          <div className="flex items-center justify-between mt-8">
+          <div className="flex items-start justify-between mt-8">
             <Input
               className="w-full"
               type="string"

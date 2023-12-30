@@ -2,44 +2,46 @@ import { Icon } from '@/components/atoms/icons/Icon'
 import clsx from 'clsx'
 import { createPortal } from 'react-dom'
 
-type ToastProps = {
+export type ToastProps = {
   type: 'error' | 'success'
+  message: string
 }
 
-export const Toast = ({ type }: ToastProps) => {
-  const rootPortal = document.getElementById('toast-root')
+export const Toast = ({ type, message }: ToastProps) => {
+  const ICON_CLASS_NAME = 'w-6 h-6'
+  const MESSAGE_CLASS_NAME = 'text-4 ml-2'
 
   const toastLabel = () => {
     switch (type) {
       case 'success':
         return (
-          <div className="flex items-center justify-center px-5 py-4">
-            <Icon className="w-6 h-6 text-toast-success" name="check" />
-            <p className="text-4 text-toast-success ml-2">Success !</p>
-          </div>
+          <>
+            <Icon className={clsx(ICON_CLASS_NAME, 'text-toast-success')} name="check" />
+            <p className={clsx(MESSAGE_CLASS_NAME, 'text-toast-success')}>{message}</p>
+          </>
         )
       default:
         return (
-          <div className="flex items-center justify-center px-5 py-4">
-            <Icon className="w-6 h-6 text-toast-error" name="close" />
-            <p className="text-4 text-toast-error ml-2">Erreur...</p>
-          </div>
+          <>
+            <Icon className={clsx(ICON_CLASS_NAME, 'text-toast-error')} name="close" />
+            <p className={clsx(MESSAGE_CLASS_NAME, 'text-toast-error')}>{message}</p>
+          </>
         )
     }
   }
-  if (!rootPortal) return <></>
+
   return createPortal(
-    <div className="absolute bottom-12 left-[40vw]">
+    <div className="fixed bottom-12 left-1/2 -translate-x-1/2">
       <div
         className={clsx(
-          'w-[340px] rounded-3 border-[1px] bg-gray-700',
+          'max-w-[90vw] rounded-3 border-[1px] bg-gray-700',
           type === 'error' && 'border-toast-error',
           type === 'success' && 'border-toast-success'
         )}
       >
-        {toastLabel()}
+        <div className="flex items-center justify-center px-5 py-4">{toastLabel()}</div>
       </div>
     </div>,
-    rootPortal
+    document.body
   )
 }

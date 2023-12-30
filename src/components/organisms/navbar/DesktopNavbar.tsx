@@ -35,6 +35,7 @@ export const DesktopNavbar = ({ studentName, applicationsNumber }: AvatarProps) 
           <div className="mt-9 flex flex-col gap-5">
             {MAIN_ROUTES.map((route) => (
               <NavbarLabel
+                key={route.name}
                 iconName={route.iconName}
                 onClick={() => goTo(route.path)}
                 isActive={isActivePath(route.path)}
@@ -47,7 +48,12 @@ export const DesktopNavbar = ({ studentName, applicationsNumber }: AvatarProps) 
         <div className="w-full flex flex-col gap-5">
           <hr className="h-[1px] w-full border-gray-500" />
           {SECONDARY_ROUTES.map((route) => (
-            <NavbarLabel iconName={route.iconName} onClick={() => goTo(route.path)} isActive={isActivePath(route.path)}>
+            <NavbarLabel
+              key={route.name}
+              iconName={route.iconName}
+              onClick={() => goTo(route.path)}
+              isActive={isActivePath(route.path)}
+            >
               {route.name}
             </NavbarLabel>
           ))}

@@ -1,13 +1,14 @@
 import clsx from 'clsx'
 import './DatePickerInput.scss'
-import { Input } from '../../atoms/input/Input'
 import { Datepicker } from 'flowbite-react'
+import dayjs from 'dayjs'
 import { CustomTheme } from './datepicker.custom'
+import { Input } from '@/components'
 
 type DatePickerInputProps = {
   label?: string
   className?: string
-  onChange?: any
+  onChange: (date: Date) => void
   value: string
   show: boolean
   onClick?: () => void
@@ -16,7 +17,7 @@ type DatePickerInputProps = {
 export const DatePickerInput = ({ label, className, onChange, value, show, onClick }: DatePickerInputProps) => {
   return (
     <div className={clsx(className)}>
-      <Input onClick={onClick} label={label} value={value} />
+      <Input handleOnChange={() => {}} onClick={onClick} label={label} value={dayjs(value).format('DD MMM YYYY')} />
       <Datepicker
         language="fr-FR"
         labelTodayButton="Aujourd'hui"
