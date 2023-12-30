@@ -62,7 +62,6 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
     setShowDatePicker(!showDatePicker)
     setApplicationDate(e)
   }
-
   const handleOnAdd = (application: FormValues) => {
     if (!application.jobOfferUrl) {
       delete application.jobOfferUrl
