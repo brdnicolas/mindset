@@ -40,7 +40,6 @@ type AddApplicationModalProps = {
 
 export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps) => {
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [applicationDate, setApplicationDate] = useState(dayjs().format('DD MMM YYYY'))
   const timerRef = useRef<NodeJS.Timeout>()
   const { dispatch } = useApplicationsContext()
   const formik = useFormik({
@@ -48,7 +47,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
       jobOfferUrl: '',
       job: '',
       company: '',
-      applicationDate: '',
+      applicationDate: dayjs().format('DD MMM YYYY'),
       companyImageUrl: ''
     },
     validate,
@@ -59,18 +58,16 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
   })
 
   const handleOnChangeDate = (e: string) => {
+    formik.setFieldValue('applicationDate', e)
     setShowDatePicker(!showDatePicker)
-    setApplicationDate(e)
   }
 
   const handleOnAdd = (application: FormValues) => {
     if (!application.jobOfferUrl) {
       delete application.jobOfferUrl
     }
-
-    console.log(application, 'app')
-
     const formatedDate = dayjs(application.applicationDate).format('YYYY-MM-DD')
+    console.log(formatedDate)
     createApplication({ ...application, applicationDate: formatedDate })
     dispatch(addApplication({ application: { ...application, applicationDate: formatedDate } }))
     onClose()
@@ -139,7 +136,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
           </div>
           <DatePickerInput
             onClick={() => setShowDatePicker(!showDatePicker)}
-            value={applicationDate}
+            value={formik.values.applicationDate}
             show={showDatePicker}
             onChange={handleOnChangeDate}
             className="mt-3"
