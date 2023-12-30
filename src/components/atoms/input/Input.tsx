@@ -6,7 +6,7 @@ import { Icon } from '@/components/atoms/icons/Icon'
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   className?: string
   iconName?: IconName
-  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleOnChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   errorMessage?: string
   label?: string
 }
