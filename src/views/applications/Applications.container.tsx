@@ -1,19 +1,17 @@
 import { useMemo, useState } from 'react'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 import { useApplicationsContext } from '@/contexts/applications/applications.provider'
-import { addApplication, setApplications } from '@/contexts/applications/applications.actions'
+import { setApplications } from '@/contexts/applications/applications.actions'
 import { Column } from '@/views/applications/components/Column'
 import { ApplicationStates } from '@/contexts/applications/applications.types'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
 import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
-import { createApplication, updateApplicationStateById } from '@/services/applications/application'
+import { updateApplicationStateById } from '@/services/applications/application'
 import { withAuthenticatedUser } from '@/utils/hoc/withAuthenticatedUser'
 import { useBreakpointsContext } from '@/contexts/breakpoints/breakpoints.provider'
-import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
-import { DatePickerInput } from '@/components/atoms/datePickerInput/DatePickerInput'
-import { Modal } from '@/components/organisms/modal/Modal'
-import dayjs from 'dayjs'
+import { ButtonPrimary } from '@/components'
+import { AddApplicationModal } from '@/views/applications/components/AddApplicationModal'
 
 export const ApplicationsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
@@ -22,10 +20,6 @@ export const ApplicationsContainer = withAuthenticatedUser(
     const isMobileOrTablet = isMobile || isTablet
 
     const [showNewApplication, setShowNewApplication] = useState(false)
-    const [jobOfferUrl, setJobOfferUrl] = useState('')
-    const [job, setJob] = useState('')
-    const [company, setCompany] = useState('')
-    const [applicationDate, setApplicationDate] = useState('')
 
     const columns = useMemo(
       () => ({
@@ -60,14 +54,6 @@ export const ApplicationsContainer = withAuthenticatedUser(
       }),
       [applied, relaunched, interviewObtained, archived]
     )
-
-    const handleOnAdd = () => {
-      const formatedDate = dayjs(applicationDate).format('YYYY-MM-DD')
-      const application = { job, jobOfferUrl, company, applicationDate: formatedDate }
-      createApplication(application)
-      dispatch(addApplication({ application }))
-      setShowNewApplication(!showNewApplication)
-    }
 
     const onDragEnd = ({ source, destination }: DropResult) => {
       const destinationNotFound = destination === undefined || destination === null
@@ -177,56 +163,7 @@ export const ApplicationsContainer = withAuthenticatedUser(
             />
           </div>
         </div>
-        <Modal
-          title="Ajouter une candidature"
-          show={showNewApplication}
-          onClose={() => setShowNewApplication(!showNewApplication)}
-        >
-          <div className="mt-6">
-            <Input
-              type="string"
-              name="offerLink"
-              label="Lien de l'offre"
-              iconName="link"
-              handleOnChange={(e) => setJobOfferUrl(e.target.value)}
-              value={jobOfferUrl}
-            />
-            <hr className="h-[1px] border-gray-600 w-full mt-8" />
-            <div className="flex items-center justify-between mt-8">
-              <Input
-                className="w-full"
-                type="string"
-                iconName="briefcase"
-                name="job"
-                label="Poste"
-                value={job}
-                handleOnChange={(e) => setJob(e.target.value)}
-              />
-              <Input
-                className="w-full ml-4"
-                type="string"
-                iconName="briefcase"
-                name="company"
-                label="Entreprise"
-                value={company}
-                handleOnChange={(e) => setCompany(e.target.value)}
-              />
-            </div>
-            <DatePickerInput
-              onChange={(e: any) => {
-                setApplicationDate(e)
-              }}
-              className="mt-3"
-              label="Date de candidature"
-            />
-          </div>
-          <footer className="flex items-center justify-center mt-6">
-            <ButtonSecondary onClick={() => setShowNewApplication(!showNewApplication)}>Annuler</ButtonSecondary>
-            <ButtonPrimary className="ml-4" onClick={handleOnAdd}>
-              Confirmer
-            </ButtonPrimary>
-          </footer>
-        </Modal>
+        <AddApplicationModal show={showNewApplication} onClose={() => setShowNewApplication(false)} />
       </DragDropContext>
     )
   })

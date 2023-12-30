@@ -1,4 +1,4 @@
-import { Application, EApplicationStateId, EApplicationState } from '@/contexts/applications/applications.types'
+import { Application, EApplicationState, EApplicationStateId } from '@/contexts/applications/applications.types'
 import { api } from '../api'
 
 export const getAllUserApplications = async (): Promise<Application[]> => {
@@ -18,7 +18,7 @@ export const updateApplicationStateById = async (
 
 export type CreateApplication = {
   job: string
-  jobOfferUrl: string
+  jobOfferUrl?: string
   company: string
   applicationDate: string
 }
@@ -34,4 +34,12 @@ export const createApplication = async (application: CreateApplication): Promise
 
 export const deleteApplicationById = async (applicationId: number): Promise<Application> => {
   return api.delete(`/applications/${applicationId}`).then((response) => response.data)
+}
+
+export const scrapApplication = async (jobOfferUrl: string): Promise<Application> => {
+  return api
+    .post('/applications/scrap', {
+      jobOfferUrl
+    })
+    .then((response) => response.data)
 }

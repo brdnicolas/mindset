@@ -7,11 +7,20 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   className?: string
   iconName?: IconName
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  hasError?: boolean
+  errorMessage?: string
   label?: string
 }
 
-export const Input = ({ value, iconName, className, handleOnChange, type, hasError, label, ...rest }: InputProps) => {
+export const Input = ({
+  value,
+  iconName,
+  className,
+  handleOnChange,
+  type,
+  errorMessage,
+  label,
+  ...rest
+}: InputProps) => {
   const [inputType, setInputType] = useState(type)
 
   const togglePassword = () => {
@@ -39,7 +48,7 @@ export const Input = ({ value, iconName, className, handleOnChange, type, hasErr
             'focus:ring-2 ring-gray-500 focus:outline-none',
             iconName && 'pl-11',
             type === 'password' && 'pr-11',
-            hasError ? 'ring-2 ring-red-500' : 'ring-0'
+            errorMessage ? 'ring-2 ring-red-500' : 'ring-0'
           )}
           {...rest}
           onChange={handleOnChange}
@@ -53,6 +62,7 @@ export const Input = ({ value, iconName, className, handleOnChange, type, hasErr
           </button>
         )}
       </div>
+      {errorMessage && <p className="text-red-500 text-3 mt-3">{errorMessage}</p>}
     </div>
   )
 }

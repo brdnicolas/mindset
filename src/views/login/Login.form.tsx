@@ -51,7 +51,7 @@ export const LoginForm = () => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Input
-        hasError={!!formik.errors.email}
+        errorMessage={formik.errors.email}
         type="text"
         name="email"
         value={formik.values.email}
@@ -60,6 +60,7 @@ export const LoginForm = () => {
         handleOnChange={formik.handleChange}
       />
       <Input
+        errorMessage={formik.errors.password}
         className="mt-6"
         type="password"
         name="password"
