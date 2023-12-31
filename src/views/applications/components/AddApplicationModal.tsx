@@ -7,12 +7,14 @@ import { FormikErrors, useFormik } from 'formik'
 import { useApplicationsContext } from '@/contexts/applications/applications.provider'
 import { useRef, useState } from 'react'
 import { DatePickerInput } from '@/components/organisms/datePickerInput/DatePickerInput'
+import { alert } from '@/components/molecules/toast/toast.helper'
+import { API_DATE_FORMAT } from '@/shared/constants'
 
 type FormValues = {
   jobOfferUrl?: string
   job: string
   company: string
-  applicationDate: string
+  applicationDate: Date
 }
 
 const validate = (values: FormValues) => {
@@ -47,13 +49,14 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
       jobOfferUrl: '',
       job: '',
       company: '',
-      applicationDate: dayjs().format('DD MMM YYYY'),
+      applicationDate: new Date(),
       companyImageUrl: ''
     },
     validate,
     validateOnChange: false,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       handleOnAdd(values)
+      resetForm()
     }
   })
 
@@ -67,10 +70,11 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
       delete application.jobOfferUrl
     }
 
-    const formattedDate = dayjs(application.applicationDate).format('YYYY-MM-DD')
+    const formattedDate = dayjs(application.applicationDate).format(API_DATE_FORMAT)
     createApplication({ ...application, applicationDate: formattedDate })
     dispatch(addApplication({ application: { ...application, applicationDate: formattedDate } }))
     onClose()
+    alert({ type: 'success', message: 'Candidature créée !' })
   }
 
   const handleOnJobUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,7 +121,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
               className="w-full"
               type="string"
               iconName="briefcase"
-              label="Poste"
+              label="Poste *"
               errorMessage={formik.errors.job}
               value={formik.values.job}
               handleOnChange={formik.handleChange}
@@ -127,7 +131,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
               className="w-full ml-4"
               type="string"
               iconName="briefcase"
-              label="Entreprise"
+              label="Entreprise *"
               errorMessage={formik.errors.company}
               value={formik.values.company}
               handleOnChange={formik.handleChange}
