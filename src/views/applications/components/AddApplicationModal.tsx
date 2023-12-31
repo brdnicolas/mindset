@@ -116,7 +116,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
             name="jobOfferUrl"
           />
           <hr className="h-[1px] border-gray-600 w-full mt-8" />
-          <div className="flex items-start justify-between mt-8">
+          <div className="flex flex-col gap-4 laptop:flex-row items-start justify-between mt-8">
             <Input
               className="w-full"
               type="string"
@@ -128,7 +128,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
               name="job"
             />
             <Input
-              className="w-full ml-4"
+              className="w-full"
               type="string"
               iconName="company"
               label="Entreprise *"
@@ -145,9 +145,11 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
             label="Date de candidature"
           />
         </div>
-        <footer className="flex items-center justify-center mt-6">
-          <ButtonSecondary onClick={onClose}>Annuler</ButtonSecondary>
-          <ButtonPrimary type="submit" className="ml-4">
+        <footer className="flex items-center justify-center mt-6 gap-4">
+          <ButtonSecondary className=" w-full laptop:w-fit" onClick={onClose}>
+            Annuler
+          </ButtonSecondary>
+          <ButtonPrimary className=" w-full laptop:w-fit" type="submit">
             Confirmer
           </ButtonPrimary>
         </footer>

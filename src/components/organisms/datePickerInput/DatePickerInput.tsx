@@ -47,8 +47,9 @@ export const DatePickerInput = ({ label, className, onChange, value, onClick }: 
   }
 
   return (
-    <div className={clsx(className)}>
+    <>
       <Input
+        className={clsx(className)}
         ref={inputRef}
         onChange={() => {}}
         onClick={handleOnClick}
@@ -66,6 +67,6 @@ export const DatePickerInput = ({ label, className, onChange, value, onClick }: 
           onSelectedDateChanged={handleOnDateChangeByDatePicker}
         />
       </div>
-    </div>
+    </>
   )
 }
