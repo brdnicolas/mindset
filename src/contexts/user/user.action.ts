@@ -1,17 +1,27 @@
 export enum EUserActions {
-  GET_USER_DATA = 'GET_USER_DATA'
+  SET_USER_DATA = 'SET_USER_DATA'
 }
 
-type GetUserData = {
-  type: EUserActions.GET_USER_DATA
+export type SetUserData = {
+  type: EUserActions.SET_USER_DATA
   payload: {
-    data: { id: number; email: string; firstName: string; lastName: string; applicationsNumber: number }
+    id: number
+    email: string
+    firstName: string
+    lastName: string
+    applicationsNumber: number
   }
 }
 
-export const getUserData = (args: {
-  data: { id: number; email: string; firstName: string; lastName: string; applicationsNumber: number }
-}): GetUserData => ({
-  type: EUserActions.GET_USER_DATA,
+export const setUserData = (args: {
+  id: number
+  email: string
+  firstName: string
+  lastName: string
+  applicationsNumber: number
+}): SetUserData => ({
+  type: EUserActions.SET_USER_DATA,
   payload: args
 })
+
+export type UserActions = SetUserData

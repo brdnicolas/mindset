@@ -7,24 +7,27 @@ import { PlansContainer } from './views/plans/Plans.container'
 import { RegisterContainer } from './views/register/Register.container'
 import { LoginContainer } from './views/login/Login.container'
 import { BreakpointsProvider } from '@/contexts/breakpoints/breakpoints.provider'
+import { UserProvider } from './contexts/user/user.provider'
 
 function App() {
   return (
     <>
-      <BreakpointsProvider>
-        <ApplicationsProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<ApplicationsContainer />} />
-              <Route path="/settings" element={<SettingsContainer />} />
-              <Route path="/statistics" element={<StatisticsContainer />} />
-              <Route path="/plans" element={<PlansContainer />} />
-              <Route path="/register" element={<RegisterContainer />} />
-              <Route path="/login" element={<LoginContainer />} />
-            </Routes>
-          </BrowserRouter>
-        </ApplicationsProvider>
-      </BreakpointsProvider>
+      <UserProvider>
+        <BreakpointsProvider>
+          <ApplicationsProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<ApplicationsContainer />} />
+                <Route path="/settings" element={<SettingsContainer />} />
+                <Route path="/statistics" element={<StatisticsContainer />} />
+                <Route path="/plans" element={<PlansContainer />} />
+                <Route path="/register" element={<RegisterContainer />} />
+                <Route path="/login" element={<LoginContainer />} />
+              </Routes>
+            </BrowserRouter>
+          </ApplicationsProvider>
+        </BreakpointsProvider>
+      </UserProvider>
     </>
   )
 }
