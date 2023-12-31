@@ -35,7 +35,7 @@ export const applicationsReducer: Reducer<ApplicationsState, ApplicationsActions
           ...state.applied,
           {
             ...action.payload.application,
-            id: higherId,
+            id: higherId + 1,
             userId: -1
           }
         ]

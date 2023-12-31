@@ -1,7 +1,7 @@
 import { FormikErrors, useFormik } from 'formik'
 import { ButtonPrimary, Input } from '@/components'
 import { login } from '@/services/auth/auth'
-import { Toast } from '@/components/molecules/toast/Toast'
+import { alert } from '@/components/molecules/toast/toast.helper'
 
 type FormValues = {
   email: string
@@ -44,11 +44,8 @@ export const LoginForm = () => {
 
       localStorage.setItem('token', token)
       window.location.href = '/'
-    } catch {
-      alert('Error')
-      setTimeout(() => {
-        return <Toast type="error" />
-      }, 3000)
+    } catch (error) {
+      alert({ type: 'error', message: 'Adresse email ou mot de passe incorrect' })
     }
   }
 
