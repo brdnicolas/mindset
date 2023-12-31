@@ -130,7 +130,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
             <Input
               className="w-full ml-4"
               type="string"
-              iconName="briefcase"
+              iconName="company"
               label="Entreprise *"
               errorMessage={formik.errors.company}
               value={formik.values.company}
