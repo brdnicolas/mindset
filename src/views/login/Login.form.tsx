@@ -58,7 +58,7 @@ export const LoginForm = () => {
         value={formik.values.email}
         placeholder="Votre email"
         iconName="mail"
-        handleOnChange={formik.handleChange}
+        onChange={formik.handleChange}
       />
       <Input
         errorMessage={formik.errors.password}
@@ -68,7 +68,7 @@ export const LoginForm = () => {
         value={formik.values.password}
         placeholder="Votre mot de passe"
         iconName="lock"
-        handleOnChange={formik.handleChange}
+        onChange={formik.handleChange}
       />
       <ButtonPrimary type="submit" className="w-full mt-9">
         Se connecter

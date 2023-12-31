@@ -2,37 +2,69 @@ import clsx from 'clsx'
 import './DatePickerInput.scss'
 import { Datepicker } from 'flowbite-react'
 import dayjs from 'dayjs'
-import { CustomTheme } from './datepicker.custom'
+import { CUSTOM_DATEPICKER_THEME } from './datepicker.custom'
 import { Input } from '@/components'
-import { FULL_DISPLAY_DATE_FORMAT } from '@/shared/constants'
+import { SHORT_DISPLAY_DATE_FORMAT } from '@/shared/constants'
+import { useEffect, useRef, useState } from 'react'
 
 type DatePickerInputProps = {
   label?: string
   className?: string
   onChange: (date: Date) => void
   value: Date
-  show: boolean
   onClick?: () => void
 }
 
-export const DatePickerInput = ({ label, className, onChange, value, show, onClick }: DatePickerInputProps) => {
+export const DatePickerInput = ({ label, className, onChange, value, onClick }: DatePickerInputProps) => {
+  const [isDatePickerDisplayed, setIsDatePickerDisplayed] = useState(false)
+  const datePickerRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleOnClick = () => {
+    setIsDatePickerDisplayed((prevState) => !prevState)
+    if (onClick) {
+      onClick()
+    }
+  }
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const isOutsideOfDatePicker = datePickerRef.current && !datePickerRef.current.contains(event.target as Node)
+      const isOutsideOfInput = inputRef.current && !inputRef.current.contains(event.target as Node)
+
+      if (isOutsideOfDatePicker && isOutsideOfInput) {
+        setIsDatePickerDisplayed(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick)
+  }, [])
+
+  const handleOnDateChange = (value: Date) => {
+    setIsDatePickerDisplayed(false)
+    onChange(value)
+  }
+
   return (
     <div className={clsx(className)}>
       <Input
-        handleOnChange={() => {}}
-        onClick={onClick}
+        ref={inputRef}
+        onChange={() => {}}
+        onClick={handleOnClick}
         label={label}
-        value={dayjs(value).format(FULL_DISPLAY_DATE_FORMAT)}
+        value={dayjs(value).format(SHORT_DISPLAY_DATE_FORMAT)}
       />
-      <Datepicker
-        language="fr-FR"
-        labelTodayButton="Aujourd'hui"
-        labelClearButton="Effacer"
-        theme={CustomTheme}
-        inline
-        className={clsx(show ? 'block' : 'hidden')}
-        onSelectedDateChanged={onChange}
-      />
+      <div className="w-fit" ref={datePickerRef}>
+        <Datepicker
+          language="fr-FR"
+          labelTodayButton="Aujourd'hui"
+          labelClearButton="Effacer"
+          theme={CUSTOM_DATEPICKER_THEME}
+          inline
+          className={clsx(isDatePickerDisplayed ? 'block' : 'hidden')}
+          onSelectedDateChanged={handleOnDateChange}
+        />
+      </div>
     </div>
   )
 }

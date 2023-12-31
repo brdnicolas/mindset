@@ -65,7 +65,7 @@ export const RegisterForm = () => {
         iconName="user"
         errorMessage={formik.errors.firstName}
         value={formik.values.firstName}
-        handleOnChange={formik.handleChange}
+        onChange={formik.handleChange}
         name="firstName"
       />
       <Input
@@ -75,7 +75,7 @@ export const RegisterForm = () => {
         iconName="user"
         errorMessage={formik.errors.lastName}
         value={formik.values.lastName}
-        handleOnChange={formik.handleChange}
+        onChange={formik.handleChange}
         name="lastName"
       />
       <Input
@@ -85,7 +85,7 @@ export const RegisterForm = () => {
         iconName="mail"
         errorMessage={formik.errors.email}
         value={formik.values.email}
-        handleOnChange={formik.handleChange}
+        onChange={formik.handleChange}
         name="email"
       />
       <Input
@@ -95,7 +95,7 @@ export const RegisterForm = () => {
         iconName="lock"
         errorMessage={formik.errors.password}
         value={formik.values.password}
-        handleOnChange={formik.handleChange}
+        onChange={formik.handleChange}
         name="password"
       />
       <ButtonPrimary type="submit" className="w-full mt-9">

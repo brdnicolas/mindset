@@ -5,10 +5,11 @@ import { createApplication, scrapApplication } from '@/services/applications/app
 import { addApplication } from '@/contexts/applications/applications.actions'
 import { FormikErrors, useFormik } from 'formik'
 import { useApplicationsContext } from '@/contexts/applications/applications.provider'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { DatePickerInput } from '@/components/organisms/datePickerInput/DatePickerInput'
 import { alert } from '@/components/molecules/toast/toast.helper'
 import { API_DATE_FORMAT } from '@/shared/constants'
+import { isUrl } from '@/utils/check/string'
 
 type FormValues = {
   jobOfferUrl?: string
@@ -41,7 +42,6 @@ type AddApplicationModalProps = {
 }
 
 export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps) => {
-  const [showDatePicker, setShowDatePicker] = useState(false)
   const timerRef = useRef<NodeJS.Timeout>()
   const { dispatch } = useApplicationsContext()
   const formik = useFormik({
@@ -61,7 +61,6 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
   })
 
   const handleOnChangeDate = (date: Date) => {
-    setShowDatePicker(!showDatePicker)
     formik.setFieldValue('applicationDate', date)
   }
 
@@ -80,14 +79,15 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
   const handleOnJobUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     formik.setFieldValue('jobOfferUrl', e.target.value)
 
+    if (!isUrl(e.target.value)) {
+      return
+    }
+
     if (timerRef.current) {
       clearTimeout(timerRef.current)
     }
 
     timerRef.current = setTimeout(() => {
-      if (!e.target.value) {
-        return
-      }
       scrapApplication(e.target.value).then((data) => {
         if (data.company) {
           formik.setFieldValue('company', data.company)
@@ -99,7 +99,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
           formik.setFieldValue('companyImageUrl', data.companyImageUrl)
         }
       })
-    }, 1500)
+    }, 500)
   }
 
   return (
@@ -112,7 +112,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
             iconName="link"
             errorMessage={formik.errors.jobOfferUrl}
             value={formik.values.jobOfferUrl}
-            handleOnChange={handleOnJobUrlChange}
+            onChange={handleOnJobUrlChange}
             name="jobOfferUrl"
           />
           <hr className="h-[1px] border-gray-600 w-full mt-8" />
@@ -124,7 +124,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
               label="Poste *"
               errorMessage={formik.errors.job}
               value={formik.values.job}
-              handleOnChange={formik.handleChange}
+              onChange={formik.handleChange}
               name="job"
             />
             <Input
@@ -134,14 +134,12 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
               label="Entreprise *"
               errorMessage={formik.errors.company}
               value={formik.values.company}
-              handleOnChange={formik.handleChange}
+              onChange={formik.handleChange}
               name="company"
             />
           </div>
           <DatePickerInput
-            onClick={() => setShowDatePicker(!showDatePicker)}
             value={formik.values.applicationDate}
-            show={showDatePicker}
             onChange={handleOnChangeDate}
             className="mt-3"
             label="Date de candidature"
