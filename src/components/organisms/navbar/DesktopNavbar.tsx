@@ -28,7 +28,7 @@ export const DesktopNavbar = ({ studentName, applicationsNumber }: AvatarProps) 
             <div className="ml-5">
               <p className="text-gray-500 text-3 font-medium">{studentName}</p>
               <p className="text-gray-500 text-3 font-medium">
-                {applicationsNumber} {applicationsNumber <= 0 ? 'candidature' : 'candidatures'}
+                {applicationsNumber} {applicationsNumber <= 1 ? 'candidature' : 'candidatures'}
               </p>
             </div>
           </div>

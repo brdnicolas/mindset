@@ -1,5 +1,6 @@
 export enum EUserActions {
-  SET_USER_DATA = 'SET_USER_DATA'
+  SET_USER_DATA = 'SET_USER_DATA',
+  UPDATE_APPLICATIONS_NUMBER = 'UPDATE_APPLICATIONS_NUMBER'
 }
 
 export type SetUserData = {
@@ -24,4 +25,16 @@ export const setUserData = (args: {
   payload: args
 })
 
-export type UserActions = SetUserData
+export type UpdateApplicationsNumber = {
+  type: EUserActions.UPDATE_APPLICATIONS_NUMBER
+  payload: {
+    applicationsNumber: number
+  }
+}
+
+export const updateApplicationsNumber = (args: { applicationsNumber: number }): UpdateApplicationsNumber => ({
+  type: EUserActions.UPDATE_APPLICATIONS_NUMBER,
+  payload: args
+})
+
+export type UserActions = SetUserData | UpdateApplicationsNumber

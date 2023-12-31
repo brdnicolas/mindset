@@ -7,6 +7,8 @@ import clsx from 'clsx'
 import { deleteApplicationById } from '@/services/applications/application'
 import { useApplicationsContext } from '@/contexts/applications/applications.provider'
 import { deleteApplication } from '@/contexts/applications/applications.actions'
+import { useUserContext } from '@/contexts/user/user.provider'
+import { updateApplicationsNumber } from '@/contexts/user/user.action'
 
 type ColumnProps = {
   cards: MinimalApplication[]
@@ -17,7 +19,8 @@ type ColumnProps = {
 }
 
 export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
-  const { dispatch } = useApplicationsContext()
+  const { dispatch: dispatchApplications } = useApplicationsContext()
+  const { applicationsNumber, dispatch: dispatchUser } = useUserContext()
   const variantsColor: any = {
     applied: 'bg-applicationStatus-applied',
     relaunched: 'bg-applicationStatus-relaunched',
@@ -27,7 +30,8 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
 
   const handleOnDelete = (cardId: number) => {
     deleteApplicationById(Number(cardId))
-    dispatch(deleteApplication({ id: cardId }))
+    dispatchApplications(deleteApplication({ id: cardId }))
+    dispatchUser(updateApplicationsNumber({ applicationsNumber: applicationsNumber - 1 }))
   }
 
   return (

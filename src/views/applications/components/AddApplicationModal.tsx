@@ -9,6 +9,8 @@ import { useRef, useState } from 'react'
 import { DatePickerInput } from '@/components/organisms/datePickerInput/DatePickerInput'
 import { alert } from '@/components/molecules/toast/toast.helper'
 import { API_DATE_FORMAT } from '@/shared/constants'
+import { useUserContext } from '@/contexts/user/user.provider'
+import { updateApplicationsNumber } from '@/contexts/user/user.action'
 
 type FormValues = {
   jobOfferUrl?: string
@@ -43,7 +45,8 @@ type AddApplicationModalProps = {
 export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps) => {
   const [showDatePicker, setShowDatePicker] = useState(false)
   const timerRef = useRef<NodeJS.Timeout>()
-  const { dispatch } = useApplicationsContext()
+  const { dispatch: dispatchApplications } = useApplicationsContext()
+  const { applicationsNumber, dispatch: dispatchUser } = useUserContext()
   const formik = useFormik({
     initialValues: {
       jobOfferUrl: '',
@@ -72,7 +75,8 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
 
     const formattedDate = dayjs(application.applicationDate).format(API_DATE_FORMAT)
     createApplication({ ...application, applicationDate: formattedDate })
-    dispatch(addApplication({ application: { ...application, applicationDate: formattedDate } }))
+    dispatchApplications(addApplication({ application: { ...application, applicationDate: formattedDate } }))
+    dispatchUser(updateApplicationsNumber({ applicationsNumber: applicationsNumber + 1 }))
     onClose()
     alert({ type: 'success', message: 'Candidature créée !' })
   }

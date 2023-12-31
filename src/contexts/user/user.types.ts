@@ -1,7 +1,7 @@
 export type UserState = {
   id: number
   email: string
-  firstNAme: string
+  firstName: string
   lastName: string
   applicationsNumber: number
 }
