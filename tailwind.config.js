@@ -52,7 +52,8 @@ module.exports = {
     },
     extend: {
       zIndex: {
-        first: 99999
+        first: 99999,
+        modal: 100000
       },
       gridTemplateColumns: {
         globalLayout: '285px 1fr'

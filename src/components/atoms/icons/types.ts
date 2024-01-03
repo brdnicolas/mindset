@@ -167,7 +167,8 @@ const icons = [
   'x',
   'zap',
   'zoom-in',
-  'zoom-out'
+  'zoom-out',
+  'company'
 ] as const
 
 export type IconName = (typeof icons)[number]

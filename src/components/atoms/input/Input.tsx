@@ -1,26 +1,17 @@
 import clsx from 'clsx'
-import { ChangeEvent, InputHTMLAttributes, useState } from 'react'
+import { ForwardedRef, forwardRef, InputHTMLAttributes, useState } from 'react'
 import { IconName } from '@/components/atoms/icons/types'
 import { Icon } from '@/components/atoms/icons/Icon'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   className?: string
   iconName?: IconName
-  handleOnChange: (e: ChangeEvent<HTMLInputElement>) => void
   errorMessage?: string
   label?: string
 }
 
-export const Input = ({
-  value,
-  iconName,
-  className,
-  handleOnChange,
-  type,
-  errorMessage,
-  label,
-  ...rest
-}: InputProps) => {
+export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
+  const { value, iconName, className, type, errorMessage, label, ...rest } = props
   const [inputType, setInputType] = useState(type)
 
   const togglePassword = () => {
@@ -39,6 +30,7 @@ export const Input = ({
           <Icon className={clsx('absolute left-3', value ? 'text-gray-100' : 'text-gray-550')} name={iconName} />
         )}
         <input
+          ref={ref}
           type={inputType}
           value={value}
           className={clsx(
@@ -51,7 +43,6 @@ export const Input = ({
             errorMessage ? 'ring-2 ring-red-500' : 'ring-0'
           )}
           {...rest}
-          onChange={handleOnChange}
         />
         {type === 'password' && (
           <button type="button" className="absolute right-3 cursor-pointer" onClick={togglePassword}>
@@ -65,4 +56,4 @@ export const Input = ({
       {errorMessage && <p className="text-red-500 text-3 mt-3">{errorMessage}</p>}
     </div>
   )
-}
+})
