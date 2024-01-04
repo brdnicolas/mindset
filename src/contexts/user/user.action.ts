@@ -1,3 +1,5 @@
+import { UserState } from './user.types'
+
 export enum EUserActions {
   SET_USER_DATA = 'SET_USER_DATA',
   UPDATE_APPLICATIONS_NUMBER = 'UPDATE_APPLICATIONS_NUMBER'
@@ -5,22 +7,10 @@ export enum EUserActions {
 
 export type SetUserData = {
   type: EUserActions.SET_USER_DATA
-  payload: {
-    id: number
-    email: string
-    firstName: string
-    lastName: string
-    applicationsNumber: number
-  }
+  payload: UserState
 }
 
-export const setUserData = (args: {
-  id: number
-  email: string
-  firstName: string
-  lastName: string
-  applicationsNumber: number
-}): SetUserData => ({
+export const setUserData = (args: UserState): SetUserData => ({
   type: EUserActions.SET_USER_DATA,
   payload: args
 })

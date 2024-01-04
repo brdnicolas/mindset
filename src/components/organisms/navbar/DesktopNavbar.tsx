@@ -1,14 +1,12 @@
 import { Avatar, NavbarLabel } from '@/components'
 import { useNavigate } from 'react-router-dom'
 import { isActivePath, MAIN_ROUTES, SECONDARY_ROUTES } from '@/utils/routing/routing'
+import { useUserContext } from '@/contexts/user/user.provider'
 
-type AvatarProps = {
-  studentName: string
-  applicationsNumber: number
-}
-
-export const DesktopNavbar = ({ studentName, applicationsNumber }: AvatarProps) => {
+export const DesktopNavbar = () => {
   const navigate = useNavigate()
+
+  const { firstName, lastName, applicationsNumber } = useUserContext()
 
   const goTo = (path: string) => {
     navigate(path)
@@ -26,7 +24,7 @@ export const DesktopNavbar = ({ studentName, applicationsNumber }: AvatarProps) 
               className="min-w-13 min-h-13 max-w-13 max-h-13"
             />
             <div className="ml-5">
-              <p className="text-gray-500 text-3 font-medium">{studentName}</p>
+              <p className="text-gray-500 text-3 font-medium">{firstName + ' ' + lastName}</p>
               <p className="text-gray-500 text-3 font-medium">
                 {applicationsNumber} {applicationsNumber <= 1 ? 'candidature' : 'candidatures'}
               </p>
