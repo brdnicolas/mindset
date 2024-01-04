@@ -14,13 +14,15 @@ export const Modal = ({ show, onClose, children, title }: NewApplicationModalPro
   if (!rootPortal) return <></>
   return createPortal(
     <div
+      onClick={onClose}
       className={clsx(
         show ? 'fixed' : 'hidden',
         'top-0 left-0 w-full h-full absolute z-first bg-gray-900/50 flex ',
-        'laptop:items-center laptop:justify-center'
+        'laptop:items-center laptop:justify-center z-modal'
       )}
     >
       <div
+        onClick={(event) => event.stopPropagation()}
         className={clsx(
           'w-full p-6 bg-gray-700 rounded-6  max-h-[75vh] fixed bottom-0',
           'laptop:w-[666px] laptop:block laptop:bottom-auto laptop:h-fit overflow-y-auto'
