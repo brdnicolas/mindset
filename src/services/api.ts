@@ -1,6 +1,7 @@
+import { API_BASE_URL } from './../../env'
 import axios from 'axios'
 
-export const api = axios.create({ baseURL: 'https://applifyai.onrender.com/api' })
+export const api = axios.create({ baseURL: API_BASE_URL })
 
 api.interceptors.request.use(
   (config) => {
