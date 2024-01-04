@@ -2,6 +2,8 @@ import { FormikErrors, useFormik } from 'formik'
 import { ButtonPrimary, Input } from '@/components'
 import { login } from '@/services/auth/auth'
 import { alert } from '@/components/molecules/toast/toast.helper'
+import { useState } from 'react'
+import { Loader } from '@/components/atoms/loader/Loader'
 
 type FormValues = {
   email: string
@@ -25,6 +27,8 @@ const validate = (values: FormValues) => {
 }
 
 export const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false)
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -38,15 +42,23 @@ export const LoginForm = () => {
   })
 
   const handleOnLogin = async (credentials: FormValues) => {
+    setIsLoading(true)
+
     try {
       const data = await login(credentials)
       const token = data.token
 
       localStorage.setItem('token', token)
       window.location.href = '/'
+      setIsLoading(false)
     } catch (error) {
+      setIsLoading(false)
       alert({ type: 'error', message: 'Adresse email ou mot de passe incorrect' })
     }
+  }
+
+  if (isLoading) {
+    return <Loader />
   }
 
   return (
