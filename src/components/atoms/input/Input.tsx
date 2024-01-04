@@ -36,7 +36,7 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
           className={clsx(
             'transition-all w-full bg-gray-800 rounded-2 p-3 text-sm',
             'text-gray-100 placeholder:text-gray-550',
-            'border-[1px] border-gray-600 focus:border-gray-300',
+            'border-[1px] hover:border-gray-300 border-gray-600 focus:border-gray-300',
             'focus:ring-2 ring-gray-500 focus:outline-none',
             iconName && 'pl-11',
             type === 'password' && 'pr-11',
