@@ -3,6 +3,7 @@ import { Icon } from '@/components/atoms/icons/Icon'
 import { useState } from 'react'
 import dayjs from 'dayjs'
 import { SHORT_DISPLAY_DATE_FORMAT } from '@/shared/constants'
+import { useNavigate } from 'react-router-dom'
 
 type CardProps = {
   company: string
@@ -11,13 +12,16 @@ type CardProps = {
   avatar?: string
   coverLetter?: string
   onDelete?: any
+  applicationId: number
 }
 
-export const Card = ({ company, job, date, avatar, coverLetter, onDelete }: CardProps) => {
+export const Card = ({ company, job, date, avatar, coverLetter, onDelete, applicationId }: CardProps) => {
   const [showIcon, setShowIcon] = useState(false)
+  const navigate = useNavigate()
 
   return (
     <div
+      onClick={() => navigate(`/application/${applicationId}`)}
       onMouseEnter={() => setShowIcon(true)}
       onMouseLeave={() => setShowIcon(false)}
       className="p-5 bg-gray-700 w-full"

@@ -3,6 +3,6 @@ import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 
 export const ApplicationDetailsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
-    return <div>ApplicationDetails</div>
+    return <div className="laptop:pt-16">ApplicationDetails</div>
   })
 )
