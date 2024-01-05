@@ -1,4 +1,4 @@
-import { ApplicationDetailsState } from './applicationDetail.types'
+import { ApplicationDetailsState } from './applicationDetails.types'
 
 export enum EApplicationDetailsActions {
   SET_APPLICATION_DETAILS = 'SET_APPLICATION_DETAILS'

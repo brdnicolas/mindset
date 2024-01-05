@@ -1,14 +1,12 @@
-import { ApplicationStates } from '../applications/applications.types'
-
 export type ApplicationDetailsState = {
   id: number
   job: string
   company: string
   applicationDate: string
-  cv: string
-  coverLetter: string
+  cv: string | null
+  coverLetter: string | null
   companyImageUrl: string
   userId: number
   applicationStateId: number
-  applicationState: ApplicationStates
+  applicationState: { name: string }
 }
