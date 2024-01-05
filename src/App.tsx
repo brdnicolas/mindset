@@ -7,6 +7,7 @@ import { PlansContainer } from './views/plans/Plans.container'
 import { RegisterContainer } from './views/register/Register.container'
 import { LoginContainer } from './views/login/Login.container'
 import { BreakpointsProvider } from '@/contexts/breakpoints/breakpoints.provider'
+import { ApplicationDetailsContainer } from './views/applicationDetail/ApplicationDetail.container'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<ApplicationsContainer />} />
+              <Route path="/application/:id" element={<ApplicationDetailsContainer />} />
               <Route path="/settings" element={<SettingsContainer />} />
               <Route path="/statistics" element={<StatisticsContainer />} />
               <Route path="/plans" element={<PlansContainer />} />
