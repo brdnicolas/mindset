@@ -17,14 +17,12 @@ export const setUserData = (args: UserState): SetUserData => ({
 
 export type UpdateApplicationsNumber = {
   type: EUserActions.UPDATE_APPLICATIONS_NUMBER
-  payload: {
-    applicationsNumber: number
-  }
+  payload: number
 }
 
-export const updateApplicationsNumber = (args: { applicationsNumber: number }): UpdateApplicationsNumber => ({
+export const updateApplicationsNumber = (number: number): UpdateApplicationsNumber => ({
   type: EUserActions.UPDATE_APPLICATIONS_NUMBER,
-  payload: args
+  payload: number
 })
 
 export type UserActions = SetUserData | UpdateApplicationsNumber

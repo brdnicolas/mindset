@@ -20,7 +20,7 @@ type ColumnProps = {
 
 export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
   const { dispatch: dispatchApplications } = useApplicationsContext()
-  const { applicationsNumber, dispatch: dispatchUser } = useUserContext()
+  const { dispatch: dispatchUser } = useUserContext()
   const variantsColor: any = {
     applied: 'bg-applicationStatus-applied',
     relaunched: 'bg-applicationStatus-relaunched',
@@ -31,7 +31,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
   const handleOnDelete = (cardId: number) => {
     deleteApplicationById(Number(cardId))
     dispatchApplications(deleteApplication({ id: cardId }))
-    dispatchUser(updateApplicationsNumber({ applicationsNumber: applicationsNumber - 1 }))
+    dispatchUser(updateApplicationsNumber(-1))
   }
 
   return (

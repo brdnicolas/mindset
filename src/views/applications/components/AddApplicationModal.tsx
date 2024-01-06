@@ -46,7 +46,7 @@ type AddApplicationModalProps = {
 export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps) => {
   const timerRef = useRef<NodeJS.Timeout>()
   const { dispatch: dispatchApplications } = useApplicationsContext()
-  const { applicationsNumber, dispatch: dispatchUser } = useUserContext()
+  const { dispatch: dispatchUser } = useUserContext()
   const formik = useFormik({
     initialValues: {
       jobOfferUrl: '',
@@ -75,7 +75,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
     const formattedDate = dayjs(application.applicationDate).format(API_DATE_FORMAT)
     createApplication({ ...application, applicationDate: formattedDate })
     dispatchApplications(addApplication({ application: { ...application, applicationDate: formattedDate } }))
-    dispatchUser(updateApplicationsNumber({ applicationsNumber: applicationsNumber + 1 }))
+    dispatchUser(updateApplicationsNumber(1))
     onClose()
     alert({ type: 'success', message: 'Candidature créée !' })
   }

@@ -15,6 +15,10 @@ export const userReducer: Reducer<UserState, UserActions> = (state = initialStat
     case EUserActions.SET_USER_DATA:
       return { ...state, ...action.payload }
     case EUserActions.UPDATE_APPLICATIONS_NUMBER:
-      return { ...state, ...action.payload }
+      if (action.payload === 1) {
+        return { ...state, applicationsNumber: +1 }
+      } else {
+        return { ...state, applicationsNumber: -1 }
+      }
   }
 }
