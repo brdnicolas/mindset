@@ -16,9 +16,9 @@ export const userReducer: Reducer<UserState, UserActions> = (state = initialStat
       return { ...state, ...action.payload }
     case EUserActions.UPDATE_APPLICATIONS_NUMBER:
       if (action.payload === 1) {
-        return { ...state, applicationsNumber: +1 }
+        return { ...state, applicationsNumber: state.applicationsNumber + 1 }
       } else {
-        return { ...state, applicationsNumber: -1 }
+        return { ...state, applicationsNumber: state.applicationsNumber - 1 }
       }
   }
 }
