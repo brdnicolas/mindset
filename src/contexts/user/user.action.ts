@@ -2,7 +2,8 @@ import { UserState } from './user.types'
 
 export enum EUserActions {
   SET_USER_DATA = 'SET_USER_DATA',
-  UPDATE_APPLICATIONS_NUMBER = 'UPDATE_APPLICATIONS_NUMBER'
+  INCREASED_APPLICATION_NUMBER = 'INCREASED_APPLICATION_NUMBER',
+  DECREASED_APPLICATION_NUMBER = 'DECREASED_APPLICATION_NUMBER'
 }
 
 export type SetUserData = {
@@ -15,14 +16,24 @@ export const setUserData = (args: UserState): SetUserData => ({
   payload: args
 })
 
-export type UpdateApplicationsNumber = {
-  type: EUserActions.UPDATE_APPLICATIONS_NUMBER
+export type IncreasedApplicationNumber = {
+  type: EUserActions.INCREASED_APPLICATION_NUMBER
   payload: number
 }
 
-export const updateApplicationsNumber = (number: number): UpdateApplicationsNumber => ({
-  type: EUserActions.UPDATE_APPLICATIONS_NUMBER,
+export type DecreaseApplicationsNumber = {
+  type: EUserActions.DECREASED_APPLICATION_NUMBER
+  payload: number
+}
+
+export const increasedApplicationsNumber = (number: number): IncreasedApplicationNumber => ({
+  type: EUserActions.INCREASED_APPLICATION_NUMBER,
   payload: number
 })
 
-export type UserActions = SetUserData | UpdateApplicationsNumber
+export const decreaseApplicationsNumber = (number: number): DecreaseApplicationsNumber => ({
+  type: EUserActions.DECREASED_APPLICATION_NUMBER,
+  payload: number
+})
+
+export type UserActions = SetUserData | IncreasedApplicationNumber | DecreaseApplicationsNumber

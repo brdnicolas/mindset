@@ -8,7 +8,7 @@ import { deleteApplicationById } from '@/services/applications/application'
 import { useApplicationsContext } from '@/contexts/applications/applications.provider'
 import { deleteApplication } from '@/contexts/applications/applications.actions'
 import { useUserContext } from '@/contexts/user/user.provider'
-import { updateApplicationsNumber } from '@/contexts/user/user.action'
+import { decreaseApplicationsNumber } from '@/contexts/user/user.action'
 
 type ColumnProps = {
   cards: MinimalApplication[]
@@ -31,7 +31,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
   const handleOnDelete = (cardId: number) => {
     deleteApplicationById(Number(cardId))
     dispatchApplications(deleteApplication({ id: cardId }))
-    dispatchUser(updateApplicationsNumber(-1))
+    dispatchUser(decreaseApplicationsNumber(-1))
   }
 
   return (

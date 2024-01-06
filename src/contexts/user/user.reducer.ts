@@ -14,11 +14,11 @@ export const userReducer: Reducer<UserState, UserActions> = (state = initialStat
   switch (action.type) {
     case EUserActions.SET_USER_DATA:
       return { ...state, ...action.payload }
-    case EUserActions.UPDATE_APPLICATIONS_NUMBER:
-      if (action.payload === 1) {
-        return { ...state, applicationsNumber: state.applicationsNumber + 1 }
-      } else {
-        return { ...state, applicationsNumber: state.applicationsNumber - 1 }
-      }
+    case EUserActions.INCREASED_APPLICATION_NUMBER:
+      return { ...state, applicationsNumber: state.applicationsNumber + action.payload }
+    case EUserActions.DECREASED_APPLICATION_NUMBER:
+      return { ...state, applicationsNumber: state.applicationsNumber - action.payload }
+    default:
+      return { ...state }
   }
 }

@@ -10,7 +10,7 @@ import { DatePickerInput } from '@/components/organisms/datePickerInput/DatePick
 import { alert } from '@/components/molecules/toast/toast.helper'
 import { API_DATE_FORMAT } from '@/shared/constants'
 import { useUserContext } from '@/contexts/user/user.provider'
-import { updateApplicationsNumber } from '@/contexts/user/user.action'
+import { increasedApplicationsNumber } from '@/contexts/user/user.action'
 import { isUrl } from '@/utils/check/string'
 
 type FormValues = {
@@ -75,7 +75,7 @@ export const AddApplicationModal = ({ show, onClose }: AddApplicationModalProps)
     const formattedDate = dayjs(application.applicationDate).format(API_DATE_FORMAT)
     createApplication({ ...application, applicationDate: formattedDate })
     dispatchApplications(addApplication({ application: { ...application, applicationDate: formattedDate } }))
-    dispatchUser(updateApplicationsNumber(1))
+    dispatchUser(increasedApplicationsNumber(1))
     onClose()
     alert({ type: 'success', message: 'Candidature créée !' })
   }
