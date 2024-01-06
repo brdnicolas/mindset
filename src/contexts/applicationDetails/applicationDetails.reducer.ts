@@ -23,5 +23,7 @@ export const applicationDetailsReducer: Reducer<ApplicationDetailsState, Applica
   switch (action.type) {
     case EApplicationDetailsActions.SET_INFORMATION:
       return { ...state, ...action.payload }
+    default:
+      return { ...state }
   }
 }

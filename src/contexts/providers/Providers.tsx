@@ -7,14 +7,12 @@ type ProviderPropsType = {
   children: ReactNode
 }
 
-export const Provider = ({ children }: ProviderPropsType) => {
+export const Providers = ({ children }: ProviderPropsType) => {
   return (
-    <>
-      <BreakpointsProvider>
-        <ApplicationsProvider>
-          <ApplicationDetailsProvider>{children}</ApplicationDetailsProvider>
-        </ApplicationsProvider>
-      </BreakpointsProvider>
-    </>
+    <BreakpointsProvider>
+      <ApplicationsProvider>
+        <ApplicationDetailsProvider>{children}</ApplicationDetailsProvider>
+      </ApplicationsProvider>
+    </BreakpointsProvider>
   )
 }

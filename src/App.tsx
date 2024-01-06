@@ -6,12 +6,12 @@ import { PlansContainer } from './views/plans/Plans.container'
 import { RegisterContainer } from './views/register/Register.container'
 import { LoginContainer } from './views/login/Login.container'
 import { ApplicationDetailsContainer } from './views/applicationDetail/ApplicationDetail.container'
-import { Provider } from './components/atoms/provider/Provider'
+import { Providers } from './contexts/providers/Providers'
 
 function App() {
   return (
     <>
-      <Provider>
+      <Providers>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<ApplicationsContainer />} />
@@ -23,7 +23,7 @@ function App() {
             <Route path="/login" element={<LoginContainer />} />
           </Routes>
         </BrowserRouter>
-      </Provider>
+      </Providers>
     </>
   )
 }
