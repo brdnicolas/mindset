@@ -11,7 +11,6 @@ export const initialState: ApplicationDetailsState = {
   coverLetter: null,
   companyImageUrl: '',
   userId: 1,
-  applicationStateId: 1,
   applicationState: {
     name: 'applied'
   }
@@ -22,7 +21,7 @@ export const applicationDetailsReducer: Reducer<ApplicationDetailsState, Applica
   action
 ) => {
   switch (action.type) {
-    case EApplicationDetailsActions.SET_APPLICATION_DETAILS:
+    case EApplicationDetailsActions.SET_INFORMATION:
       return { ...state, ...action.payload }
   }
 }

@@ -7,6 +7,5 @@ export type ApplicationDetailsState = {
   coverLetter: string | null
   companyImageUrl: string
   userId: number
-  applicationStateId: number
   applicationState: { name: string }
 }

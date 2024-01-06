@@ -1,17 +1,17 @@
 import { ApplicationDetailsState } from './applicationDetails.types'
 
 export enum EApplicationDetailsActions {
-  SET_APPLICATION_DETAILS = 'SET_APPLICATION_DETAILS'
+  SET_INFORMATION = 'SET_INFORMATION'
 }
 
-export type SetApplicationDetails = {
-  type: EApplicationDetailsActions.SET_APPLICATION_DETAILS
+export type SetInformation = {
+  type: EApplicationDetailsActions.SET_INFORMATION
   payload: ApplicationDetailsState
 }
 
-export const setApplicationsDetails = (args: ApplicationDetailsState): SetApplicationDetails => ({
-  type: EApplicationDetailsActions.SET_APPLICATION_DETAILS,
+export const setInformation = (args: ApplicationDetailsState): SetInformation => ({
+  type: EApplicationDetailsActions.SET_INFORMATION,
   payload: args
 })
 
-export type ApplicationDetailsActions = SetApplicationDetails
+export type ApplicationDetailsActions = SetInformation
