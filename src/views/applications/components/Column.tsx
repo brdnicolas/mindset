@@ -38,7 +38,7 @@ export const Column = ({ cards, id, color, icon, title }: ColumnProps) => {
             <div className="flex items-center pb-4">
               <div className={clsx('h-4 w-1 rounded-full mr-2', variantsColor[color])} />
               <Icon className="w-7 h-7 text-gray-500" name={icon} />
-              <h2 className="ml-2 text-gray-500 text-base">
+              <h2 className={clsx('ml-2 text-base', id === 'archived' ? 'text-gray-500' : 'text-gray-200')}>
                 {title}
                 {cards.length > 1 && 's'} {cards.length}
               </h2>

@@ -117,8 +117,8 @@ export const ApplicationsContainer = withAuthenticatedUser(
           {!isMobileOrTablet && (
             <div className="flex items-center justify-between pr-9">
               <div className="flex items-center">
-                <Icon className="w-7 h-7 text-gray-200" name="document" />
-                <p className="text-gray-200 text-2xl font-extrabold ml-3">Mes candidatures</p>
+                <Icon className="w-8 h-8 text-gray-200" name="document" />
+                <p className="text-gray-200 text-7 font-extrabold ml-3">Mes candidatures</p>
               </div>
               <ButtonPrimary onClick={() => setShowNewApplication(true)}>Nouvelle candidature</ButtonPrimary>
             </div>
