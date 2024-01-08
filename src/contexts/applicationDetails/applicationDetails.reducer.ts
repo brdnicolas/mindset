@@ -12,6 +12,7 @@ export const initialState: ApplicationDetailsState = {
   companyImageUrl: '',
   userId: 1,
   createdAt: '',
+  jobOfferUrl: '',
   applicationState: {
     name: 'applied'
   }

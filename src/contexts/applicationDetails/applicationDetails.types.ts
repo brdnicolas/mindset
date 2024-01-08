@@ -9,4 +9,5 @@ export type ApplicationDetailsState = {
   userId: number
   applicationState: { name: string }
   createdAt: string
+  jobOfferUrl: string
 }
