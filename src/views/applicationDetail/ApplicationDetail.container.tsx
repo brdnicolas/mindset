@@ -7,6 +7,10 @@ import { withAuthenticatedUser } from '@/utils/hoc/withAuthenticatedUser'
 import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
+import { InformationsContainer } from './containers/Informations.container'
+import { EventContainer } from './containers/Event.container'
+import { ContactsContainer } from './containers/Contacts.container'
+import { NotesContainer } from './containers/Notes.container'
 
 export const ApplicationDetailsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
@@ -42,6 +46,19 @@ export const ApplicationDetailsContainer = withAuthenticatedUser(
       }
     ]
 
+    const selectedContainer = () => {
+      switch (tabSelected) {
+        case 'events':
+          return <EventContainer />
+        case 'contacts':
+          return <ContactsContainer />
+        case 'notes':
+          return <NotesContainer />
+        default:
+          return <InformationsContainer />
+      }
+    }
+
     useEffect(() => {
       const token = localStorage.getItem('token')
 
@@ -70,6 +87,7 @@ export const ApplicationDetailsContainer = withAuthenticatedUser(
           </div>
         </header>
         <TabsGroup className="mt-10" options={options} />
+        {selectedContainer()}
       </div>
     )
   })
