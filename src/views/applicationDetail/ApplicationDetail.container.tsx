@@ -76,7 +76,7 @@ export const ApplicationDetailsContainer = withAuthenticatedUser(
         })
     }, [])
     return (
-      <div className="laptop:pt-16">
+      <div className="laptop:pt-16 laptop:pr-13">
         <header className="flex items-center">
           <Avatar src={companyImageUrl} alt="Logo company" className="w-20 h-20" />
           <div className="ml-5">

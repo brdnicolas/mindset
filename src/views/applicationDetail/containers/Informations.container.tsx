@@ -5,9 +5,9 @@ export const InformationsContainer = () => {
   const { company, job, jobOfferUrl } = useApplicationDetailsContext()
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-13">
         <div className="w-1/2">
-          <p className="text-4 text-gray-50 font-bold mt-13 mb-6">Général</p>
+          <p className="text-4 text-gray-50 font-bold mb-6">Général</p>
           <div className="flex items-center">
             <Input className="w-full" iconName="company" label="Entreprise" value={company} />
             <Input className="ml-10 w-full" iconName="briefcase" label="Poste" value={job} />
