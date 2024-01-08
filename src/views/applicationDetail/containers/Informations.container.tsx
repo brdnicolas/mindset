@@ -1,5 +1,5 @@
 import { Input } from '@/components'
-import { Upload } from '@/components/molecules/upload/Upload'
+import { UploadInput } from '@/components/molecules/upload/Upload'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
 
 export const InformationsContainer = () => {
@@ -26,8 +26,8 @@ export const InformationsContainer = () => {
       <div className="mt-13">
         <p className="text-4 text-gray-50 font-bold mb-6">Documents</p>
         <div className="grid grid-cols-8 gap-5">
-          {cv && <Upload doc={cv} />}
-          <Upload label="CV" subtitle="PDF • max 5 Mo" />
+          {cv && <UploadInput doc={cv} />}
+          <UploadInput label="CV" subtitle="PDF • max 5 Mo" />
         </div>
       </div>
     </div>
