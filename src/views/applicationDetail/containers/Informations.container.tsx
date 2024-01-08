@@ -1,4 +1,5 @@
 import { Input } from '@/components'
+import { Upload } from '@/components/molecules/upload/Upload'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
 
 export const InformationsContainer = () => {
@@ -20,6 +21,12 @@ export const InformationsContainer = () => {
             <Input className="w-full" label="Localisation" iconName="map-pin" placeholder="Localisation" />
             <Input className="w-full ml-10" label="Type de contrat" iconName="document-remove" placeholder="CDI" />
           </div>
+        </div>
+      </div>
+      <div className="mt-13">
+        <p className="text-4 text-gray-50 font-bold mb-6">Documents</p>
+        <div className="grid grid-cols-12 gap-5">
+          <Upload />
         </div>
       </div>
     </div>

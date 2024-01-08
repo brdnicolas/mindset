@@ -4,13 +4,14 @@ import { useState } from 'react'
 import dayjs from 'dayjs'
 import { SHORT_DISPLAY_DATE_FORMAT } from '@/shared/constants'
 import { useNavigate } from 'react-router-dom'
+import { DocumentProps } from '@/contexts/applicationDetails/applicationDetails.types'
 
 type CardProps = {
   company: string
   job: string
   date: string
   avatar?: string
-  coverLetter?: string
+  coverLetter?: DocumentProps
   onDelete?: any
   applicationId: number
 }
