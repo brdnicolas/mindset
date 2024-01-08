@@ -1,4 +1,4 @@
-import { Avatar } from '@/components'
+import { Avatar, TabsGroup } from '@/components'
 import { setInformation } from '@/contexts/applicationDetails/applicationDetails.actions'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
 import { getApplicationById } from '@/services/applications/application'
@@ -6,12 +6,41 @@ import { SHORT_DISPLAY_DATE_FORMAT } from '@/shared/constants'
 import { withAuthenticatedUser } from '@/utils/hoc/withAuthenticatedUser'
 import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 import dayjs from 'dayjs'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export const ApplicationDetailsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
     const { companyImageUrl, company, job, createdAt, dispatch } = useApplicationDetailsContext()
     const applicationId = window.location.href.split('/')[4]
+
+    const [tabSelected, setTabSelected] = useState('informations')
+
+    const options = [
+      {
+        label: 'Informations',
+        id: 'informations',
+        onClick: () => setTabSelected('informations'),
+        isSelected: tabSelected === 'informations'
+      },
+      {
+        label: 'Mes événements',
+        id: 'events',
+        onClick: () => setTabSelected('events'),
+        isSelected: tabSelected === 'events'
+      },
+      {
+        label: 'Contacts',
+        id: 'contacts',
+        onClick: () => setTabSelected('contacts'),
+        isSelected: tabSelected === 'contacts'
+      },
+      {
+        label: 'Notes',
+        id: 'notes',
+        onClick: () => setTabSelected('notes'),
+        isSelected: tabSelected === 'notes'
+      }
+    ]
 
     useEffect(() => {
       const token = localStorage.getItem('token')
@@ -40,6 +69,7 @@ export const ApplicationDetailsContainer = withAuthenticatedUser(
             <p className="text-3 text-gray-200">Postulé le {dayjs(createdAt).format(SHORT_DISPLAY_DATE_FORMAT)}</p>
           </div>
         </header>
+        <TabsGroup className="mt-10" options={options} />
       </div>
     )
   })
