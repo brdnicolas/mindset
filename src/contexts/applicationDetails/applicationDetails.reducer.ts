@@ -11,6 +11,7 @@ export const initialState: ApplicationDetailsState = {
   coverLetter: null,
   companyImageUrl: '',
   userId: 1,
+  createdAt: '',
   applicationState: {
     name: 'applied'
   }

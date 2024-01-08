@@ -8,4 +8,5 @@ export type ApplicationDetailsState = {
   companyImageUrl: string
   userId: number
   applicationState: { name: string }
+  createdAt: string
 }
