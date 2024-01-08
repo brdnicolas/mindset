@@ -13,7 +13,7 @@ export const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   return (
     <div className="h-full flex flex-col laptop:grid grid-cols-globalLayout w-full">
       {isMobileOrTablet && <MobileNavbar />}
-      {isMobileOrTablet ? <MobileHeader /> : <DesktopNavbar studentName="Nicolas B." applicationsNumber={12} />}
+      {isMobileOrTablet ? <MobileHeader /> : <DesktopNavbar />}
       <div className="w-full overflow-hidden p-5 pb-0 pr-0 h-full pl-0 laptop:pl-5">{children}</div>
     </div>
   )
