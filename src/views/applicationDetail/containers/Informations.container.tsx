@@ -3,7 +3,7 @@ import { UploadInput } from '@/components/molecules/upload/Upload'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
 
 export const InformationsContainer = () => {
-  const { company, job, jobOfferUrl, cv } = useApplicationDetailsContext()
+  const { company, job, jobOfferUrl, cv, coverLetter } = useApplicationDetailsContext()
   return (
     <div className="w-full">
       <div className="flex justify-between mt-13">
@@ -26,8 +26,12 @@ export const InformationsContainer = () => {
       <div className="mt-13">
         <p className="text-4 text-gray-50 font-bold mb-6">Documents</p>
         <div className="grid grid-cols-8 gap-5">
-          {cv && <UploadInput doc={cv} />}
-          <UploadInput label="CV" subtitle="PDF • max 5 Mo" />
+          {cv ? <UploadInput doc={cv} /> : <UploadInput label="CV" subtitle="PDF • max 5 Mo" />}
+          {coverLetter ? (
+            <UploadInput doc={coverLetter} />
+          ) : (
+            <UploadInput label="Lettre de motivation" subtitle="PDF • max 5 Mo" />
+          )}
         </div>
       </div>
     </div>

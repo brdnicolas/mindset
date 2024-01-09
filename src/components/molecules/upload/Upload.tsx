@@ -1,7 +1,7 @@
 import { Icon } from '@/components/atoms/icons/Icon'
 import { DocumentProps } from '@/contexts/applicationDetails/applicationDetails.types'
 import clsx from 'clsx'
-import { useRef } from 'react'
+import { ChangeEvent, useRef } from 'react'
 
 type UploadPropsType = {
   doc?: DocumentProps
@@ -18,6 +18,12 @@ export const UploadInput = ({ doc, label, subtitle, accept }: UploadPropsType) =
       inputRef.current.click()
     }
   }
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      console.log(e.target.files[0])
+    }
+  }
   return (
     <>
       {doc ? (
@@ -30,7 +36,7 @@ export const UploadInput = ({ doc, label, subtitle, accept }: UploadPropsType) =
         </div>
       ) : (
         <>
-          <input className="hidden" type="file" accept={accept} ref={inputRef} />
+          <input className="hidden" type="file" accept={accept} ref={inputRef} onChange={handleChange} />
           <div
             onClick={handleClick}
             className={clsx(
