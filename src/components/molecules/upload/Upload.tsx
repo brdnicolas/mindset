@@ -1,5 +1,6 @@
 import { Icon } from '@/components/atoms/icons/Icon'
 import { DocumentProps } from '@/contexts/applicationDetails/applicationDetails.types'
+import { convertFileSize } from '@/utils/formating/formats'
 import clsx from 'clsx'
 import { ChangeEvent, useRef } from 'react'
 
@@ -8,9 +9,10 @@ type UploadPropsType = {
   label?: string
   subtitle?: string
   accept?: string
+  handleChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const UploadInput = ({ doc, label, subtitle, accept }: UploadPropsType) => {
+export const UploadInput = ({ doc, label, subtitle, accept, handleChange }: UploadPropsType) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClick = () => {
@@ -19,11 +21,6 @@ export const UploadInput = ({ doc, label, subtitle, accept }: UploadPropsType) =
     }
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      console.log(e.target.files[0])
-    }
-  }
   return (
     <>
       {doc ? (
@@ -32,7 +29,7 @@ export const UploadInput = ({ doc, label, subtitle, accept }: UploadPropsType) =
             <img src="/assets/pdfIcon.svg" alt="pdfIcon" />
           </div>
           <p className="w-full text-3 text-gray-100 truncate pt-2">{doc.fileName}</p>
-          <p className="text-left text-2 text-gray-400">{Math.trunc(doc.size / 10 ** 6)} Ko</p>
+          <p className="text-left text-2 text-gray-400">{convertFileSize(doc.size)}</p>
         </div>
       ) : (
         <>

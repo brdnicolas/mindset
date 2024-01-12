@@ -1,6 +1,7 @@
 export type DocumentProps = {
   fileName: string
   size: number
+  url: string
 }
 
 export type ApplicationDetailsState = {

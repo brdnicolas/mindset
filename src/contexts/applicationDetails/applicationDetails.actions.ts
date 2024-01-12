@@ -6,10 +6,10 @@ export enum EApplicationDetailsActions {
 
 export type SetInformation = {
   type: EApplicationDetailsActions.SET_INFORMATION
-  payload: ApplicationDetailsState
+  payload: Partial<ApplicationDetailsState>
 }
 
-export const setInformation = (args: ApplicationDetailsState): SetInformation => ({
+export const setInformation = (args: Partial<ApplicationDetailsState>): SetInformation => ({
   type: EApplicationDetailsActions.SET_INFORMATION,
   payload: args
 })
