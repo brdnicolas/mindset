@@ -1,4 +1,11 @@
 import { api } from '../api'
+import { AxiosRequestConfig } from 'axios'
+
+const config: AxiosRequestConfig = {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
+}
 
 type UploadCvPropsTypes = {
   applicationId: number
@@ -6,7 +13,7 @@ type UploadCvPropsTypes = {
 }
 
 export const uploadCv = async ({ applicationId, cv }: UploadCvPropsTypes) => {
-  return api.patch('/upload/cv', { applicationId, cv })
+  return api.patch('/upload/cv', { applicationId, cv }, config)
 }
 
 type UploadCoverLetterPropsTypes = {
@@ -14,5 +21,5 @@ type UploadCoverLetterPropsTypes = {
   coverLetter: FormDataEntryValue | null
 }
 export const uploadCoverLetter = async ({ applicationId, coverLetter }: UploadCoverLetterPropsTypes) => {
-  return api.patch('/upload/coverLetter', { coverLetter, applicationId })
+  return api.patch('/upload/coverLetter', { coverLetter, applicationId }, config)
 }
