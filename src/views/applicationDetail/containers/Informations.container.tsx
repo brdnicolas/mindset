@@ -2,33 +2,45 @@ import { Input } from '@/components'
 import { UploadInput } from '@/components/molecules/upload/Upload'
 import { setInformation } from '@/contexts/applicationDetails/applicationDetails.actions'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
-import { uploadCv } from '@/services/upload/upload'
-import { ChangeEvent } from 'react'
+import { uploadCoverLetter, uploadCv } from '@/services/upload/upload'
+import { useState } from 'react'
 
 export const InformationsContainer = () => {
   const { company, job, jobOfferUrl, cv, coverLetter, dispatch } = useApplicationDetailsContext()
 
+  const [isLoadingCv, setIsLoadingCv] = useState(false)
+  const [isLoadingCoverLetter, setIsLoadingCoverLetter] = useState(false)
+
   const applicationId = window.location.href.split('/')[4]
 
-  const formDataCv = new FormData()
+  const handleAddCv = (files: FileList) => {
+    if (files) {
+      setIsLoadingCv(true)
+      const formDataCv = new FormData()
 
-  const handleAddCv = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      formDataCv.append('cv', e.target.files[0])
-      uploadCv({ applicationId: Number(applicationId), cv: formDataCv.get('cv') }).then((data) =>
+      formDataCv.append('cv', files[0])
+      uploadCv({ applicationId: Number(applicationId), cv: formDataCv.get('cv') }).then((data) => {
+        setIsLoadingCv(false)
         dispatch(setInformation({ cv: { fileName: data.data.fileName, size: data.data.size, url: data.data.url } }))
-      )
+      })
     }
   }
 
-  const handleAddCoverLetter = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      formDataCv.append('cv', e.target.files[0])
-      uploadCv({ applicationId: Number(applicationId), cv: formDataCv.get('cv') }).then((data) =>
+  const handleAddCoverLetter = (files: FileList) => {
+    if (files) {
+      setIsLoadingCoverLetter(true)
+      const formDataCoverLetter = new FormData()
+
+      formDataCoverLetter.append('coverLetter', files[0])
+      uploadCoverLetter({
+        applicationId: Number(applicationId),
+        coverLetter: formDataCoverLetter.get('coverLetter')
+      }).then((data) => {
+        setIsLoadingCoverLetter(false)
         dispatch(
           setInformation({ coverLetter: { fileName: data.data.fileName, size: data.data.size, url: data.data.url } })
         )
-      )
+      })
     }
   }
 
@@ -54,16 +66,22 @@ export const InformationsContainer = () => {
       <div className="mt-13">
         <p className="text-4 text-gray-50 font-bold mb-6">Documents</p>
         <div className="grid grid-cols-8 gap-5">
-          {cv ? (
-            <UploadInput doc={cv} />
-          ) : (
-            <UploadInput handleChange={handleAddCv} label="CV" subtitle="PDF • max 5 Mo" />
-          )}
-          {coverLetter ? (
-            <UploadInput doc={coverLetter} />
-          ) : (
-            <UploadInput handleChange={handleAddCoverLetter} label="Lettre de motivation" subtitle="PDF • max 5 Mo" />
-          )}
+          <UploadInput
+            accept=".pdf"
+            isLoading={isLoadingCv}
+            doc={cv}
+            handleChange={handleAddCv}
+            label="CV"
+            subtitle="PDF • max 5 Mo"
+          />
+          <UploadInput
+            accept=".pdf"
+            isLoading={isLoadingCoverLetter}
+            doc={coverLetter}
+            handleChange={handleAddCoverLetter}
+            label="Lettre de motivation"
+            subtitle="PDF • max 5 Mo"
+          />
         </div>
       </div>
     </div>
