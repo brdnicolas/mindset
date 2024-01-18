@@ -1,9 +1,9 @@
-import { Loader } from '@/components/atoms'
+import { IconButtonPrimary } from '@/components/atoms/button/Button'
 import { Icon } from '@/components/atoms/icons/Icon'
 import { DocumentProps } from '@/contexts/applicationDetails/applicationDetails.types'
 import { convertFileSize } from '@/utils/formating/formats'
 import clsx from 'clsx'
-import { ChangeEvent, useCallback, useRef } from 'react'
+import { ChangeEvent, useCallback, useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 export type Files = FileList | object[]
@@ -14,11 +14,12 @@ type UploadPropsType = {
   subtitle?: string
   accept?: string
   handleChange?: (files: FileList) => void
-  isLoading?: boolean
 }
 
-export const UploadInput = ({ doc, label, subtitle, accept, handleChange, isLoading }: UploadPropsType) => {
+export const UploadInput = ({ doc, label, subtitle, accept, handleChange }: UploadPropsType) => {
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const [onHover, setOnHover] = useState(false)
 
   const handleClick = () => {
     if (inputRef.current) {
@@ -32,6 +33,20 @@ export const UploadInput = ({ doc, label, subtitle, accept, handleChange, isLoad
     }
   }
 
+  const handleView = () => {
+    window.open(`https://applifyai.onrender.com${doc?.url}`, '_blank')
+  }
+
+  const handleDownload = () => {
+    const pdfUrl = `https://applifyai.onrender.com${doc?.url}`
+    const link = document.createElement('a')
+    link.href = pdfUrl
+    link.download = 'cv.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   const onDrop = useCallback((acceptedFiles: object[]) => {
     if (acceptedFiles && handleChange) {
       handleChange(acceptedFiles as unknown as FileList)
@@ -43,11 +58,26 @@ export const UploadInput = ({ doc, label, subtitle, accept, handleChange, isLoad
     <>
       {doc ? (
         <div className="rounded-3 border-[1px] border-gray-600 p-2">
-          <div className="flex w-full items-center justify-center px-3 py-6 bg-gray-700 rounded-2">
-            {isLoading ? <Loader /> : <img src="/assets/pdfIcon.svg" alt="pdfIcon" />}
+          <div
+            onMouseEnter={() => {
+              setOnHover(true)
+            }}
+            onMouseLeave={() => {
+              setOnHover(false)
+            }}
+            className="flex w-full items-center justify-center px-3 py-6 bg-gray-700 rounded-2"
+          >
+            {onHover ? (
+              <div className="flex items-center">
+                <IconButtonPrimary onClick={handleView} iconName="eye" />
+                <IconButtonPrimary onClick={handleDownload} className="ml-4" iconName="download" />
+              </div>
+            ) : (
+              <img src="/assets/pdfIcon.svg" alt="pdfIcon" />
+            )}
           </div>
-          <p className="w-full text-3 text-gray-100 truncate pt-2">{doc.fileName}</p>
-          <p className="text-left text-2 text-gray-400">{convertFileSize(doc.size)}</p>
+          <p className="w-full text-3 text-gray-100 truncate pt-2">{doc?.fileName}</p>
+          <p className="text-left text-2 text-gray-400">{convertFileSize(doc?.size)}</p>
         </div>
       ) : (
         <div {...getRootProps()}>
