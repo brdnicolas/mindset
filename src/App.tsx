@@ -5,7 +5,7 @@ import { StatisticsContainer } from './views/statistics/Statistics.container'
 import { PlansContainer } from './views/plans/Plans.container'
 import { RegisterContainer } from './views/register/Register.container'
 import { LoginContainer } from './views/login/Login.container'
-import { ApplicationDetailsContainer } from './views/applicationDetail/ApplicationDetail.container'
+import { ApplicationDetailsContainer } from '@/views/applicationDetails/ApplicationDetails.container'
 import { Providers } from './contexts/providers/Providers'
 
 function App() {

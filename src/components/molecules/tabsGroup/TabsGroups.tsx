@@ -1,7 +1,7 @@
 import { Tab } from '@/components/atoms'
 import clsx from 'clsx'
 
-type TabsOption = {
+type TabOption = {
   label: string
   id: string
   isSelected: boolean
@@ -9,7 +9,7 @@ type TabsOption = {
 }
 
 type TabsGroupProps = {
-  options: TabsOption[]
+  options: TabOption[]
   className?: string
 }
 
@@ -18,7 +18,15 @@ export const TabsGroup = ({ options, className }: TabsGroupProps) => {
     <div className="w-full flex flex-col">
       <div className={clsx('flex items-center', className)}>
         {options.map((option) => {
-          return <Tab label={option.label} id={option.id} isSelected={option.isSelected} onClick={option.onClick} />
+          return (
+            <Tab
+              key={option.label}
+              label={option.label}
+              id={option.id}
+              isSelected={option.isSelected}
+              onClick={option.onClick}
+            />
+          )
         })}
       </div>
       <hr className="w-full h-[1px] border-gray-600 mt-4" />

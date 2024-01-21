@@ -5,6 +5,7 @@ import { convertFileSize } from '@/utils/formating/formats'
 import clsx from 'clsx'
 import { ChangeEvent, useCallback, useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { Loader } from '@/components'
 
 export type Files = FileList | object[]
 
@@ -14,21 +15,22 @@ type UploadPropsType = {
   subtitle?: string
   accept?: string
   handleChange?: (files: FileList) => void
+  isLoading?: boolean
 }
 
-export const UploadInput = ({ doc, label, subtitle, accept, handleChange }: UploadPropsType) => {
+export const UploadInput = ({ doc, label, subtitle, accept, handleChange, isLoading }: UploadPropsType) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const [onHover, setOnHover] = useState(false)
 
   const handleClick = () => {
-    if (inputRef.current) {
+    if (inputRef.current && !isLoading) {
       inputRef.current.click()
     }
   }
 
   const handleOnFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && handleChange) {
+    if (e.target.files && handleChange && !isLoading) {
       handleChange(e.target.files)
     }
   }
@@ -48,7 +50,7 @@ export const UploadInput = ({ doc, label, subtitle, accept, handleChange }: Uplo
   }
 
   const onDrop = useCallback((acceptedFiles: object[]) => {
-    if (acceptedFiles && handleChange) {
+    if (acceptedFiles && handleChange && !isLoading) {
       handleChange(acceptedFiles as unknown as FileList)
     }
   }, [])
@@ -96,7 +98,7 @@ export const UploadInput = ({ doc, label, subtitle, accept, handleChange }: Uplo
               'hover:border-gray-300 hover:text-gray-300'
             )}
           >
-            <Icon name="upload" className="w-13 h-13" />
+            {isLoading ? <Loader className="max-w-13 max-h-13" /> : <Icon name="upload" className="w-13 h-13" />}
             <div className="flex flex-col items-center">
               <p className="text-3 mt-3">{label}</p>
               <p className="text-3 mt-1">{subtitle}</p>
