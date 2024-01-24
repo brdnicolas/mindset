@@ -7,12 +7,12 @@ import { withAuthenticatedUser } from '@/utils/hoc/withAuthenticatedUser'
 import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
-import { InformationContainer } from './containers/information/Information.container'
 import { EventContainer } from './containers/Event.container'
 import { ContactsContainer } from './containers/Contacts.container'
 import { NotesContainer } from './containers/Notes.container'
 import { InformationContainerSkeleton } from '@/views/applicationDetails/containers/information/Information.skeleton'
 import { TextSkeleton } from '@/components/atoms/text/Text.skeleton'
+import { InformationsContainer } from './containers/information/Information.container'
 
 export const ApplicationDetailsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
@@ -58,7 +58,7 @@ export const ApplicationDetailsContainer = withAuthenticatedUser(
         case 'notes':
           return <NotesContainer />
         default:
-          return isApplicationDetailsLoading ? <InformationContainerSkeleton /> : <InformationContainer />
+          return isApplicationDetailsLoading ? <InformationContainerSkeleton /> : <InformationsContainer />
       }
     }
 
