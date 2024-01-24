@@ -1,4 +1,5 @@
 import { Input } from '@/components'
+import { Select } from '@/components/atoms/select/Select'
 import { UploadInput } from '@/components/molecules/uploadInput/UploadInput'
 import { setInformation } from '@/contexts/applicationDetails/applicationDetails.actions'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
@@ -18,6 +19,14 @@ export const InformationsContainer = () => {
   const [isCvIsUploading, setIsCvIsUploading] = useState(false)
   const [isCoverLetterIsUploading, setIsCoverLetterIsUploading] = useState(false)
   const applicationId = window.location.href.split('/')[4]
+
+  const [contractLabel, setContractLabel] = useState('')
+  const contractTypeOptions = [
+    { value: 'cdi', label: 'CDI' },
+    { value: 'cdd', label: 'CDD' },
+    { value: 'alternance', label: 'Alternance' },
+    { value: 'stage', label: 'Stage' }
+  ]
 
   const handleAddCv = (files: FileList) => {
     if (files) {
@@ -67,13 +76,13 @@ export const InformationsContainer = () => {
       })
   }
 
-  const handleBlur = async () => {
-    await geocodingQuery(location)
-    updateApplication(Number(applicationId), { city: location, lat: locationLat, lng: locationLng }).then((data) =>
-      console.log(data)
-    )
+  const handleBlur = () => {
+    geocodingQuery(location).finally(() => {
+      updateApplication(Number(applicationId), { city: location, lat: locationLat, lng: locationLng }).then((data) =>
+        console.log(data)
+      )
+    })
   }
-
   return (
     <div className="w-full">
       <div className="flex justify-between mt-13">
@@ -87,7 +96,7 @@ export const InformationsContainer = () => {
         </div>
         <div className="w-1/2 ml-30">
           <p className="text-4 text-gray-50 font-bold mb-6">Détails</p>
-          <div className="flex items-center">
+          <div className="flex gap-10">
             <Input
               onBlur={handleBlur}
               onChange={(e) => {
@@ -99,7 +108,15 @@ export const InformationsContainer = () => {
               placeholder="Localisation"
               value={location}
             />
-            <Input className="w-full ml-10" label="Type de contrat" iconName="document-remove" placeholder="CDI" />
+            <Select
+              value={contractLabel}
+              contractTypeProps={{ setContractLabel }}
+              options={contractTypeOptions}
+              className="w-full"
+              defaultValue="CDI"
+              label="Type de contrat"
+              iconName="document-remove"
+            />
           </div>
         </div>
       </div>

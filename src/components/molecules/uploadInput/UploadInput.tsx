@@ -56,6 +56,15 @@ export const UploadInput = ({ doc, label, subtitle, accept, handleChange, isLoad
   }, [])
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
+  const inputIcon = () => {
+    switch (doc?.fileName.split('.')[1]) {
+      case 'pdf':
+        return <img src="/assets/pdfIcon.svg" alt="pdfIcon" />
+      default:
+        return <img src="/assets/docIcon.svg" alt="docIcon" />
+    }
+  }
+
   return (
     <>
       {doc ? (
@@ -75,7 +84,7 @@ export const UploadInput = ({ doc, label, subtitle, accept, handleChange, isLoad
                 <IconButtonPrimary onClick={handleDownload} className="ml-4" iconName="download" />
               </div>
             ) : (
-              <img src="/assets/pdfIcon.svg" alt="pdfIcon" />
+              inputIcon()
             )}
           </div>
           <p className="w-full text-3 text-gray-100 truncate pt-2">{doc?.fileName}</p>
