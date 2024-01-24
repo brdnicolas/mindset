@@ -2,10 +2,18 @@ import { Input } from '@/components'
 import { UploadInput } from '@/components/molecules/upload/Upload'
 import { setInformation } from '@/contexts/applicationDetails/applicationDetails.actions'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
+import { updateApplication } from '@/services/applications/application'
 import { uploadCoverLetter, uploadCv } from '@/services/upload/upload'
+import { GoogleApiKey } from '@/shared/apiKey'
+import axios from 'axios'
+import { useState } from 'react'
 
 export const InformationsContainer = () => {
-  const { company, job, jobOfferUrl, cv, coverLetter, dispatch } = useApplicationDetailsContext()
+  const { company, job, jobOfferUrl, cv, coverLetter, city, dispatch } = useApplicationDetailsContext()
+
+  const [location, setLocation] = useState(city)
+  const [locationLat, setLocationLat] = useState('')
+  const [locationLng, setLocationLng] = useState('')
 
   const applicationId = window.location.href.split('/')[4]
 
@@ -36,6 +44,28 @@ export const InformationsContainer = () => {
     }
   }
 
+  const geocodingQuery = (city: string) => {
+    const geocoderQuery = encodeURIComponent(`${city}`.replace(/ /g, '+'))
+    return axios
+      .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${geocoderQuery}&key=${GoogleApiKey}`)
+      .then((res) => res.data)
+      .then((json) => {
+        if (json.results.length === 0) {
+          return null
+        }
+
+        setLocationLat(json.results['0'].geometry.location.lat)
+        setLocationLng(json.results['0'].geometry.location.lng)
+      })
+  }
+
+  const handleBlur = async () => {
+    await geocodingQuery(location)
+    updateApplication(Number(applicationId), { city: location, lat: locationLat, lng: locationLng }).then((data) =>
+      console.log(data)
+    )
+  }
+
   return (
     <div className="w-full">
       <div className="flex justify-between mt-13">
@@ -50,7 +80,17 @@ export const InformationsContainer = () => {
         <div className="w-1/2 ml-30">
           <p className="text-4 text-gray-50 font-bold mb-6">Détails</p>
           <div className="flex items-center">
-            <Input className="w-full" label="Localisation" iconName="map-pin" placeholder="Localisation" />
+            <Input
+              onBlur={handleBlur}
+              onChange={(e) => {
+                setLocation(e.target.value)
+              }}
+              className="w-full"
+              label="Localisation"
+              iconName="map-pin"
+              placeholder="Localisation"
+              value={location}
+            />
             <Input className="w-full ml-10" label="Type de contrat" iconName="document-remove" placeholder="CDI" />
           </div>
         </div>

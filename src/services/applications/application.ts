@@ -1,5 +1,6 @@
 import { Application, EApplicationState, EApplicationStateId } from '@/contexts/applications/applications.types'
 import { api } from '../api'
+import { ApplicationDetailsState } from '@/contexts/applicationDetails/applicationDetails.types'
 
 export const getAllUserApplications = async (): Promise<Application[]> => {
   return api.get('/applications').then((response) => response.data)
@@ -14,6 +15,13 @@ export const updateApplicationStateById = async (
       applicationStateId: EApplicationStateId[applicationState]
     })
     .then((response) => response.data)
+}
+
+export const updateApplication = async (
+  applicationId: number,
+  application: Partial<ApplicationDetailsState>
+): Promise<Application> => {
+  return api.patch(`/applications/${applicationId}`, { ...application }).then((response) => response.data)
 }
 
 export type CreateApplication = {
