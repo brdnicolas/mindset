@@ -1,5 +1,5 @@
 import { Input } from '@/components'
-import { UploadInput } from '@/components/molecules/upload/Upload'
+import { UploadInput } from '@/components/molecules/uploadInput/UploadInput'
 import { setInformation } from '@/contexts/applicationDetails/applicationDetails.actions'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
 import { updateApplication } from '@/services/applications/application'
@@ -15,32 +15,40 @@ export const InformationsContainer = () => {
   const [locationLat, setLocationLat] = useState('')
   const [locationLng, setLocationLng] = useState('')
 
+  const [isCvIsUploading, setIsCvIsUploading] = useState(false)
+  const [isCoverLetterIsUploading, setIsCoverLetterIsUploading] = useState(false)
   const applicationId = window.location.href.split('/')[4]
 
   const handleAddCv = (files: FileList) => {
     if (files) {
+      setIsCvIsUploading(true)
       const formDataCv = new FormData()
 
       formDataCv.append('cv', files[0])
-      uploadCv({ applicationId: Number(applicationId), cv: formDataCv.get('cv') }).then((data) => {
-        dispatch(setInformation({ cv: { fileName: data.data.fileName, size: data.data.size, url: data.data.url } }))
-      })
+      uploadCv({ applicationId: Number(applicationId), cv: formDataCv.get('cv') })
+        .then((data) => {
+          dispatch(setInformation({ cv: { fileName: data.data.fileName, size: data.data.size, url: data.data.url } }))
+        })
+        .finally(() => setIsCvIsUploading(false))
     }
   }
 
   const handleAddCoverLetter = (files: FileList) => {
     if (files) {
+      setIsCoverLetterIsUploading(true)
       const formDataCoverLetter = new FormData()
 
       formDataCoverLetter.append('coverLetter', files[0])
       uploadCoverLetter({
         applicationId: Number(applicationId),
         coverLetter: formDataCoverLetter.get('coverLetter')
-      }).then((data) => {
-        dispatch(
-          setInformation({ coverLetter: { fileName: data.data.fileName, size: data.data.size, url: data.data.url } })
-        )
       })
+        .then((data) => {
+          dispatch(
+            setInformation({ coverLetter: { fileName: data.data.fileName, size: data.data.size, url: data.data.url } })
+          )
+        })
+        .finally(() => setIsCoverLetterIsUploading(false))
     }
   }
 
@@ -71,9 +79,9 @@ export const InformationsContainer = () => {
       <div className="flex justify-between mt-13">
         <div className="w-1/2">
           <p className="text-4 text-gray-50 font-bold mb-6">Général</p>
-          <div className="flex items-center">
+          <div className="flex items-center gap-10">
             <Input className="w-full" iconName="company" label="Entreprise" value={company} />
-            <Input className="ml-10 w-full" iconName="briefcase" label="Poste" value={job} />
+            <Input className="w-full" iconName="briefcase" label="Poste" value={job} />
           </div>
           <Input className="w-full mt-6" iconName="link" label="Lien de l'offre" value={jobOfferUrl} />
         </div>
@@ -98,8 +106,16 @@ export const InformationsContainer = () => {
       <div className="mt-13">
         <p className="text-4 text-gray-50 font-bold mb-6">Documents</p>
         <div className="grid grid-cols-8 gap-5">
-          <UploadInput accept=".pdf" doc={cv} handleChange={handleAddCv} label="CV" subtitle="PDF • max 5 Mo" />
           <UploadInput
+            isLoading={isCvIsUploading}
+            accept=".pdf"
+            doc={cv}
+            handleChange={handleAddCv}
+            label="CV"
+            subtitle="PDF • max 5 Mo"
+          />
+          <UploadInput
+            isLoading={isCoverLetterIsUploading}
             accept=".pdf"
             doc={coverLetter}
             handleChange={handleAddCoverLetter}
