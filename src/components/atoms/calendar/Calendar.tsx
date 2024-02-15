@@ -35,6 +35,7 @@ export const Calendar = () => {
         navLinks
         eventColor="#D6D6D6"
         eventTextColor="#090909"
+        editable
         eventClassNames="event-container"
         eventClick={(info) => {
           console.log(info.event.title, info.event.startStr)
