@@ -3,6 +3,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import './Calendar.scss'
 import { DateSelectArg } from '@fullcalendar/core'
+import { AddCardEvent } from './addEventCard/addEventCard'
 
 export const Calendar = () => {
   let eventId = 0
@@ -30,6 +31,10 @@ export const Calendar = () => {
 
   return (
     <div className="mt-12 mb-10">
+      <p className="font-bold text-4 text-gray-50 mb-6">Évévenment à venir</p>
+      <div className="grid grid-cols-4 mb-13">
+        <AddCardEvent />
+      </div>
       <p className="font-bold text-4 text-gray-50 mb-6">Évévenment à venir</p>
       <FullCalendar
         navLinks
