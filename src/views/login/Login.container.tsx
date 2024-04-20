@@ -16,7 +16,7 @@ export const LoginContainer = () => {
           <h1 className="text-white text-center text-8 tablet:text-10 font-bold w-full tablet:w-[600px]">
             Vos compétences en première ligne de l'innovation
           </h1>
-          <div className="mt-[10vh] w-[300px]">
+          <div className="mt-[10vh] w-[300px] flex flex-col items-center">
             <LoginForm />
 
             <p className="text-gray-300 text-3 flex justify-center mt-[3vh] tablet:mt-[7vh]">

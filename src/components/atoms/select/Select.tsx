@@ -1,11 +1,15 @@
 import clsx from 'clsx'
 import { Icon } from '../icons/Icon'
 import { IconName } from '../icons/types'
-import { useState } from 'react'
 
 type OptionType = {
   value: string
   label: string
+}
+
+type ShowType = {
+  showOptions: boolean
+  setShowOptions: (showOptions: boolean) => void
 }
 
 type SelectPropsType = {
@@ -15,7 +19,8 @@ type SelectPropsType = {
   value?: string
   className?: string
   defaultValue: string
-  contractTypeProps: { setContractLabel: (value: string) => void }
+  onClick?: (e: any) => void
+  showProps: ShowType
 }
 
 export const Select = ({
@@ -25,11 +30,10 @@ export const Select = ({
   className,
   defaultValue,
   options,
-  contractTypeProps
+  onClick,
+  showProps
 }: SelectPropsType) => {
-  const [showOptions, setShowOptions] = useState(false)
-  const { setContractLabel } = contractTypeProps
-
+  const { showOptions, setShowOptions } = showProps
   return (
     <div className={clsx(className)}>
       {label && <p className="text-gray-500 text-3.5 mb-3">{label}</p>}
@@ -52,10 +56,7 @@ export const Select = ({
           {options.map((option, i) => {
             return (
               <div
-                onClick={() => {
-                  setContractLabel(option.label)
-                  setShowOptions(!showOptions)
-                }}
+                onClick={onClick}
                 key={i}
                 className={clsx(
                   'transition-all cursor-pointer mb-2 last:mb-0 py-1 px-2 text-gray-300 text-3 rounded-1',

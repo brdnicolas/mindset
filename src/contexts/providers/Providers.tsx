@@ -3,6 +3,7 @@ import { ApplicationsProvider } from '@/contexts/applications/applications.provi
 import { BreakpointsProvider } from '@/contexts/breakpoints/breakpoints.provider'
 import { ReactNode } from 'react'
 import { UserProvider } from '../user/user.provider'
+import { EventProvider } from '../events/events.provider'
 
 type ProviderPropsType = {
   children: ReactNode
@@ -13,7 +14,9 @@ export const Providers = ({ children }: ProviderPropsType) => {
     <UserProvider>
       <BreakpointsProvider>
         <ApplicationsProvider>
-          <ApplicationDetailsProvider>{children}</ApplicationDetailsProvider>
+          <ApplicationDetailsProvider>
+            <EventProvider>{children}</EventProvider>
+          </ApplicationDetailsProvider>
         </ApplicationsProvider>
       </BreakpointsProvider>
     </UserProvider>

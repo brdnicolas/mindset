@@ -15,6 +15,7 @@ export const InformationsContainer = () => {
   const [location, setLocation] = useState(city)
   const [locationLat, setLocationLat] = useState('')
   const [locationLng, setLocationLng] = useState('')
+  const [showOptions, setShowOptions] = useState(false)
 
   const [isCvIsUploading, setIsCvIsUploading] = useState(false)
   const [isCoverLetterIsUploading, setIsCoverLetterIsUploading] = useState(false)
@@ -83,6 +84,11 @@ export const InformationsContainer = () => {
       )
     })
   }
+
+  /* const handleChangeContract = () => {
+    updateApplication(Number(applicationId), { contract: contractLabel }).then((data) => console.log(data))
+  } */
+
   return (
     <div className="w-full">
       <div className="flex justify-between mt-13">
@@ -109,8 +115,12 @@ export const InformationsContainer = () => {
               value={location}
             />
             <Select
+              showProps={{ showOptions, setShowOptions }}
+              onClick={(e: any) => {
+                setContractLabel(e.target.textContent)
+                setShowOptions(!showOptions)
+              }}
               value={contractLabel}
-              contractTypeProps={{ setContractLabel }}
               options={contractTypeOptions}
               className="w-full"
               defaultValue="CDI"
