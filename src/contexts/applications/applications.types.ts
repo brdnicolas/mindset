@@ -25,6 +25,8 @@ export type MinimalApplication = {
 }
 
 export type Application = {
+  lat: string
+  lng: string
   id: number
   job: string
   jobOfferUrl: string

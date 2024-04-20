@@ -3,18 +3,22 @@ import { Select } from '@/components/atoms/select/Select'
 import { UploadInput } from '@/components/molecules/uploadInput/UploadInput'
 import { setInformation } from '@/contexts/applicationDetails/applicationDetails.actions'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
-import { updateApplication } from '@/services/applications/application'
 import { uploadCoverLetter, uploadCv } from '@/services/upload/upload'
-import { GoogleApiKey } from '@/shared/apiKey'
-import axios from 'axios'
 import { useState } from 'react'
+import axios from 'axios'
+import { updateApplication } from '@/services/applications/application'
 
 export const InformationsContainer = () => {
-  const { company, job, jobOfferUrl, cv, coverLetter, city, dispatch } = useApplicationDetailsContext()
+  const { company, job, jobOfferUrl, cv, coverLetter, city, street, postalCode, dispatch } =
+    useApplicationDetailsContext()
 
-  const [location, setLocation] = useState(city)
+  const [location, setLocation] = useState(street + ' ' + city + ' ' + postalCode)
   const [locationLat, setLocationLat] = useState('')
   const [locationLng, setLocationLng] = useState('')
+  const [cityValue, setCityValue] = useState(city)
+  const [streetValue, setStreetValue] = useState(street)
+  const [postalCodeValue, setPostalCodeValue] = useState(postalCode)
+
   const [showOptions, setShowOptions] = useState(false)
 
   const [isCvIsUploading, setIsCvIsUploading] = useState(false)
@@ -62,27 +66,39 @@ export const InformationsContainer = () => {
     }
   }
 
-  const geocodingQuery = (city: string) => {
-    const geocoderQuery = encodeURIComponent(`${city}`.replace(/ /g, '+'))
-    return axios
-      .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${geocoderQuery}&key=${GoogleApiKey}`)
-      .then((res) => res.data)
-      .then((json) => {
-        if (json.results.length === 0) {
-          return null
-        }
-
-        setLocationLat(json.results['0'].geometry.location.lat)
-        setLocationLng(json.results['0'].geometry.location.lng)
-      })
-  }
-
   const handleBlur = () => {
-    geocodingQuery(location).finally(() => {
-      updateApplication(Number(applicationId), { city: location, lat: locationLat, lng: locationLng }).then((data) =>
-        console.log(data)
-      )
-    })
+    if (!location) {
+      return
+    }
+
+    const apiLocationValue = location?.replaceAll(' ', '+')
+
+    axios
+      .get(`https://api-adresse.data.gouv.fr/search/?q=${apiLocationValue}`)
+      .then((response) => {
+        setLocationLng(response.data.features[0].geometry.coordinates[0])
+        setLocationLat(response.data.features[0].geometry.coordinates[1])
+        setCityValue(response.data.features[0].properties.city)
+        setStreetValue(response.data.features[0].properties.name)
+        setPostalCodeValue(response.data.features[0].properties.postcode)
+      })
+      .then(() => {
+        updateApplication(Number(applicationId), {
+          lng: locationLng,
+          lat: locationLat,
+          city: cityValue,
+          street: streetValue,
+          postalCode: postalCodeValue
+        }).then((data) => {
+          setInformation({
+            lat: data.lat,
+            lng: data.lng,
+            city: cityValue,
+            street: streetValue,
+            postalCode: postalCodeValue
+          })
+        })
+      })
   }
 
   /* const handleChangeContract = () => {

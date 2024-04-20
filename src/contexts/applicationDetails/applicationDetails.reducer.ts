@@ -14,6 +14,9 @@ export const initialState: ApplicationDetailsState = {
   createdAt: '',
   jobOfferUrl: '',
   city: '',
+  postalCode: '',
+  country: '',
+  street: '',
   lat: '',
   lng: '',
   applicationState: {

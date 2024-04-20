@@ -19,4 +19,7 @@ export type ApplicationDetailsState = {
   city: string
   lng: string
   lat: string
+  country: string
+  postalCode: string
+  street: string
 }
