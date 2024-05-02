@@ -1,6 +1,7 @@
 import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
 import clsx from 'clsx'
+import { ForwardedRef, forwardRef } from 'react'
 
 type ButtonPrimaryProps = {
   children: React.ReactNode
@@ -96,3 +97,23 @@ export const IconButtonSecondary = ({ iconName, onClick, className }: IconButton
     </button>
   )
 }
+
+function IconButtonTertiaryInner({ iconName, onClick, className }: IconButtonProps, ref: ForwardedRef<HTMLDivElement>) {
+  return (
+    <div ref={ref}>
+      <button
+        onClick={onClick}
+        className={clsx(
+          'transition-all cursor-pointer p-2 flex items-center justify-center text-gray-400  hover:text-gray-100',
+          className
+        )}
+      >
+        <Icon name={iconName} />
+      </button>
+    </div>
+  )
+}
+
+export const IconButtonTertiary = forwardRef(IconButtonTertiaryInner) as <T>(
+  props: IconButtonProps & { ref?: ForwardedRef<HTMLDivElement> }
+) => ReturnType<typeof IconButtonTertiaryInner>

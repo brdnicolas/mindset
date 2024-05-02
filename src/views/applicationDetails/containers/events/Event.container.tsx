@@ -9,6 +9,8 @@ import { AddEventModal } from '@/views/applicationDetails/containers/events/comp
 import { AddCardEvent } from './components/addCardEvent'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
 import { getEventByApplicationId } from '@/services/events/events'
+import { CardEvent } from './components/cardEvent'
+import clsx from 'clsx'
 
 export const EventContainer = () => {
   const [showNewEvent, setShowNewEvent] = useState(false)
@@ -24,12 +26,29 @@ export const EventContainer = () => {
   return (
     <div className="mt-12 mb-10">
       <p className="font-bold text-4 text-gray-50 mb-6">Évévenments à venir</p>
-      <div className="grid grid-cols-4 mb-13">
-        <AddCardEvent
-          onClick={() => {
-            setShowNewEvent(!showNewEvent)
-          }}
-        />
+      <div className="flex mb-13 overflow-scroll">
+        {events && events.length > 0 ? (
+          <>
+            {events.map((event) => {
+              return <CardEvent className="mr-6" eventTitle={event.name} eventDate={event.start} />
+            })}
+            <AddCardEvent
+              onClick={() => {
+                setShowNewEvent(!showNewEvent)
+              }}
+            />
+          </>
+        ) : (
+          <div
+            onClick={() => {
+              setShowNewEvent(true)
+            }}
+          >
+            <p className={clsx('cursor-pointer text-gray-500 text-4', 'hover:underline')}>
+              Aucun événement de prévu. Clique ici pour ajouter un nouvel événement.
+            </p>
+          </div>
+        )}
       </div>
       <p className="font-bold text-4 text-gray-50 mb-6">Évévenments à venir</p>
       <FullCalendar

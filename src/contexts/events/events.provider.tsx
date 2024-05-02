@@ -29,7 +29,9 @@ export const EventProvider = ({ children }: EventsProviderPropsType) => {
       return
     }
 
-    getAllEvents().then((data) => dispatch(setEvents(data)))
+    getAllEvents().then((data) => {
+      dispatch(setEvents(data))
+    })
   }, [])
 
   const value: EventsContext = useMemo(() => ({ ...state, dispatch }), [state])

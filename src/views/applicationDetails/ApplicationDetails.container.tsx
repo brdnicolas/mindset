@@ -8,11 +8,11 @@ import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import { EventContainer } from './containers/events/Event.container'
-import { ContactsContainer } from './containers/Contacts.container'
 import { NotesContainer } from './containers/Notes.container'
 import { InformationContainerSkeleton } from '@/views/applicationDetails/containers/information/Information.skeleton'
 import { TextSkeleton } from '@/components/atoms/text/Text.skeleton'
 import { InformationContainer } from './containers/information/Information.container'
+import { ContactsContainer } from './containers/contacts/Contacts.container'
 
 export const ApplicationDetailsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
