@@ -1,15 +1,13 @@
 import clsx from 'clsx'
 import { Icon } from '../icons/Icon'
 import { IconName } from '../icons/types'
+import { RefObject, useEffect, useRef, useState } from 'react'
+import { Dropdown } from '@/components/atoms/dropdown/Dropdown'
+import { useOnClickOutside } from '@/utils/hooks/useOnClickOutside'
 
 type OptionType = {
   value: string
   label: string
-}
-
-type ShowType = {
-  showOptions: boolean
-  setShowOptions: (showOptions: boolean) => void
 }
 
 type SelectPropsType = {
@@ -19,25 +17,43 @@ type SelectPropsType = {
   value?: string
   className?: string
   defaultValue: string
-  onClick?: (e: any) => void
-  showProps: ShowType
+  onChange: (option: OptionType) => void
 }
 
-export const Select = ({
-  iconName,
-  label,
-  value,
-  className,
-  defaultValue,
-  options,
-  onClick,
-  showProps
-}: SelectPropsType) => {
-  const { showOptions, setShowOptions } = showProps
+export const Select = ({ iconName, label, value, className, defaultValue, options, onChange }: SelectPropsType) => {
+  const [showDropdown, setShowDropdown] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const selectRef = useRef<HTMLDivElement>(null)
+
+  const onClickOnLabel = (option: OptionType) => {
+    onChange(option)
+    setShowDropdown(!showDropdown)
+  }
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const isOutsideOfDropdown = dropdownRef.current && !dropdownRef.current.contains(event.target as Node)
+      const isOutsideOfSelect = selectRef.current && !selectRef.current.contains(event.target as Node)
+
+      if (isOutsideOfDropdown && isOutsideOfSelect) {
+        setShowDropdown(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [])
+
   return (
     <div className={clsx(className)}>
-      {label && <p className="text-gray-500 text-3.5 mb-3">{label}</p>}
-      <div onClick={() => setShowOptions(!showOptions)} className={clsx('relative flex items-center')}>
+      {label && <p className="text-gray-500 text-3.5 mb-3">{label} cc</p>}
+      <div
+        ref={selectRef}
+        onClick={() => setShowDropdown(!showDropdown)}
+        className={clsx('relative flex items-center')}
+      >
         {iconName && <Icon className={clsx('absolute left-3 text-gray-100')} name={iconName} />}
         <div
           className={clsx(
@@ -50,25 +66,8 @@ export const Select = ({
         >
           {value || defaultValue}
         </div>
+        {showDropdown && <Dropdown<string> ref={dropdownRef} items={options} onItemClick={onClickOnLabel} />}
       </div>
-      {showOptions && (
-        <div className="w-full rounded-2 border-[1px] border-gray-600 px-3 py-2 mt-2">
-          {options.map((option, i) => {
-            return (
-              <div
-                onClick={onClick}
-                key={i}
-                className={clsx(
-                  'transition-all cursor-pointer mb-2 last:mb-0 py-1 px-2 text-gray-300 text-3 rounded-1',
-                  'hover:bg-gray-600 hover:text-gray-100'
-                )}
-              >
-                <p id={option.value}>{option.label}</p>
-              </div>
-            )
-          })}
-        </div>
-      )}
     </div>
   )
 }

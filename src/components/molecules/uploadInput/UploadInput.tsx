@@ -76,7 +76,7 @@ export const UploadInput = ({ doc, label, subtitle, accept, handleChange, isLoad
             onMouseLeave={() => {
               setOnHover(false)
             }}
-            className="flex w-full items-center justify-center px-3 py-6 bg-gray-700 rounded-2"
+            className="flex w-full items-center justify-center px-3 py-6 bg-gray-700 rounded-2 h-[87px]"
           >
             {onHover ? (
               <div className="flex items-center">

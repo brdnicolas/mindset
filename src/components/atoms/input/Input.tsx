@@ -3,7 +3,7 @@ import { ForwardedRef, forwardRef, InputHTMLAttributes, useState } from 'react'
 import { IconName } from '@/components/atoms/icons/types'
 import { Icon } from '@/components/atoms/icons/Icon'
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
   iconName?: IconName
   errorMessage?: string

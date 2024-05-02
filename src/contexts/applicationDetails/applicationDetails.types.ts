@@ -16,10 +16,7 @@ export type ApplicationDetailsState = {
   applicationState: { name: string }
   createdAt: string
   jobOfferUrl: string
-  city: string
-  lng: string
-  lat: string
-  country: string
-  postalCode: string
-  street: string
+  lng: number
+  lat: number
+  locationLabel: string
 }

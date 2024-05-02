@@ -17,7 +17,7 @@ export const updateApplicationStateById = async (
     .then((response) => response.data)
 }
 
-export const updateApplication = async (
+export const updateApplicationById = async (
   applicationId: number,
   application: Partial<ApplicationDetailsState>
 ): Promise<Application> => {

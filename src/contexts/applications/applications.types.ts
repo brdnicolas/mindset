@@ -25,8 +25,6 @@ export type MinimalApplication = {
 }
 
 export type Application = {
-  lat: string
-  lng: string
   id: number
   job: string
   jobOfferUrl: string
@@ -39,6 +37,9 @@ export type Application = {
   companyImageUrl: string
   company: string
   date: string
+  lat: number
+  lng: number
+  locationLabel: string
 }
 
 export type ApplicationsState = {
