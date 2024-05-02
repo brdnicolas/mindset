@@ -8,6 +8,8 @@
 .fc-button-primary {
   background-color: #141414 !important;
   border-color: #222222 !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
 }
 
 .fc-button-primary:hover {
@@ -36,19 +38,23 @@
 
 .fc .fc-col-header-cell-cushion,
 .fc .fc-daygrid-day-number {
-  font-size: 16px;
+  font-size: 14px;
   color: #d6d6d6;
   text-transform: capitalize;
   padding: 8px 16px;
 }
 
 .fc .fc-col-header-cell-cushion {
-  display: flex !important;
-  justify-content: center !important;
+  font-weight: 400;
 }
 
 .fc .fc-daygrid-day.fc-day-today {
   background-color: #141414;
+}
+
+.fc .fc-daygrid-day,
+.fc .fc-col-header-cell {
+  background-color: #0e0e0e;
 }
 
 .fc .fc-highlight {
@@ -78,11 +84,11 @@
 }
 
 .fc-event {
-  background-color: #D6D6D6;
+  background-color: #d6d6d6;
   margin-top: 8px !important;
 
   &:hover {
-    background-color: #D6D6D6;
+    background-color: #d6d6d6;
   }
 }
 
@@ -98,4 +104,34 @@
 
 .fc-event-time {
   font-size: 10px;
+}
+
+// list vue
+
+.fc-theme-standard .fc-list {
+  background-color: #0e0e0e;
+  border: 1px solid #222222;
+  border-radius: 8px;
+}
+
+.fc .fc-list-day-cushion {
+  background-color: #0e0e0e;
+  color: #d6d6d6;
+  font-weight: 400;
+}
+
+.fc-list-event-title,
+.fc-list-event-graphic {
+  border: none !important;
+  font-size: 14px;
+  cursor: default;
+}
+
+.fc .fc-list-event:hover td {
+  background-color: #d6d6d6 !important;
+}
+
+.fc-list-event {
+  margin-bottom: 8px !important;
+  border-radius: 4px !important;
 }

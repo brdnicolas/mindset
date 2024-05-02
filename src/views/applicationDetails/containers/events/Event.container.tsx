@@ -2,14 +2,13 @@ import FullCalendar from '@fullcalendar/react'
 import interactionPlugin from '@fullcalendar/interaction'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
+import listPlugin from '@fullcalendar/list'
 import './EventContainer.scss'
 import { useEffect, useState } from 'react'
 import { AddEventModal } from '@/views/applicationDetails/containers/events/components/addEventModal'
 import { AddCardEvent } from './components/addCardEvent'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
 import { getEventByApplicationId } from '@/services/events/events'
-import { title } from 'process'
-import { start } from 'repl'
 
 export const EventContainer = () => {
   const [showNewEvent, setShowNewEvent] = useState(false)
@@ -37,7 +36,7 @@ export const EventContainer = () => {
         displayEventTime={false}
         events={events?.map((event) => {
           return {
-            title: event.name,
+            title: event.name || 'Évévenment',
             start: event.start,
             end: event.end
           }
@@ -50,10 +49,10 @@ export const EventContainer = () => {
         unselectAuto
         firstDay={1}
         dayHeaderFormat={{ weekday: 'long' }}
-        buttonText={{ today: "Aujourd'hui", month: 'Mois', year: 'Année', week: 'Semaine', day: 'Jour' }}
-        headerToolbar={{ start: 'prev,next', center: 'title', end: 'timeGridDay,dayGridMonth,dayGridYear' }}
+        buttonText={{ today: "Aujourd'hui", month: 'Mois', year: 'Année', week: 'Semaine', day: 'Jour', list: 'Liste' }}
+        headerToolbar={{ start: 'prev,next', center: 'title', end: 'dayGridMonth,dayGridWeek,dayGridDay,listMonth' }}
         locale={'fr'}
-        plugins={[interactionPlugin, dayGridPlugin, timeGridPlugin]}
+        plugins={[interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView="dayGridMonth"
       />
       {showNewEvent && <AddEventModal show={showNewEvent} onClose={() => setShowNewEvent(!showNewEvent)} />}
