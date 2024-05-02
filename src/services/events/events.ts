@@ -1,8 +1,7 @@
 import { EventsState, EventState } from '@/contexts/events/events.types'
 import { api } from '../api'
-import { EventSourceInput } from '@fullcalendar/core'
 
-export const getEventByApplicationId = (applicationId: number): Promise<EventSourceInput> => {
+export const getEventByApplicationId = (applicationId: number): Promise<[]> => {
   return api.get(`/events/application/${applicationId}`).then((response) => response.data)
 }
 

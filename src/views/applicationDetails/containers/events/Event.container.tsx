@@ -8,11 +8,12 @@ import { AddEventModal } from '@/views/applicationDetails/containers/events/comp
 import { AddCardEvent } from './components/addCardEvent'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
 import { getEventByApplicationId } from '@/services/events/events'
-import { EventSourceInput } from '@fullcalendar/core'
+import { title } from 'process'
+import { start } from 'repl'
 
 export const EventContainer = () => {
   const [showNewEvent, setShowNewEvent] = useState(false)
-  const [events, setEvents] = useState<EventSourceInput>()
+  const [events, setEvents] = useState<{ name: string; start: string; end: string }[]>()
   const { id } = useApplicationDetailsContext()
 
   useEffect(() => {
@@ -33,14 +34,19 @@ export const EventContainer = () => {
       </div>
       <p className="font-bold text-4 text-gray-50 mb-6">Évévenment à venir</p>
       <FullCalendar
-        events={events}
+        displayEventTime={false}
+        events={events?.map((event) => {
+          return {
+            title: event.name,
+            start: event.start,
+            end: event.end
+          }
+        })}
         navLinks
         eventColor="#D6D6D6"
         eventTextColor="#090909"
         eventClassNames="event-container"
-        eventClick={(info) => {
-          console.log(info.event.title, info.event.startStr)
-        }}
+        eventClick={(info) => {}}
         unselectAuto
         firstDay={1}
         dayHeaderFormat={{ weekday: 'long' }}
