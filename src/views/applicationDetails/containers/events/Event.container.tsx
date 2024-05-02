@@ -24,7 +24,7 @@ export const EventContainer = () => {
 
   return (
     <div className="mt-12 mb-10">
-      <p className="font-bold text-4 text-gray-50 mb-6">Évévenment à venir</p>
+      <p className="font-bold text-4 text-gray-50 mb-6">Évévenments à venir</p>
       <div className="grid grid-cols-4 mb-13">
         <AddCardEvent
           onClick={() => {
@@ -32,7 +32,7 @@ export const EventContainer = () => {
           }}
         />
       </div>
-      <p className="font-bold text-4 text-gray-50 mb-6">Évévenment à venir</p>
+      <p className="font-bold text-4 text-gray-50 mb-6">Évévenments à venir</p>
       <FullCalendar
         displayEventTime={false}
         events={events?.map((event) => {
