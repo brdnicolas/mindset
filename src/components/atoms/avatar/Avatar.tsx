@@ -9,7 +9,7 @@ interface AvatarProps extends ComponentPropsWithoutRef<'div'> {
 
 export const Avatar = ({ src, alt, className = '', ...props }: AvatarProps) => {
   return (
-    <div {...props} className={clsx('rounded-4 p-1.5 overflow-hidden bg-gray-650 w-12 h-12', className)}>
+    <div {...props} className={clsx('rounded-4 p-1.5 overflow-hidden bg-gray-650 w-10 h-10', className)}>
       {src ? (
         <img className="w-full h-full object-cover rounded-3" src={src} alt={alt} />
       ) : (
