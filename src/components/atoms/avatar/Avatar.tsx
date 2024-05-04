@@ -1,16 +1,17 @@
 import clsx from 'clsx'
+import { ComponentPropsWithoutRef } from 'react'
 
-type AvatarProps = {
+interface AvatarProps extends ComponentPropsWithoutRef<'div'> {
   src?: string
   alt?: string
   className?: string
 }
 
-export const Avatar = ({ src, alt, className = '' }: AvatarProps) => {
+export const Avatar = ({ src, alt, className = '', ...props }: AvatarProps) => {
   return (
-    <div className={clsx('rounded-full aspect-square overflow-hidden', className)}>
+    <div {...props} className={clsx('rounded-4 p-1.5 overflow-hidden bg-gray-650 w-10 h-10', className)}>
       {src ? (
-        <img className="h-full w-full object-cover" src={src} alt={alt} />
+        <img className="w-full h-full object-cover rounded-3" src={src} alt={alt} />
       ) : (
         <div className="bg-gray-600 w-full h-full rounded-full" />
       )}

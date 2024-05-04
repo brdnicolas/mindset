@@ -1,27 +1,35 @@
-import { IconName } from '@/components/atoms/icons/types'
-import { Icon } from '@/components/atoms/icons/Icon'
+import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 
 type NavbarLabelProps = {
-  iconName: IconName
+  iconName: string
   children?: React.ReactNode
   onClick: () => void
   isActive: boolean
   className?: string
+  hasNotification?: boolean
 }
 
-export const NavbarLabel = ({ iconName, children, onClick, isActive, className }: NavbarLabelProps) => {
+export const NavbarLabel = ({
+  iconName,
+  children,
+  onClick,
+  isActive,
+  className,
+  hasNotification
+}: NavbarLabelProps) => {
   return (
     <div
       className={clsx(
-        'flex items-center cursor-pointer transition-all hover:text-gray-200',
+        'p-2 flex items-center cursor-pointer transition-al text-white rounded-2',
         className,
-        isActive ? 'text-gray-200' : 'text-gray-500'
+        isActive ? 'bg-gray-600' : 'bg-transparent hover:bg-gray-600'
       )}
       onClick={onClick}
     >
-      <Icon className="w-8 h-8 laptop:w-6 laptop:h-6" name={iconName} />
-      <p className="ml-2 text-base font-medium">{children}</p>
+      <Icon className="w-8 h-8 laptop:w-6 laptop:h-6" icon={iconName} />
+      {children ? <p className="ml-2 text-4 font-medium">{children}</p> : null}
+      {hasNotification ? <div className="w-[5px] h-[5px] bg-[#FA382B] rounded-full ml-auto" /> : null}
     </div>
   )
 }

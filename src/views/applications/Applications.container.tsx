@@ -4,7 +4,6 @@ import { useApplicationsContext } from '@/contexts/applications/applications.pro
 import { setApplications } from '@/contexts/applications/applications.actions'
 import { Column } from '@/views/applications/components/Column'
 import { ApplicationStates } from '@/contexts/applications/applications.types'
-import { Icon } from '@/components/atoms/icons/Icon'
 import { IconName } from '@/components/atoms/icons/types'
 import { withGlobalLayout } from '@/utils/hoc/withGlobalLayout'
 import { updateApplicationStateById } from '@/services/applications/application'
@@ -113,13 +112,10 @@ export const ApplicationsContainer = withAuthenticatedUser(
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="laptop:pt-6 flex flex-col h-full">
+        <div className="flex flex-col h-full">
           {!isMobileOrTablet && (
-            <div className="flex items-center justify-between pr-9">
-              <div className="flex items-center">
-                <Icon className="w-8 h-8 text-gray-200" name="document" />
-                <p className="text-gray-200 text-7 font-extrabold ml-3">Mes candidatures</p>
-              </div>
+            <div className="flex items-center justify-between">
+              <p className="text-white text-7 font-semibold">Mes candidatures</p>
               <ButtonPrimary onClick={() => setShowNewApplication(true)}>Nouvelle candidature</ButtonPrimary>
             </div>
           )}

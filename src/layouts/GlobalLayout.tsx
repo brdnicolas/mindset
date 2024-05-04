@@ -11,10 +11,10 @@ export const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   const isMobileOrTablet = isMobile || isTablet
 
   return (
-    <div className="h-full flex flex-col laptop:grid grid-cols-globalLayout w-full">
+    <div className="h-full flex flex-col laptop:flex-row w-full">
       {isMobileOrTablet && <MobileNavbar />}
       {isMobileOrTablet ? <MobileHeader /> : <DesktopNavbar />}
-      <div className="w-full overflow-hidden p-5 pb-0 pr-0 h-full pl-0 laptop:pl-5">{children}</div>
+      <div className="w-full overflow-hidden pb-0 p-6 h-full">{children}</div>
     </div>
   )
 }
