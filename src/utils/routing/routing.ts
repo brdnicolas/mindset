@@ -1,21 +1,19 @@
-import { IconName } from '@/components/atoms/icons/types'
-
 export type Route = {
   path: string
   name: string
-  iconName: IconName
+  iconName: string
 }
 
 export const MAIN_ROUTES: Route[] = [
   {
     path: '/',
     name: 'Mes candidatures',
-    iconName: 'document'
+    iconName: 'solar:folder-bold'
   },
   {
     path: '/statistics',
     name: 'Statistiques',
-    iconName: 'bar-chart-2'
+    iconName: 'solar:chart-square-bold'
   }
 ]
 
@@ -23,12 +21,12 @@ export const SECONDARY_ROUTES: Route[] = [
   {
     path: '/settings',
     name: 'Paramètres',
-    iconName: 'gear'
+    iconName: 'solar:settings-bold'
   },
   {
     path: '/plans',
     name: 'Plans',
-    iconName: 'credit-card'
+    iconName: 'solar:card-bold'
   }
 ]
 
