@@ -55,6 +55,7 @@ export const AddEventModal = ({ show, onClose }: AddEventModalProps) => {
 
   const handleOnChangeDateStart = (date: Date) => {
     formik.setFieldValue('start', date)
+    formik.setFieldValue('end', date)
   }
 
   const handleOnChangeDateEnd = (date: Date) => {
