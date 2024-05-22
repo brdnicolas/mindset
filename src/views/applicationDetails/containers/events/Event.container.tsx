@@ -4,11 +4,9 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import './EventContainer.scss'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AddEventModal } from '@/views/applicationDetails/containers/events/components/addEventModal'
 import { AddCardEvent } from './components/addCardEvent'
-import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
-import { getEventByApplicationId } from '@/services/events/events'
 import { CardEvent } from './components/cardEvent'
 import clsx from 'clsx'
 import { useEventsContext } from '@/contexts/events/events.provider'
@@ -18,13 +16,19 @@ export const EventContainer = () => {
 
   const { events } = useEventsContext()
 
+  const now = new Date().getTime()
+  const sortedEvents = events
+    .filter((event) => new Date(event.start).getTime() >= now)
+    .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
+  const upcomingEvents = sortedEvents.slice(0, 3)
+
   return (
     <div className="mt-12 mb-10">
       <p className="font-bold text-4 text-gray-50 mb-6">Évévenments à venir</p>
-      <div className="flex mb-13 overflow-scroll">
-        {events && events.length > 0 ? (
+      <div className="grid grid-cols-4 mb-13">
+        {upcomingEvents && upcomingEvents.length > 0 ? (
           <>
-            {events.map((event) => {
+            {upcomingEvents.map((event) => {
               return <CardEvent className="mr-6" eventTitle={event.name} eventDate={event.start} />
             })}
             <AddCardEvent
