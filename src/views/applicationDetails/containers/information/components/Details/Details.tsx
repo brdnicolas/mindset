@@ -67,7 +67,7 @@ export const Details = () => {
   }
 
   return (
-    <div className={clsx('w-1/2 ml-30', 'mobile:w-full mobile:ml-0 mobile:mt-6')}>
+    <div className={clsx('w-full ml-0 mt-6 ', 'laptop:w-1/2 laptop:ml-30')}>
       <p className="text-4 text-gray-50 font-bold mb-6">Détails</p>
       <div className="flex gap-10">
         <Autocomplet<ApplicationLocationOption>

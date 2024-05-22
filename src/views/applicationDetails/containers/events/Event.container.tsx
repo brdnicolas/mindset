@@ -25,11 +25,11 @@ export const EventContainer = () => {
   return (
     <div className="mt-12 mb-10">
       <p className="font-bold text-4 text-gray-50 mb-6">Évévenments à venir</p>
-      <div className="grid grid-cols-4 mb-13">
+      <div className={clsx('grid grid-cols-2 gap-5', 'laptop:grid-cols-4 laptop:mb-13')}>
         {upcomingEvents && upcomingEvents.length > 0 ? (
           <>
             {upcomingEvents.map((event) => {
-              return <CardEvent className="mr-6" eventTitle={event.name} eventDate={event.start} />
+              return <CardEvent className="laptop:mr-6" eventTitle={event.name} eventDate={event.start} />
             })}
             <AddCardEvent
               onClick={() => {
@@ -49,7 +49,7 @@ export const EventContainer = () => {
           </div>
         )}
       </div>
-      <p className="font-bold text-4 text-gray-50 mb-6">Évévenments à venir</p>
+      <p className={clsx('font-bold text-4 text-gray-50 mb-6 mt-8', 'laptop:mt-0')}>Calendrier</p>
       <FullCalendar
         displayEventTime={false}
         events={events?.map((event) => {

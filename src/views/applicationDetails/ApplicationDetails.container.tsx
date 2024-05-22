@@ -13,6 +13,7 @@ import { InformationContainerSkeleton } from '@/views/applicationDetails/contain
 import { TextSkeleton } from '@/components/atoms/text/Text.skeleton'
 import { InformationContainer } from './containers/information/Information.container'
 import { ContactsContainer } from './containers/contacts/Contacts.container'
+import clsx from 'clsx'
 
 export const ApplicationDetailsContainer = withAuthenticatedUser(
   withGlobalLayout(() => {
@@ -72,7 +73,7 @@ export const ApplicationDetailsContainer = withAuthenticatedUser(
     }, [])
 
     return (
-      <div className="laptop:pt-16 laptop:pr-13 mobile:px-5">
+      <div className={clsx('px-5 pb-35', 'laptop:pt-16 laptop:pr-13 laptop:pb-0')}>
         <header className="flex items-center">
           <Avatar src={companyImageUrl} alt="Logo company" className="w-20 h-20" />
           <div className="ml-5">

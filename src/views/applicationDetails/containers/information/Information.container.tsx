@@ -51,14 +51,14 @@ export const InformationContainer = () => {
   }
 
   return (
-    <div className={clsx('w-full', 'mobile:pb-35')}>
-      <div className="flex justify-between mt-13 mobile:flex-col">
+    <div className={clsx('laptop:w-full')}>
+      <div className="flex flex-col laptop:flex-row laptop:justify-between laptop:mt-13 ">
         <General />
         <Details />
       </div>
       <div className="mt-13">
         <p className="text-4 text-gray-50 font-bold mb-6">Documents</p>
-        <div className={clsx('grid grid-cols-8 gap-5', 'mobile:grid-cols-2')}>
+        <div className={clsx('grid grid-cols-2 gap-5', 'laptop:grid-cols-8')}>
           <UploadInput
             isLoading={isCvIsUploading}
             accept=".pdf"

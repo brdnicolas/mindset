@@ -13,7 +13,7 @@ export const AddCardEvent = ({ onClick }: AddCardEventProps) => {
         'hover:cursor-pointer hover:border-gray-600'
       )}
     >
-      <p>Ajouter un événement</p>
+      <p className="text-center">Ajouter un événement</p>
     </div>
   )
 }
