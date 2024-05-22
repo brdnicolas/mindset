@@ -23,7 +23,7 @@ function DropdownInner<T>({ items, onItemClick }: DropdownProps<T>, ref: Forward
             onClick={() => onItemClick(item)}
             key={i}
             className={clsx(
-              'transition-all cursor-pointer mb-2 last:mb-0 py-1 px-2 text-gray-300 text-3.5 rounded-1',
+              'transition-all cursor-pointer mb-2 last:mb-0 py-1 px-2 text-gray-300 bg-gray-800 text-3.5 rounded-1',
               'hover:bg-gray-600 hover:text-gray-100'
             )}
           >

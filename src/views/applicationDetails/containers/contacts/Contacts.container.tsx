@@ -47,6 +47,7 @@ export const ContactsContainer = () => {
           Ajouter un contact
         </ButtonSecondary>
       </div>
+      <General contacts={contacts} />
     </div>
   )
 }
