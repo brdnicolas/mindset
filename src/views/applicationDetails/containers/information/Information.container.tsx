@@ -7,6 +7,7 @@ import { uploadCoverLetter, uploadCv } from '@/services/upload/upload'
 import { useState } from 'react'
 import { General } from './components/General/General'
 import { Details } from './components/Details/Details'
+import clsx from 'clsx'
 
 export const InformationContainer = () => {
   const { id, cv, coverLetter, dispatch: dispatchApplicationDetails } = useApplicationDetailsContext()
@@ -50,14 +51,14 @@ export const InformationContainer = () => {
   }
 
   return (
-    <div className="w-full">
-      <div className="flex justify-between mt-13">
+    <div className={clsx('w-full', 'mobile:pb-35')}>
+      <div className="flex justify-between mt-13 mobile:flex-col">
         <General />
         <Details />
       </div>
       <div className="mt-13">
         <p className="text-4 text-gray-50 font-bold mb-6">Documents</p>
-        <div className="grid grid-cols-8 gap-5">
+        <div className={clsx('grid grid-cols-8 gap-5', 'mobile:grid-cols-2')}>
           <UploadInput
             isLoading={isCvIsUploading}
             accept=".pdf"

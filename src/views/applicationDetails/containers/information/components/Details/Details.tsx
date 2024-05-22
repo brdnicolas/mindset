@@ -6,6 +6,7 @@ import { useApplicationDetailsContext } from '@/contexts/applicationDetails/appl
 import { updateApplicationById } from '@/services/applications/application'
 import { getAddressAutocompletion } from '@/services/datagouv/datagouv'
 import axios from 'axios'
+import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 
 interface ApplicationLocationOption {
@@ -66,7 +67,7 @@ export const Details = () => {
   }
 
   return (
-    <div className="w-1/2 ml-30">
+    <div className={clsx('w-1/2 ml-30', 'mobile:w-full mobile:ml-0 mobile:mt-6')}>
       <p className="text-4 text-gray-50 font-bold mb-6">Détails</p>
       <div className="flex gap-10">
         <Autocomplet<ApplicationLocationOption>

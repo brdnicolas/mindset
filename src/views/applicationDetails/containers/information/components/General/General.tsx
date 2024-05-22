@@ -1,6 +1,7 @@
 import { Input } from '@/components'
 import { useApplicationDetailsContext } from '@/contexts/applicationDetails/applicationDetails.provider'
 import { updateApplicationById } from '@/services/applications/application'
+import clsx from 'clsx'
 import { ReactEventHandler, useEffect, useState } from 'react'
 
 export const General = () => {
@@ -25,7 +26,7 @@ export const General = () => {
   }, [currentCompany, currentJob, currentJobOfferUrl])
 
   return (
-    <div className="w-1/2">
+    <div className={clsx('w-1/2', 'mobile:w-full')}>
       <p className="text-4 text-gray-50 font-bold mb-6">Général</p>
       <div className="flex items-center gap-10">
         <Input

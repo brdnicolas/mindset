@@ -15,7 +15,7 @@ type TabsGroupProps = {
 
 export const TabsGroup = ({ options, className }: TabsGroupProps) => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col overflow-auto">
       <div className={clsx('flex items-center', className)}>
         {options.map((option) => {
           return (
