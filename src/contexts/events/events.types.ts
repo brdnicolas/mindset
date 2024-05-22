@@ -1,7 +1,7 @@
 export type EventState = {
-  title: string
-  startDate: string
-  endDate: string
+  name: string
+  start: string
+  end: string
   applicationId?: number
 }
 

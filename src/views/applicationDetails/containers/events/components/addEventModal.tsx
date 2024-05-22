@@ -14,20 +14,21 @@ type AddEventModalProps = {
 }
 
 type FormValues = {
-  title: string
-  eventDateStart: Date
-  eventDateEnd: Date
+  applicationId: number
+  name: string
+  start: Date
+  end: Date
 }
 
 const validate = (values: FormValues) => {
   const errors: FormikErrors<FormValues> = {}
 
-  if (!values.title) {
-    errors.title = 'Un titre est requis'
+  if (!values.name) {
+    errors.name = 'Un titre est requis'
   }
 
-  if (!values.eventDateStart) {
-    errors.eventDateStart = 'Une date de début est requise'
+  if (!values.start) {
+    errors.start = 'Une date de début est requise'
   }
 
   return errors
@@ -39,32 +40,33 @@ export const AddEventModal = ({ show, onClose }: AddEventModalProps) => {
 
   const formik = useFormik({
     initialValues: {
-      eventDateStart: new Date(),
-      eventDateEnd: new Date(),
-      title: ''
+      applicationId: id,
+      start: new Date(),
+      end: new Date(),
+      name: ''
     },
     validate,
     validateOnChange: false,
     onSubmit: (values, { resetForm }) => {
-      handleOnAdd()
+      handleOnAdd(values)
       resetForm()
     }
   })
 
   const handleOnChangeDateStart = (date: Date) => {
-    formik.setFieldValue('eventDateStart', date)
+    formik.setFieldValue('start', date)
   }
 
   const handleOnChangeDateEnd = (date: Date) => {
-    formik.setFieldValue('eventDateEnd', date)
+    formik.setFieldValue('end', date)
   }
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    formik.setFieldValue('title', e.target.value)
+    formik.setFieldValue('name', e.target.value)
   }
 
-  const handleOnAdd = () => {
-    createEvent(id, formik.values.title, formik.values.eventDateStart.toString(), formik.values.eventDateEnd.toString())
+  const handleOnAdd = (event: FormValues) => {
+    createEvent({ ...event })
       .then((newEvent) => {
         dispatch(addEvent({ event: newEvent }))
         onClose()
@@ -78,16 +80,12 @@ export const AddEventModal = ({ show, onClose }: AddEventModalProps) => {
   return (
     <Modal title="Ajouter un événement" show={show} onClose={onClose}>
       <form onSubmit={formik.handleSubmit}>
-        <Input className="mt-6" label="Titre de l'événement" value={formik.values.title} onChange={handleChangeTitle} />
+        <Input className="mt-6" label="Titre de l'événement" value={formik.values.name} onChange={handleChangeTitle} />
         <div className="mt-3">
-          <DatePickerInput
-            value={formik.values.eventDateStart}
-            onChange={handleOnChangeDateStart}
-            label="Date de début"
-          />
+          <DatePickerInput value={formik.values.start} onChange={handleOnChangeDateStart} label="Date de début" />
           <DatePickerInput
             className="mt-3"
-            value={formik.values.eventDateEnd}
+            value={formik.values.end}
             onChange={handleOnChangeDateEnd}
             label="Date de Fin*"
           />

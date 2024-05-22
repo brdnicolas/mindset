@@ -8,6 +8,14 @@ export const getEventByApplicationId = (applicationId: number): Promise<[]> => {
 export const getAllEvents = (): Promise<EventsState> => {
   return api.get('/events').then((response) => response.data)
 }
-export const createEvent = (applicationId: number, name: string, start: string, end: string): Promise<EventState> => {
-  return api.post('/events', { applicationId, name, start, end }).then((response) => response.data)
+
+export interface CreateEvent {
+  applicationId: number
+  name: string
+  start: Date
+  end: Date
+}
+
+export const createEvent = (events: CreateEvent): Promise<EventState> => {
+  return api.post('/events', { ...events }).then((response) => response.data)
 }

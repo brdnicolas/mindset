@@ -1,10 +1,11 @@
 import { Dispatch, ReactNode, createContext, useContext, useMemo, useReducer, useEffect } from 'react'
-import { EventState } from './events.types'
+import { EventsState } from './events.types'
 import { EventsActions, setEvents } from './events.actions'
 import { eventsReducer, initialState } from './events.reducer'
-import { getAllEvents } from '@/services/events/events'
+import { getEventByApplicationId } from '@/services/events/events'
+import { useApplicationDetailsContext } from '../applicationDetails/applicationDetails.provider'
 
-type EventsContext = EventState & {
+type EventsContext = EventsState & {
   dispatch: Dispatch<EventsActions>
 }
 
@@ -21,6 +22,7 @@ type EventsProviderPropsType = {
 
 export const EventProvider = ({ children }: EventsProviderPropsType) => {
   const [state, dispatch] = useReducer(eventsReducer, initialState)
+  const { id } = useApplicationDetailsContext()
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -29,10 +31,18 @@ export const EventProvider = ({ children }: EventsProviderPropsType) => {
       return
     }
 
-    getAllEvents().then((data) => {
-      dispatch(setEvents(data))
-    })
-  }, [])
+    console.log(id)
+
+    getEventByApplicationId(id)
+      .then((data) => {
+        console.log(data)
+        dispatch(setEvents({ events: data }))
+      })
+      .catch(() => {
+        localStorage.removeItem('token')
+        window.location.reload()
+      })
+  }, [id])
 
   const value: EventsContext = useMemo(() => ({ ...state, dispatch }), [state])
   return <eventsContext.Provider value={value}>{children}</eventsContext.Provider>

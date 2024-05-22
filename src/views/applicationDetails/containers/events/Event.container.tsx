@@ -11,17 +11,12 @@ import { useApplicationDetailsContext } from '@/contexts/applicationDetails/appl
 import { getEventByApplicationId } from '@/services/events/events'
 import { CardEvent } from './components/cardEvent'
 import clsx from 'clsx'
+import { useEventsContext } from '@/contexts/events/events.provider'
 
 export const EventContainer = () => {
   const [showNewEvent, setShowNewEvent] = useState(false)
-  const [events, setEvents] = useState<{ name: string; start: string; end: string }[]>()
-  const { id } = useApplicationDetailsContext()
 
-  useEffect(() => {
-    getEventByApplicationId(id).then((data) => {
-      return setEvents(data)
-    })
-  }, [id])
+  const { events } = useEventsContext()
 
   return (
     <div className="mt-12 mb-10">
