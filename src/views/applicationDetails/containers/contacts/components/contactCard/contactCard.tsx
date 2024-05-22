@@ -3,12 +3,13 @@ import { IconButtonTertiary } from '@/components/atoms/button/Button'
 import { Dropdown } from '@/components/atoms/dropdown/Dropdown'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
+import { ContactModal } from '../modals/contactModal'
 
 interface ContactCardProps {
   name: string
-  job: string
+  job?: string
   mail: string
-  phone: string
+  phone?: string
 }
 
 export const ContactCard = ({ name, job, mail, phone }: ContactCardProps) => {
