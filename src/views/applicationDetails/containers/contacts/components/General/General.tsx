@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { ContactCard } from '../contactCard/contactCard'
 
-interface Contact {
-  favorite: boolean
+export interface Contact {
+  favorite?: boolean
   name: string
   job: string
   mail: string
@@ -15,6 +15,7 @@ interface GeneralProps {
 
 export const General = ({ contacts }: GeneralProps) => {
   const sortedContacts = contacts.sort((a, b) => a.name.localeCompare(b.name))
+
   const groupedContacts = sortedContacts.reduce(
     (acc: { [key: string]: Contact[] }, contact) => {
       const firstLetter = contact.name[0].toUpperCase()

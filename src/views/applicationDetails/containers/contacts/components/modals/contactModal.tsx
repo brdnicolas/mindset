@@ -1,48 +1,112 @@
-import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
+import { useEffect, useState } from 'react'
+import { Contact } from '../General/General'
 import { Modal } from '@/components/organisms/modal/Modal'
-import clsx from 'clsx'
+import { FormikErrors, useFormik } from 'formik'
+import { ButtonPrimary, ButtonSecondary, Input } from '@/components'
 
-interface AddContactProps {
-  show: boolean
+interface ContactModalProps {
+  isOpen: boolean
   onClose: () => void
-  action: string
-  name: string
-  job?: string
-  mail: string
-  phone?: string
+  contact: Contact
 }
 
-export const ContactModal = ({ show, onClose, action, name, job, mail, phone }: AddContactProps) => {
+const validate = (values: Contact) => {
+  const errors: FormikErrors<Contact> = {}
+
+  if (!values.name) {
+    errors.name = 'Un nom est requis'
+  }
+
+  if (!values.mail) {
+    errors.mail = 'Un email est requis'
+  }
+
+  return errors
+}
+
+export const ContactModal = ({ isOpen, onClose, contact }: ContactModalProps) => {
+  const [name, setName] = useState('')
+  const [job, setJob] = useState('')
+  const [mail, setMail] = useState('')
+  const [phone, setPhone] = useState('')
+
+  const formik = useFormik({
+    initialValues: {
+      name,
+      job,
+      mail,
+      phone
+    },
+    validate,
+    validateOnChange: false,
+    onSubmit: (values, { resetForm }) => {
+      console.log(values)
+      resetForm()
+    }
+  })
+
+  useEffect(() => {
+    if (contact) {
+      setName(contact.name)
+      setJob(contact.job)
+      setMail(contact.mail)
+      setPhone(contact.phone)
+    } else {
+      setName('')
+      setJob('')
+      setMail('')
+      setPhone('')
+    }
+  }, [])
+
   return (
-    <div>
-      <Modal title={action === 'modify' ? 'Modifier un contact' : 'Ajouter un contact'} show={show} onClose={onClose}>
-        {action === 'modify' ? (
-          <div className={clsx('flex items-center justify-between mt-6')}>
-            <Input label="Nom*" iconName="user" value={name} />
-            <Input label="Poste" iconName="briefcase" value={job} /> :
-          </div>
-        ) : (
-          <div className={clsx('flex items-center justify-between mt-6')}>
-            <Input label="Nom*" iconName="user" />
-            <Input label="Poste" iconName="briefcase" />
-          </div>
-        )}
-        {action === 'modify' ? (
-          <div className={clsx('flex items-center justify-between mt-6')}>
-            <Input label="Email*" iconName="mail" value={mail} />
-            <Input label="Numéro de téléphone" iconName="briefcase" value={phone} />
-          </div>
-        ) : (
-          <div className={clsx('flex items-center justify-between mt-6')}>
-            <Input label="Email*" iconName="mail" />
-            <Input label="Numéro de téléphone" iconName="briefcase" />
-          </div>
-        )}
-        <div className={clsx('flex items-center justify-center mt-6')}>
-          <ButtonSecondary onClick={onClose}>Annuler</ButtonSecondary>
-          <ButtonPrimary className="ml-4">Confirmer</ButtonPrimary>
+    <Modal title={contact ? 'Modifier un contact' : 'Ajouter un contact'} show={isOpen} onClose={onClose}>
+      <form>
+        <div>
+          <Input
+            iconName="user"
+            value={name}
+            label="Nom*"
+            onChange={(e) => {
+              setName(e.target.value)
+            }}
+          />
+          <Input
+            iconName="briefcase"
+            value={job}
+            label="Poste"
+            onChange={(e) => {
+              setJob(e.target.value)
+            }}
+          />
         </div>
-      </Modal>
-    </div>
+        <div>
+          <Input
+            iconName="mail"
+            value={mail}
+            label="Email*"
+            onChange={(e) => {
+              setMail(e.target.value)
+            }}
+          />
+          <Input
+            iconName="device-mobile"
+            value={phone}
+            label="Numéro de téléphone"
+            onChange={(e) => {
+              setPhone(e.target.value)
+            }}
+          />
+        </div>
+        <footer className="flex items-center justify-center mt-6 gap-4">
+          <ButtonSecondary className=" w-full laptop:w-fit" onClick={onClose}>
+            Annuler
+          </ButtonSecondary>
+          <ButtonPrimary className=" w-full laptop:w-fit" type="submit">
+            Confirmer
+          </ButtonPrimary>
+        </footer>
+      </form>
+    </Modal>
   )
 }
