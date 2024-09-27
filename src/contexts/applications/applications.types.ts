@@ -1,3 +1,5 @@
+import { DocumentProps } from '../applicationDetails/applicationDetails.types'
+
 export enum EApplicationState {
   applied = 'applied',
   relaunched = 'relaunched',
@@ -19,7 +21,7 @@ export type MinimalApplication = {
   applicationDate: string
   company: string
   companyImageUrl?: string
-  coverLetter?: string
+  coverLetter?: DocumentProps
 }
 
 export type Application = {
@@ -27,13 +29,17 @@ export type Application = {
   job: string
   jobOfferUrl: string
   applicationDate: string
-  cv: string
-  coverLetter: string
+  cv: DocumentProps
+  coverLetter: DocumentProps
+  createdAt: string
   userId: number
   applicationState: { name: EApplicationState }
   companyImageUrl: string
   company: string
   date: string
+  lat: number
+  lng: number
+  locationLabel: string
 }
 
 export type ApplicationsState = {

@@ -1,0 +1,157 @@
+.fc-toolbar-title {
+  color: #ededed;
+  font-size: 16px !important;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  @media (max-width: 799px) {
+    font-size: 14px !important;
+  }
+}
+
+.fc-button-primary {
+  background-color: #141414 !important;
+  border-color: #222222 !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+
+  @media (max-width: 799px) {
+    font-size: 12px !important;
+  }
+}
+
+.fc-button-primary:hover {
+  background-color: #222222 !important;
+}
+
+.fc-button-active {
+  background-color: #333333 !important;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border-radius: 8px;
+  border: 1px solid #222222;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: 1px solid #222222;
+}
+
+.fc-theme-standard th {
+  border-left: none !important;
+  border-right: none !important;
+  text-align: left;
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+  font-size: 14px;
+  color: #d6d6d6;
+  text-transform: capitalize;
+  padding: 8px 16px;
+
+  @media (max-width: 799px) {
+    font-size: 10px !important;
+  }
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-weight: 400;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #141414;
+}
+
+.fc .fc-daygrid-day,
+.fc .fc-col-header-cell {
+  background-color: #0e0e0e;
+}
+
+.fc .fc-highlight {
+  background-color: #333333;
+}
+
+.event-container {
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-size: 12px;
+  margin: 0 8px !important;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 799px) {
+    border-radius: 8px !important;
+  }
+}
+
+.fc-timegrid-axis-cushion,
+.fc-timegrid-slot-label-cushion {
+  color: #d6d6d6;
+}
+
+.fc-timegrid-slots tr {
+  background-color: #141414;
+}
+
+.fc-event {
+  background-color: #d6d6d6;
+  margin-top: 8px !important;
+
+  &:hover {
+    background-color: #d6d6d6;
+  }
+
+  @media (max-width: 799px) {
+    margin: 0 4px !important;
+  }
+}
+
+.fc-daygrid-event-dot {
+  display: none;
+}
+
+.fc-event-title {
+  font-size: 12px;
+  color: #090909;
+  font-weight: normal !important;
+}
+
+.fc-event-time {
+  font-size: 10px;
+}
+
+// list vue
+
+.fc-theme-standard .fc-list {
+  background-color: #0e0e0e;
+  border: 1px solid #222222;
+  border-radius: 8px;
+}
+
+.fc .fc-list-day-cushion {
+  background-color: #0e0e0e;
+  color: #d6d6d6;
+  font-weight: 400;
+}
+
+.fc-list-event-title,
+.fc-list-event-graphic {
+  border: none !important;
+  font-size: 14px;
+  cursor: default;
+}
+
+.fc .fc-list-event:hover td {
+  background-color: #d6d6d6 !important;
+}
+
+.fc-list-event {
+  margin-bottom: 8px !important;
+  border-radius: 4px !important;
+}
